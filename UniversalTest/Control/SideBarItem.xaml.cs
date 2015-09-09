@@ -180,6 +180,11 @@ namespace UniversalTest.Control
             
         }
 
+
+        public void SetHeight()
+        {
+            RootContainer.Height = Double.NaN;
+        }
         #endregion
         #endregion
     }

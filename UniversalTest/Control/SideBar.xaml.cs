@@ -134,5 +134,11 @@ namespace UniversalTest.Control
                 sb.Begin();
         }
 
+
+        public void ChangeSource()
+        {
+            albumsMenuSource.Remove(albumsMenuSource.Last());
+            AlbumsItem.SetHeight();
+        }
     }
 }

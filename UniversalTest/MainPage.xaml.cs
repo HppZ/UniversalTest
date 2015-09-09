@@ -40,7 +40,8 @@ namespace UniversalTest
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            SideBarElement.CloseAllItems();
+            SideBarElement.ChangeSource();
+           // SideBarElement.CloseAllItems();
         }
     }
 }
