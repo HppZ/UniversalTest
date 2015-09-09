@@ -20,6 +20,10 @@ namespace UniversalTest.Control
 {
     public sealed partial class SideBarItem : UserControl
     {
+        #region Fields
+        public bool _isOpen; // 展开状态
+        #endregion
+
         #region Ctor
         public SideBarItem()
         {
@@ -59,21 +63,35 @@ namespace UniversalTest.Control
 
         #region Private 
         #region Ani
-        private void GroupStackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Title_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var sb = this.Resources["StoryboardForHeight"] as Storyboard;
-            var da = sb.Children[0] as DoubleAnimation;
-            da.From = ListViewContainer.ActualHeight;
-            sb.Begin();
+            DoAnimation();
         }
 
         /// <summary>
         /// 展开 收缩动画
         /// </summary>
         /// <param name="toExpand">true则要展开</param>
-        private void DoAnimation(bool toExpand)
+        private void DoAnimation()
         {
-            
+            var sb = this.Resources["StoryboardForHeight"] as Storyboard;
+            var da = sb.Children[0] as DoubleAnimation;
+
+            //处于展开状态
+            if (_isOpen)
+            {
+                da.To = 0;
+                da.From = RootContainer.ActualHeight;
+            }
+            // 处于关闭状态
+            else
+            {
+                
+                da.To = SecondContainer.ActualHeight;
+                da.From = RootContainer.ActualHeight;
+            }
+            _isOpen = !_isOpen;
+            sb.Begin();
         }
 
 

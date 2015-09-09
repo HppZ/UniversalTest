@@ -16,7 +16,7 @@
             <DoubleAnimation Duration="0:0:0.3" To="0"
                              EnableDependentAnimation="True" 
                              Storyboard.TargetProperty="(FrameworkElement.Height)" 
-                             Storyboard.TargetName="ListViewContainer"
+                             Storyboard.TargetName="RootContainer"
                              d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <QuadraticEase EasingMode="EaseInOut"/>
@@ -32,9 +32,9 @@
         </DataTemplate>
     </UserControl.Resources>
     <!--<Grid Background="Gray" >-->
-    <StackPanel x:Name="GroupStackPanel" Tapped="GroupStackPanel_Tapped" VerticalAlignment="Top" Orientation="Vertical" Margin="5 5 5 5">
+    <StackPanel x:Name="GroupStackPanel" VerticalAlignment="Top" Orientation="Vertical" Margin="5 5 5 5">
         <!--主标题-->
-        <Grid VerticalAlignment="Stretch" 
+        <Grid VerticalAlignment="Stretch" Tapped="Title_Tapped"
               Background="White" >
             <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="8 8 0 8"  HorizontalAlignment="Left">
                 <!--图标-->
@@ -49,10 +49,10 @@
         <!--子项内容-->
         <!--ContentRootSp 可有可无-->
         <!--<StackPanel Background="White" x:Name="ContentRootSp" >-->
-        <Grid x:Name="ListViewContainer" Margin="3 0 3 0" >
-            <StackPanel  x:Name="Sp" Orientation="Vertical" VerticalAlignment="Bottom" >
+        <Grid x:Name="RootContainer" Height="0" Margin="3 0 3 0" >
+            <StackPanel  x:Name="SecondContainer" Orientation="Vertical" VerticalAlignment="Bottom" >
                 <!--子项-->
-                <ListView x:Name="GroupItemListView" 
+                <ListView x:Name="ChildrenListView" 
                                   VerticalAlignment="Bottom"
                                   ItemsSource="{Binding}"
                                   ScrollViewer.VerticalScrollMode="Auto"  
