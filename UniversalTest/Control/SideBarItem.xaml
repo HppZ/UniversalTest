@@ -27,7 +27,7 @@
         <!--默认子项模板-->
         <DataTemplate x:Key="DefaultTemplateKey">
             <Grid Height="30">
-                <TextBlock VerticalAlignment="Center" Text="{Binding}" Margin="33 0 0 0" Foreground="DarkGray" FontSize="11"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding}" Margin="33 0 0 0"  FontSize="11"></TextBlock>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>

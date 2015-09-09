@@ -71,11 +71,14 @@ namespace UniversalTest.Control
         /// <summary>
         /// 展开 收缩动画
         /// </summary>
-        /// <param name="toExpand">true则要展开</param>
-        private void DoAnimation()
+        /// <param name="toOpen">true则强制展开</param>
+        private void DoAnimation(bool? toOpen = null)
         {
             var sb = this.Resources["StoryboardForHeight"] as Storyboard;
             var da = sb.Children[0] as DoubleAnimation;
+
+            if (toOpen != null)
+                _isOpen = toOpen.Value;
 
             //处于展开状态
             if (_isOpen)
@@ -94,6 +97,13 @@ namespace UniversalTest.Control
             sb.Begin();
         }
 
+        /// <summary>
+        /// 使子项变为非选择态
+        /// </summary>
+        private void UnSelecteChildren()
+        {
+            ChildrenListView.SelectedItem = null;
+        }
 
         #endregion
         #endregion
