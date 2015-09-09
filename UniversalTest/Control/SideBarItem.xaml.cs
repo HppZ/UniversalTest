@@ -49,6 +49,11 @@ namespace UniversalTest.Control
         /// 标题
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// 图标资源
+        /// </summary>
+        public Uri IconUriSource { get; set; }
         #endregion
 
 

@@ -10,10 +10,8 @@
     d:DesignWidth="400">
 
     <StackPanel Orientation="Vertical" Background="White">
-        <local:SideBarItem x:Name="PhotosItem" Title="照片"></local:SideBarItem>
-        <local:SideBarItem x:Name="AlbumsItem" Title="相册"></local:SideBarItem>
-        <local:SideBarItem x:Name="DevicesItem" Title="设备"></local:SideBarItem>
-        <local:SideBarItem x:Name="DevicesItem2" Title="设备"></local:SideBarItem>
-        <local:SideBarItem x:Name="DevicesItem3" Title="设备"></local:SideBarItem>
+        <local:SideBarItem x:Name="PhotosItem" Title="照片" IconUriSource="ms-appx:///Assets/icon_add@2x.png"></local:SideBarItem>
+        <local:SideBarItem x:Name="AlbumsItem" Title="相册" IconUriSource="ms-appx:///Assets/icon_jwb@2x.png"></local:SideBarItem>
+        <local:SideBarItem x:Name="DevicesItem" Title="设备" IconUriSource="ms-appx:///Assets/icon_like@2x.png"></local:SideBarItem>
     </StackPanel>
 </UserControl>

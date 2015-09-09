@@ -19,7 +19,7 @@
         </Storyboard>
     </Page.Resources>
 
-    <Grid Background="Transparent">
+    <Grid Background="White">
             <!--<controls:ExpandableControl ControlHeight="50" Visibility="Collapsed" Title="123" TitleInfoText="456">
                 <controls:ExpandableControl.UserActionContent>
                     <TextBlock Text="shdoshodsh" Foreground="Red"></TextBlock>
@@ -27,6 +27,6 @@
             </controls:ExpandableControl>-->
 
             <!--<control:SideBarItem Margin="0 50 0 0" Width="300" VerticalAlignment="Top"></control:SideBarItem>-->
-        <control:SideBar Margin="0 50 0 0" Width="300" VerticalAlignment="Top"></control:SideBar>
+        <control:SideBar Margin="0 50 0 0" Width="184" HorizontalAlignment="Left" VerticalAlignment="Stretch"></control:SideBar>
     </Grid>
 </Page>

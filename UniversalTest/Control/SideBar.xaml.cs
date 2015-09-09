@@ -62,8 +62,6 @@ namespace UniversalTest.Control
             };
 
             DevicesItem.DataContext = devicesMenuSource;
-            DevicesItem2.DataContext = devicesMenuSource;
-            DevicesItem3.DataContext = devicesMenuSource;
 
         }
     }
