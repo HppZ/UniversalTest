@@ -4,26 +4,34 @@
 # User-specific files
 *.suo
 *.user
+*.userosscache
 *.sln.docstates
-*.json
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
 
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
+[Rr]eleases/
 x64/
+x86/
+build/
 bld/
 [Bb]in/
 [Oo]bj/
 
-# Roslyn cache directories
-*.ide/
+# Visual Studio 2015 cache/options directory
+.vs/
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
-#NUNIT
+# NUNIT
 *.VisualState.xml
 TestResult.xml
 
@@ -31,6 +39,10 @@ TestResult.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
+
+# DNX
+project.lock.json
+artifacts/
 
 *_i.c
 *_p.c
@@ -72,6 +84,7 @@ ipch/
 *.psess
 *.vsp
 *.vspx
+*.sap
 
 # TFS 2012 Local Workspace
 $tf/
@@ -84,7 +97,7 @@ _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
 
-# JustCode is a .NET coding addin-in
+# JustCode is a .NET coding add-in
 .JustCode
 
 # TeamCity is a build add-in
@@ -96,6 +109,7 @@ _TeamCity*
 # NCrunch
 _NCrunch_*
 .*crunch*.local.xml
+nCrunchTemp_*
 
 # MightyMoose
 *.mm.*
@@ -123,22 +137,19 @@ publish/
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
-## TODO: Comment the next line if you want to checkin your
-## web deploy settings but do note that will include unencrypted
-## passwords
-#*.pubxml
+# TODO: Comment the next line if you want to checkin your web deploy settings 
+# but database connection strings (with potential passwords) will be unencrypted
+*.pubxml
+*.publishproj
 
-# NuGet Packages Directory
-packages/*
-## TODO: If the tool you use requires repositories.config
-## uncomment the next line
-#!packages/repositories.config
-
-# Enable "build/" folder in the NuGet Packages folder since
-# NuGet packages use it for MSBuild targets.
-# This line needs to be after the ignore of the build folder
-# (and the packages folder if the line above has been uncommented)
-!packages/build/
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/packages/repositories.config
 
 # Windows Azure Build Output
 csx/
@@ -147,18 +158,23 @@ csx/
 # Windows Store app package directory
 AppPackages/
 
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!*.[Cc]ache/
+
 # Others
-sql/
-*.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*
 ~$*
 *~
 *.dbmdl
-*.dbproj.schemaview 
+*.dbproj.schemaview
+*.pfx
 *.publishsettings
 node_modules/
-bower_components/
+orleans.codegen.cs
 
 # RIA/Silverlight projects
 Generated_Code/
@@ -183,72 +199,19 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-# LightSwitch generated files
-GeneratedArtifacts/
-_Pvt_Extensions/
-ModelManifest.xml
-sh.exe.stackdump
-/Sight.Windows10/packages/PinguoImageSDK-DX11.1.0.0
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/[Content_Types].xml
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta.nupkg
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/License-Stable.rtf
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/lib/net45/Microsoft.Diagnostics.Tracing.EventSource.XML
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/lib/net45/Microsoft.Diagnostics.Tracing.EventSource.dll
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/lib/net40/Microsoft.Diagnostics.Tracing.EventSource.XML
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/lib/net40/Microsoft.Diagnostics.Tracing.EventSource.dll
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/lib/net35/Microsoft.Diagnostics.Tracing.EventSource.XML
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/lib/net35/Microsoft.Diagnostics.Tracing.EventSource.dll
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/build/portable-net45+win8+wpa81/Microsoft.Diagnostics.Tracing.EventSource.Redist.targets
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/build/native/Microsoft.Diagnostics.Tracing.EventSource.Redist.targets
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/[Content_Types].xml
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/tools/win81/install.ps1
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/tools/Microsoft.ApplicationInsights.psm1
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067.nupkg
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.XML
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.winmd
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/content/win81/ApplicationInsights.config.uninstall.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/content/win81/ApplicationInsights.config.install.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/content/native/ApplicationInsights.config.uninstall.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/content/native/ApplicationInsights.config.install.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/content/native/App.xaml.uninstall.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/content/native/App.xaml.install.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/build/native/Microsoft.Applicationinsights.WindowsStore.targets
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/[Content_Types].xml
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067.nupkg
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/lib/portable-win81+wpa81/Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry.XML
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/lib/portable-win81+wpa81/Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry.winmd
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/lib/net45/Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry.XML
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/lib/net45/Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry.dll
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/lib/net40/Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry.XML
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/lib/net40/Microsoft.ApplicationInsights.Extensibility.RuntimeTelemetry.dll
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/content/portable-win81+wpa81/ApplicationInsights.config.uninstall.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/content/portable-win81+wpa81/ApplicationInsights.config.install.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/content/net45/ApplicationInsights.config.uninstall.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/content/net45/ApplicationInsights.config.install.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/content/net40/ApplicationInsights.config.uninstall.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/content/net40/ApplicationInsights.config.install.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/content/native/ApplicationInsights.config.uninstall.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/content/native/ApplicationInsights.config.install.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/build/native/Microsoft.Applicationinsights.RuntimeTelemetry.targets
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/[Content_Types].xml
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/tools/net40/uninstall.ps1
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/tools/net40/Microsoft.ApplicationInsights.targets
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/tools/net40/install.ps1
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/Microsoft.ApplicationInsights.0.13.0-build26067.nupkg
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/lib/wp8/Microsoft.ApplicationInsights.XML
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/lib/wp8/Microsoft.ApplicationInsights.dll
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/lib/portable-win81+wpa81/Microsoft.ApplicationInsights.XML
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/lib/portable-win81+wpa81/Microsoft.ApplicationInsights.winmd
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/lib/net40/Microsoft.ApplicationInsights.XML
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/lib/net40/Microsoft.ApplicationInsights.dll
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/content/ApplicationInsights.config.uninstall.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/content/ApplicationInsights.config.transform
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/content/ApplicationInsights.config.install.xdt
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/build/wp8/Microsoft.ApplicationInsights.targets
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/build/portable-win81+wpa81/Microsoft.ApplicationInsights.targets
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/build/native/Microsoft.ApplicationInsights.targets
-/Sight.Windows10/packages/Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.14-beta/[Content_Types].xml
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.WindowsStore.0.13.0-build26067/[Content_Types].xml
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.RuntimeTelemetry.0.13.0-build26067/[Content_Types].xml
-/Sight.Windows10/packages/Microsoft.ApplicationInsights.0.13.0-build26067/[Content_Types].xml
-*.xml
+# Node.js Tools for Visual Studio
+.ntvs_analysis.dat
+
+# Visual Studio 6 build log
+*.plg
+
+# Visual Studio 6 workspace options file
+*.opt
+
+# Visual Studio LightSwitch build output
+**/*.HTMLClient/GeneratedArtifacts
+**/*.DesktopClient/GeneratedArtifacts
+**/*.DesktopClient/ModelManifest.xml
+**/*.Server/GeneratedArtifacts
+**/*.Server/ModelManifest.xml
+_Pvt_Extensions

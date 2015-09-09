@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="a747f0de-e1b3-4244-b260-b4b6eaa3913c"
-    Publisher="CN=minew"
+    Name="3190b219-5078-43b5-815a-950789a3b279"
+    Publisher="CN=HaoPe"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="a747f0de-e1b3-4244-b260-b4b6eaa3913c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="3190b219-5078-43b5-815a-950789a3b279" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>UniversalTest</DisplayName>
-    <PublisherDisplayName>minew</PublisherDisplayName>
+    <PublisherDisplayName>HaoPe</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
