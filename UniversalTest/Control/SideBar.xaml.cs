@@ -75,20 +75,40 @@ namespace UniversalTest.Control
         public void CloseAllItems()
         {
             var sb = new Storyboard();
-            PhotosItem.OpenChildrenAnimation(false, sb);
-            AlbumsItem.OpenChildrenAnimation(false, sb);
-            DevicesItem.OpenChildrenAnimation(false, sb);
+
+            SwitchMode(sb);
+
+            var r1 = PhotosItem.OpenChildrenAnimation(false, sb);
+            var r2 = AlbumsItem.OpenChildrenAnimation(false, sb);
+            var r3 = DevicesItem.OpenChildrenAnimation(false, sb);
             sb.Begin();
+            return;
+
+            if (r1 || r2 || r3)
+            {
+                
+                sb.Completed += Sb_Completed;
+            }
+            else
+            {
+                SwitchMode();
+            }
         }
 
-
-        public void SwitchMode()
+        private void Sb_Completed(object sender, object e)
         {
-            var sb = new Storyboard();
+            SwitchMode();
+        }
+
+        public void SwitchMode(Storyboard sb = null)
+        {
+            var shouldBegin = sb == null;
+            if(sb == null)
+                sb = new Storyboard();
             var da = new DoubleAnimation()
             {
                 EnableDependentAnimation = true,
-                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
                 EasingFunction = new QuarticEase() { EasingMode = EasingMode.EaseInOut }
             };
 
@@ -110,7 +130,8 @@ namespace UniversalTest.Control
             _isWide = !_isWide;
             sb.Children.Add(da);
 
-            sb.Begin();
+            if(shouldBegin)
+                sb.Begin();
         }
 
     }

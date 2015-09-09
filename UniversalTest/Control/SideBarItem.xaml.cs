@@ -80,11 +80,11 @@ namespace UniversalTest.Control
         /// 展开 收缩动画
         /// </summary>
         /// <param name="toOpen">true则强制展开</param>
-        public void OpenChildrenAnimation(bool? toOpen = null, Storyboard sb = null)
+        public bool OpenChildrenAnimation(bool? toOpen = null, Storyboard sb = null)
         {
             if (toOpen != null && toOpen.Value == _isOpen)
             {
-                return;
+                return false;
             }
 
             bool shouldBegin = sb == null;
@@ -96,7 +96,7 @@ namespace UniversalTest.Control
             var da = new DoubleAnimation()
             {
                 EnableDependentAnimation = true,
-                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
                 EasingFunction = new QuarticEase() { EasingMode = EasingMode.EaseInOut }
             };
 
@@ -120,12 +120,13 @@ namespace UniversalTest.Control
             sb.Children.Add(da);
             if(shouldBegin)
                 sb.Begin();
+            return true;
         }
 
         /// <summary>
         /// 使子项变为非选择态
         /// </summary>
-        private void UnSelecteChildren()
+        private void ClearSelectedItem()
         {
             ChildrenListView.SelectedItem = null;
         }
