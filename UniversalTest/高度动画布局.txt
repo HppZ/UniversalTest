@@ -1,0 +1,33 @@
+    <StackPanel Background="Transparent">
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>-->
+
+        <StackPanel Width="500" VerticalAlignment="Top" Margin="0 50 0 0" Visibility="Collapsed">
+            <controls:ExpandableControl ControlHeight="50" Visibility="Collapsed" Title="123" TitleInfoText="456">
+                <controls:ExpandableControl.UserActionContent>
+                    <TextBlock Text="shdoshodsh" Foreground="Red"></TextBlock>
+                </controls:ExpandableControl.UserActionContent>
+            </controls:ExpandableControl>
+
+            <control:SideBarItem></control:SideBarItem>
+
+        </StackPanel>
+
+        <!--VerticalAlignment="Bottom" 可有可无 对Grid动画高度即可额 -->
+        <Grid VerticalAlignment="Bottom" x:Name="Grid" Grid.Row="0">
+            <StackPanel Orientation="Vertical" Tapped="Sp_Tapped" x:Name="Sp"  VerticalAlignment="Bottom" Background="Green">
+                <TextBlock Text="1" Foreground="Red"></TextBlock>
+                <TextBlock Text="1" Foreground="Red"></TextBlock>
+                <TextBlock Text="1" Foreground="Red"></TextBlock>
+                <TextBlock Text="1" Foreground="Red"></TextBlock>
+                <TextBlock Text="1" Foreground="Red"></TextBlock>
+                <TextBlock Text="1" Foreground="Red"></TextBlock>
+                <TextBlock Text="1" Foreground="Red"></TextBlock>
+                <TextBlock Text="1" Foreground="Red"></TextBlock>
+                <TextBlock Text="1" Foreground="Red"></TextBlock>
+            </StackPanel>
+        </Grid>
+
+    </StackPanel>

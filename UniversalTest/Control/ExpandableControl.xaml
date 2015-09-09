@@ -1,0 +1,52 @@
+﻿<UserControl
+    x:Class="Sight.Windows10.Views.Controls.ExpandableControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    x:Name="This">
+    
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+    
+    <StackPanel x:Name="GroupStackPanel" VerticalAlignment="Top" Orientation="Vertical" Background="Transparent" >
+        <Grid VerticalAlignment="Stretch"
+              Height="{Binding ElementName=This,Path=ControlHeight}"
+              Background="Transparent"
+              Tapped="GroupStackPanel_Tapped">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="8 0 0 0"  HorizontalAlignment="Left">
+                <Image x:Name="RotateImg" Width="8" Height="8" Source="ms-appx:///Assets/Arrowhead-Right.png">
+                    <Image.RenderTransform>
+                        <RotateTransform></RotateTransform>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock VerticalAlignment="Center" Text="{Binding ElementName=This,Path=Title}"></TextBlock>
+            </StackPanel>
+            <TextBlock VerticalAlignment="Center" 
+                       Margin="0 0 10 0" 
+                       HorizontalAlignment="Right" 
+                       Text="{Binding ElementName=This,Path=TitleInfoText}"></TextBlock>
+        </Grid>
+        <Grid x:Name="ExpandableStp" Height="0" MaxHeight="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ContentPresenter Height="44" Content="{Binding ElementName=This,Path=UserActionContent}" Tapped="UserAction_Tapped"
+                              Visibility="{Binding ElementName=This,Path=UserActionVisibility}"></ContentPresenter>
+            <ListView x:Name="GroupItemListView" Grid.Row="1" VerticalAlignment="Top"
+                                  ItemsSource="{Binding}"
+                                  ScrollViewer.VerticalScrollMode="Auto"  
+                                  ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                                  ItemTemplate="{Binding ElementName=This,Path=ItemTemplate}"
+                                  Background="Transparent" ItemContainerStyle="{StaticResource ListViewItemStyle1}">
+            </ListView>
+            <Border Grid.Row="2" BorderThickness="0 1 0 0" BorderBrush="LightGray"></Border>
+        </Grid>
+    </StackPanel>
+</UserControl>

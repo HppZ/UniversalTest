@@ -1,0 +1,68 @@
+﻿<UserControl
+    x:Class="UniversalTest.Control.SideBarItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UniversalTest.Control"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    x:Name="This"
+    >
+    <UserControl.Resources>
+        <!--高度动画-->
+        <Storyboard x:Name="StoryboardForHeight">
+            <DoubleAnimation Duration="0:0:0.3" To="0"
+                             EnableDependentAnimation="True" 
+                             Storyboard.TargetProperty="(FrameworkElement.Height)" 
+                             Storyboard.TargetName="ListViewContainer"
+                             d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!--默认子项模板-->
+        <DataTemplate x:Key="DefaultTemplateKey">
+            <StackPanel>
+                <TextBlock Text="{Binding}" Margin="37 0 0 0" Foreground="DarkGray" FontSize="11"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <!--<Grid Background="Gray" >-->
+    <StackPanel x:Name="GroupStackPanel" Tapped="GroupStackPanel_Tapped" VerticalAlignment="Top" Orientation="Vertical" Margin="5 5 5 5">
+        <!--Title-->
+        <Grid VerticalAlignment="Stretch" 
+              Background="White" >
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="8 8 0 8"  HorizontalAlignment="Left">
+                <!--Icon-->
+                <BitmapIcon UriSource="ms-appx:///Assets/icon_add@2x.png" Width="20" Height="20"></BitmapIcon>
+                <!--Title-->
+                <TextBlock VerticalAlignment="Center" Margin="10 0 0 0" Text="{Binding ElementName=This,Path=Title}"></TextBlock>
+            </StackPanel>
+            <!--右侧箭头-->
+            <BitmapIcon HorizontalAlignment="Right" Margin="0 0 10 0" UriSource="ms-appx:///Assets/Arrowhead-Right.png" Width="20" Height="20"></BitmapIcon>
+        </Grid>
+
+        <!--Content-->
+        <!--ContentRootSp 可有可无-->
+        <StackPanel Background="White" x:Name="ContentRootSp" Margin="3 0 3 0">
+            <Grid x:Name="ListViewContainer" >
+                <StackPanel  x:Name="Sp" Orientation="Vertical" VerticalAlignment="Bottom" >
+                    <!--子项-->
+                    <ListView x:Name="GroupItemListView" 
+                                  VerticalAlignment="Bottom"
+                                  ItemsSource="{Binding}"
+                                  ScrollViewer.VerticalScrollMode="Auto"  
+                                  ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                                  ItemTemplate="{Binding ElementName=This,Path=ItemDataTemplate}"
+                                  Background="Transparent" ItemContainerStyle="{StaticResource ListViewItemStyle1}">
+                    </ListView>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+    <!--</Grid>-->
+</UserControl>
