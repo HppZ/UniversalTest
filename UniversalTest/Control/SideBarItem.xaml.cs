@@ -58,6 +58,13 @@ namespace UniversalTest.Control
         /// 图标资源
         /// </summary>
         public Uri IconUriSource { get; set; }
+
+        public bool _isWide = true; // 宽窄模式
+        public bool IsWide
+        {
+            get { return _isWide; }
+            set { _isWide = value; }
+        }
         #endregion
 
 
@@ -65,20 +72,36 @@ namespace UniversalTest.Control
         #region Ani
         private void Title_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            DoAnimation();
+            if(_isWide)
+                OpenChildrenAnimation();
         }
 
         /// <summary>
         /// 展开 收缩动画
         /// </summary>
         /// <param name="toOpen">true则强制展开</param>
-        private void DoAnimation(bool? toOpen = null)
+        public void OpenChildrenAnimation(bool? toOpen = null, Storyboard sb = null)
         {
-            var sb = this.Resources["StoryboardForHeight"] as Storyboard;
-            var da = sb.Children[0] as DoubleAnimation;
+            if (toOpen != null && toOpen.Value == _isOpen)
+            {
+                return;
+            }
 
-            if (toOpen != null)
-                _isOpen = toOpen.Value;
+            bool shouldBegin = sb == null;
+            if (shouldBegin)
+            {
+                sb = new Storyboard();
+            }
+
+            var da = new DoubleAnimation()
+            {
+                EnableDependentAnimation = true,
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+                EasingFunction = new QuarticEase() { EasingMode = EasingMode.EaseInOut }
+            };
+
+            Storyboard.SetTarget(da, RootContainer);
+            Storyboard.SetTargetProperty(da, "(FrameworkElement.Height)");
 
             //处于展开状态
             if (_isOpen)
@@ -94,7 +117,9 @@ namespace UniversalTest.Control
                 da.From = RootContainer.ActualHeight;
             }
             _isOpen = !_isOpen;
-            sb.Begin();
+            sb.Children.Add(da);
+            if(shouldBegin)
+                sb.Begin();
         }
 
         /// <summary>
@@ -103,6 +128,55 @@ namespace UniversalTest.Control
         private void UnSelecteChildren()
         {
             ChildrenListView.SelectedItem = null;
+        }
+
+        /// <summary>
+        /// 切换宽窄模式
+        /// </summary>
+        /// <param name="toWide">true 强制变成宽模式</param>
+        /// <param name="sb">传sb是为了同步动画</param>
+        public void SwitchMode(bool? toWide = null, Storyboard sb = null)
+        {
+            if (toWide != null && toWide.Value == _isWide)
+            {
+                return;
+            }
+
+            bool shouldBegin = sb == null;
+            if(shouldBegin)
+                sb = new Storyboard();
+
+            var da = new DoubleAnimation()
+            {
+                EnableDependentAnimation = true,
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+                EasingFunction = new QuarticEase() { EasingMode = EasingMode.EaseInOut}
+            };
+
+            Storyboard.SetTarget(da,RootStackPanel);
+            Storyboard.SetTargetProperty(da, "(FrameworkElement.Width)");
+
+            // 处于宽模式
+            if (_isWide)
+            {
+                da.From = RootStackPanel.ActualWidth;
+                da.To = 30;// TODO value
+            }
+            // 处于窄模式
+            else
+            {
+                da.From = RootStackPanel.ActualWidth;
+                da.To = TitleGrid.ActualWidth;
+            }
+            _isWide = !_isWide;
+            sb.Children.Add(da);
+            if(shouldBegin)
+                sb.Begin();
+        }
+
+        public void SwitchIcon()
+        {
+            
         }
 
         #endregion

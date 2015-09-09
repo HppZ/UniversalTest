@@ -7,11 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    x:Name="This">
 
-    <StackPanel Orientation="Vertical" Background="White">
-        <local:SideBarItem x:Name="PhotosItem" Title="照片" IconUriSource="ms-appx:///Assets/icon_add@2x.png"></local:SideBarItem>
-        <local:SideBarItem x:Name="AlbumsItem" Title="相册" IconUriSource="ms-appx:///Assets/icon_jwb@2x.png"></local:SideBarItem>
-        <local:SideBarItem x:Name="DevicesItem" Title="设备" IconUriSource="ms-appx:///Assets/icon_like@2x.png"></local:SideBarItem>
-    </StackPanel>
+    <Grid x:Name="RootGrid" >
+        <StackPanel x:Name="RootStackPanel" Width="{Binding ElementName=RootGrid,Path=ActualWidth,Mode=OneTime}" Orientation="Vertical" Background="White">
+            <local:SideBarItem x:Name="PhotosItem" Title="照片" IconUriSource="ms-appx:///Assets/icon_add@2x.png"></local:SideBarItem>
+            <local:SideBarItem x:Name="AlbumsItem" Title="相册" IconUriSource="ms-appx:///Assets/icon_jwb@2x.png"></local:SideBarItem>
+            <local:SideBarItem x:Name="DevicesItem" Title="设备" IconUriSource="ms-appx:///Assets/icon_like@2x.png"></local:SideBarItem>
+        </StackPanel>
+    </Grid>
+
 </UserControl>

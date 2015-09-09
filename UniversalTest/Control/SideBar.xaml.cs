@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -24,6 +25,8 @@ namespace UniversalTest.Control
         private ObservableCollection<string> albumsMenuSource;
         private ObservableCollection<string> devicesMenuSource;
 
+
+        private bool _isWide = true; // 是否处于宽模式
         public SideBar()
         {
             this.InitializeComponent();
@@ -64,5 +67,51 @@ namespace UniversalTest.Control
             DevicesItem.DataContext = devicesMenuSource;
 
         }
+
+
+        /// <summary>
+        /// 关闭所有items
+        /// </summary>
+        public void CloseAllItems()
+        {
+            var sb = new Storyboard();
+            PhotosItem.OpenChildrenAnimation(false, sb);
+            AlbumsItem.OpenChildrenAnimation(false, sb);
+            DevicesItem.OpenChildrenAnimation(false, sb);
+            sb.Begin();
+        }
+
+
+        public void SwitchMode()
+        {
+            var sb = new Storyboard();
+            var da = new DoubleAnimation()
+            {
+                EnableDependentAnimation = true,
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+                EasingFunction = new QuarticEase() { EasingMode = EasingMode.EaseInOut }
+            };
+
+            Storyboard.SetTarget(da, RootGrid);
+            Storyboard.SetTargetProperty(da, "(FrameworkElement.Width)");
+
+            // 处于宽模式
+            if (_isWide)
+            {
+                da.From = RootGrid.ActualWidth;
+                da.To = 30;// TODO value
+            }
+            // 处于窄模式
+            else
+            {
+                da.From = RootGrid.ActualWidth;
+                da.To = RootStackPanel.ActualWidth;
+            }
+            _isWide = !_isWide;
+            sb.Children.Add(da);
+
+            sb.Begin();
+        }
+
     }
 }

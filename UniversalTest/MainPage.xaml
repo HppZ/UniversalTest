@@ -27,6 +27,8 @@
             </controls:ExpandableControl>-->
 
             <!--<control:SideBarItem Margin="0 50 0 0" Width="300" VerticalAlignment="Top"></control:SideBarItem>-->
-        <control:SideBar Margin="0 50 0 0" Width="184" HorizontalAlignment="Left" VerticalAlignment="Stretch"></control:SideBar>
+        <control:SideBar Margin="0 50 0 0" x:Name="SideBarElement" Width="184" HorizontalAlignment="Left" VerticalAlignment="Stretch"></control:SideBar>
+        
+        <Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="50" Click="ButtonBase_OnClick"></Button>
     </Grid>
 </Page>
