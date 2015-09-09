@@ -117,6 +117,7 @@ namespace UniversalTest.Control
                 da.From = RootContainer.ActualHeight;
             }
             _isOpen = !_isOpen;
+            ArrowRotateTransform.Angle = _isOpen ? 90 : 0;
             sb.Children.Add(da);
             if(shouldBegin)
                 sb.Begin();
@@ -183,7 +184,8 @@ namespace UniversalTest.Control
 
         public void SetHeight()
         {
-            RootContainer.Height = Double.NaN;
+            if(_isOpen)
+                RootContainer.Height = Double.NaN;
         }
         #endregion
         #endregion

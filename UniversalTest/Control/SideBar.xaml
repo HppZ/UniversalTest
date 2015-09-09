@@ -15,7 +15,7 @@
     
     <Grid x:Name="RootGrid" HorizontalAlignment="Left">
         <ListView x:Name="ItemsListView"
-                  HorizontalContentAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch" SelectionMode="None"
                   HorizontalAlignment="Stretch" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
