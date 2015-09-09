@@ -121,6 +121,12 @@
     <None Include="UniversalTest_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Arrowhead-Right.png" />
+    <Content Include="Assets\icon_add%402x.png" />
+    <Content Include="Assets\icon_jwb%402x.png" />
+    <Content Include="Assets\icon_like%402x.png" />
+    <Content Include="Assets\icon_search%402x.png" />
+    <Content Include="Assets\icon_share%402x.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

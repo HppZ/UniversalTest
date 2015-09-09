@@ -125,7 +125,7 @@ namespace UniversalTest.Control
             else
             {
                 da.From = RootGrid.ActualWidth;
-                da.To = RootStackPanel.ActualWidth;
+                da.To = ItemsListView.ActualWidth;
             }
             _isWide = !_isWide;
             sb.Children.Add(da);
