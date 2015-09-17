@@ -178,7 +178,7 @@
                                     </Grid>
                                 </ControlTemplate>
                                 <ControlTemplate x:Key="VerticalThumbTemplate" TargetType="Thumb">
-                                    <Rectangle x:Name="ThumbVisual" Fill="{ThemeResource SystemControlForegroundBaseLowBrush}">
+                                    <Ellipse Width="30" Height="30"  x:Name="ThumbVisual" Fill="Aqua">
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal"/>
@@ -203,7 +203,7 @@
                                                 </VisualState>
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
-                                    </Rectangle>
+                                    </Ellipse>
                                 </ControlTemplate>
                                 <ControlTemplate x:Key="HorizontalThumbTemplate" TargetType="Thumb">
                                     <Rectangle x:Name="ThumbVisual" Fill="{ThemeResource SystemControlForegroundBaseLowBrush}">
@@ -351,10 +351,10 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Rectangle Visibility="Collapsed" x:Name="VerticalTrackRect" Fill="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
+                                <Rectangle Visibility="Visible" x:Name="VerticalTrackRect" Fill="Gray" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
                                 <RepeatButton Visibility="Collapsed" x:Name="VerticalSmallDecrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="0" Template="{StaticResource VerticalDecrementTemplate}"/>
                                 <RepeatButton Visibility="Visible" x:Name="VerticalLargeDecrease" HorizontalAlignment="Stretch" Height="0" IsTabStop="False" Interval="50" Grid.Row="1" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
-                                <Thumb x:Name="VerticalThumb" AutomationProperties.AccessibilityView="Raw" Background="{ThemeResource SystemControlForegroundChromeHighBrush}" MinHeight="12" Grid.Row="2" Template="{StaticResource VerticalThumbTemplate}" Width="12"/>
+                                <Thumb x:Name="VerticalThumb" Width="30" AutomationProperties.AccessibilityView="Raw" Background="Red" MinHeight="12" Grid.Row="2" Template="{StaticResource VerticalThumbTemplate}" />
                                 <RepeatButton Visibility="Visible" x:Name="VerticalLargeIncrease" HorizontalAlignment="Stretch" IsTabStop="False" Interval="50" Grid.Row="3" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
                                 <RepeatButton Visibility="Collapsed" x:Name="VerticalSmallIncrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="4" Template="{StaticResource VerticalIncrementTemplate}"/>
                             </Grid>
@@ -482,7 +482,12 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <ScrollContentPresenter x:Name="ScrollContentPresenter" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" Grid.RowSpan="2"/>
-                                <ScrollBar x:Name="VerticalScrollBar" Grid.Column="1" HorizontalAlignment="Right" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" Style="{StaticResource ScrollBarStyle1}"/>
+                                <ScrollBar x:Name="VerticalScrollBar" Grid.Column="1" HorizontalAlignment="Right" 
+                                           IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" 
+                                           Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
+                                           Value="{TemplateBinding VerticalOffset}" 
+                                           ViewportSize="15" 
+                                           Style="{StaticResource ScrollBarStyle1}"/>
                                 <ScrollBar x:Name="HorizontalScrollBar" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}"/>
                                 <Border x:Name="ScrollBarSeparator" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Grid.Column="1" Grid.Row="1"/>
                             </Grid>
