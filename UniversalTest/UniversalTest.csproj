@@ -116,6 +116,9 @@
     <Compile Include="Control\ExpandableList\SideBarItem.xaml.cs">
       <DependentUpon>SideBarItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BlankPage3.xaml.cs">
+      <DependentUpon>BlankPage3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
     <Page Include="Control\ExpandableList\SideBarItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\BlankPage3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
