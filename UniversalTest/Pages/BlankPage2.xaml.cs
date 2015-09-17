@@ -24,7 +24,7 @@ namespace UniversalTest
     {
 
         /// <summary>
-        /// 测试TextBox的 visualstate
+        //  测试TextBox的 visualstate
         /// </summary>
         public BlankPage2()
         {

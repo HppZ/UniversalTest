@@ -25,7 +25,9 @@ namespace UniversalTest
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
+        /// <summary>
+        /// 测试展开控件减少数据源自动收起效果
+        /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
