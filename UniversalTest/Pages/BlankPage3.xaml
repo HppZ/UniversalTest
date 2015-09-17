@@ -178,7 +178,14 @@
                                     </Grid>
                                 </ControlTemplate>
                                 <ControlTemplate x:Key="VerticalThumbTemplate" TargetType="Thumb">
-                                    <Ellipse Width="30" Height="30"  x:Name="ThumbVisual" Fill="Aqua">
+                                    <Ellipse Width="30" Height="30"  x:Name="ThumbVisual" >
+                                        <Ellipse.Fill>
+                                            <ImageBrush>
+                                                <ImageBrush.ImageSource>
+                                                    <BitmapImage UriSource="ms-appx:///Assets/ControlAssets/WhiteBall.png"></BitmapImage>
+                                                </ImageBrush.ImageSource>
+                                            </ImageBrush>
+                                        </Ellipse.Fill>
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal"/>
@@ -351,7 +358,7 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Rectangle Visibility="Visible" x:Name="VerticalTrackRect" Fill="Gray" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
+                                <Rectangle Visibility="Visible" x:Name="VerticalTrackRect" Fill="Transparent" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
                                 <RepeatButton Visibility="Collapsed" x:Name="VerticalSmallDecrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="0" Template="{StaticResource VerticalDecrementTemplate}"/>
                                 <RepeatButton Visibility="Visible" x:Name="VerticalLargeDecrease" HorizontalAlignment="Stretch" Height="0" IsTabStop="False" Interval="50" Grid.Row="1" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
                                 <Thumb x:Name="VerticalThumb" Width="30" AutomationProperties.AccessibilityView="Raw" Background="Red" MinHeight="12" Grid.Row="2" Template="{StaticResource VerticalThumbTemplate}" />
