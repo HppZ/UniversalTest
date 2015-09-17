@@ -351,12 +351,12 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Rectangle x:Name="VerticalTrackRect" Fill="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
-                                <RepeatButton x:Name="VerticalSmallDecrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="0" Template="{StaticResource VerticalDecrementTemplate}"/>
-                                <RepeatButton x:Name="VerticalLargeDecrease" HorizontalAlignment="Stretch" Height="0" IsTabStop="False" Interval="50" Grid.Row="1" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
+                                <Rectangle Visibility="Collapsed" x:Name="VerticalTrackRect" Fill="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
+                                <RepeatButton Visibility="Collapsed" x:Name="VerticalSmallDecrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="0" Template="{StaticResource VerticalDecrementTemplate}"/>
+                                <RepeatButton Visibility="Visible" x:Name="VerticalLargeDecrease" HorizontalAlignment="Stretch" Height="0" IsTabStop="False" Interval="50" Grid.Row="1" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
                                 <Thumb x:Name="VerticalThumb" AutomationProperties.AccessibilityView="Raw" Background="{ThemeResource SystemControlForegroundChromeHighBrush}" MinHeight="12" Grid.Row="2" Template="{StaticResource VerticalThumbTemplate}" Width="12"/>
-                                <RepeatButton x:Name="VerticalLargeIncrease" HorizontalAlignment="Stretch" IsTabStop="False" Interval="50" Grid.Row="3" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
-                                <RepeatButton x:Name="VerticalSmallIncrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="4" Template="{StaticResource VerticalIncrementTemplate}"/>
+                                <RepeatButton Visibility="Visible" x:Name="VerticalLargeIncrease" HorizontalAlignment="Stretch" IsTabStop="False" Interval="50" Grid.Row="3" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
+                                <RepeatButton Visibility="Collapsed" x:Name="VerticalSmallIncrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="4" Template="{StaticResource VerticalIncrementTemplate}"/>
                             </Grid>
                             <Grid x:Name="VerticalPanningRoot" MinHeight="24">
                                 <Border x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeHighBrush}" MinHeight="12" VerticalAlignment="Top" Width="4"/>
