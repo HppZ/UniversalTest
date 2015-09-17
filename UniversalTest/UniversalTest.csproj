@@ -102,6 +102,9 @@
     <Compile Include="BlankPage1.xaml.cs">
       <DependentUpon>BlankPage1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BlankPage2.xaml.cs">
+      <DependentUpon>BlankPage2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\ExpandableControl.xaml.cs">
       <DependentUpon>ExpandableControl.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Arrowhead-Right.png" />
+    <Content Include="Assets\gallery2.jpg" />
     <Content Include="Assets\icon_add%402x.png" />
     <Content Include="Assets\icon_jwb%402x.png" />
     <Content Include="Assets\icon_like%402x.png" />
@@ -145,6 +149,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="BlankPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlankPage2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
