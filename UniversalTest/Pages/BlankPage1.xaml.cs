@@ -31,6 +31,7 @@ namespace UniversalTest
 
         private ScrollBar _scrollBar;
         private ScrollViewer _scrollViewer;
+        private Thumb _verticalThumb;
         public BlankPage1()
         {
             this.InitializeComponent();
@@ -45,19 +46,7 @@ namespace UniversalTest
 
         private void BlankPage1_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_scrollBar != null && _scrollViewer != null)
-            {
-                double s = _scrollViewer.ViewportHeight;
-                s = 30;
-                double max = _scrollBar.Maximum;
-                double min = _scrollBar.Minimum;
-                double t = s*s - 4*(min - max);
-                double b24ac = Math.Sqrt(t);
-                var r = (b24ac + s) / 2;
-
-                _scrollBar.ViewportSize = r;
-                Debug.WriteLine("viewpostsize "+r);
-            }
+            ResetViewportSize();
         }
 
         private void BlankPage1_Loaded(object sender, RoutedEventArgs e)
@@ -67,19 +56,56 @@ namespace UniversalTest
 
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            //Debug.WriteLine(_scrollViewer.ScrollableHeight);
-            //Debug.WriteLine(_scrollBar.ViewportSize);
         }
 
         private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
         {
             _scrollViewer = sender as ScrollViewer;
+            ResetViewportSize();
         }
 
         private void VerticalScrollBar_OnLoaded(object sender, RoutedEventArgs e)
         {
             _scrollBar = sender as ScrollBar;
+            _scrollBar.ValueChanged += _scrollBar_ValueChanged;
+
+            ResetViewportSize();
         }
+
+        private void _scrollBar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+
+        }
+
+        private void VerticalThumb_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            _verticalThumb = sender as Thumb;
+            ResetViewportSize();
+        }
+
+        #region 调整滚动条
+        private double GetThumbHeight()
+        {
+            if (_scrollBar != null && _scrollViewer != null)
+            {
+                double viewportsize = _scrollViewer.ViewportHeight;
+                var shouldHeight = viewportsize * viewportsize / (_scrollViewer.ScrollableHeight + viewportsize);
+                return shouldHeight;
+            }
+            return 0;
+        }
+
+        private void ResetViewportSize()
+        {
+            if (_scrollBar != null && _scrollViewer != null && _verticalThumb != null)
+            {
+                var shouldHeight = GetThumbHeight();
+                if (Math.Abs(shouldHeight) < 0.01) return;
+                var finalViewportSize = _verticalThumb.ActualHeight * _scrollViewer.ViewportHeight / shouldHeight;
+                _scrollBar.ViewportSize = finalViewportSize - (shouldHeight - _verticalThumb.ActualHeight);
+            }
+        }
+        #endregion
 
     }
 }
