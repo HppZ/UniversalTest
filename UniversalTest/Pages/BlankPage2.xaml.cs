@@ -22,10 +22,11 @@ namespace UniversalTest
     /// </summary>
     public sealed partial class BlankPage2 : Page
     {
-
         /// <summary>
         //  测试TextBox的 visualstate
         /// </summary>
+      
+             
         public BlankPage2()
         {
             this.InitializeComponent();

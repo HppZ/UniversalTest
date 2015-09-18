@@ -26,7 +26,7 @@ namespace UniversalTest
     public sealed partial class MainPage : Page
     {
         /// <summary>
-        /// 测试展开控件减少数据源自动收起效果
+        /// 测试展开控件减少数据源自动收起效果   就是当observablecollection remove的时候
         /// </summary>
         public MainPage()
         {
@@ -37,7 +37,6 @@ namespace UniversalTest
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             
-
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

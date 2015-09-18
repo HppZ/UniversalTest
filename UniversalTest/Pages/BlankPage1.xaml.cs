@@ -26,6 +26,10 @@ namespace UniversalTest
     /// </summary>
     public sealed partial class BlankPage1 : Page
     {
+        /// <summary>
+        /// 圆球滚动条
+        /// </summary>
+
         private ObservableCollection<ImageItem> _source;
         private MainController mainController;
 
