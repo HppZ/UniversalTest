@@ -36,6 +36,7 @@ namespace UniversalTest
         private ScrollBar _scrollBar;
         private ScrollViewer _scrollViewer;
         private Thumb _verticalThumb;
+        private Slider _slider;
         public BlankPage1()
         {
             this.InitializeComponent();
@@ -57,7 +58,19 @@ namespace UniversalTest
         private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
         {
             _scrollViewer = sender as ScrollViewer;
+            _scrollViewer.ViewChanging += _scrollViewer_ViewChanging;
+            _scrollViewer.ViewChanged += _scrollViewer_ViewChanged;
+
             ResetViewportSize();
+        }
+
+        private void _scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            _slider.Value = _scrollViewer.VerticalOffset;
+        }
+
+        private void _scrollViewer_ViewChanging(object sender, ScrollViewerViewChangingEventArgs e)
+        {
         }
 
         private void VerticalScrollBar_OnLoaded(object sender, RoutedEventArgs e)
@@ -139,6 +152,19 @@ namespace UniversalTest
         private void VerticalPanningRoot_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             Debug.WriteLine("Size " + e.NewSize);
+        }
+
+        private void RangeBase_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            Debug.WriteLine("offset "+_scrollViewer.VerticalOffset);
+            Debug.WriteLine("value "+e.NewValue);
+
+            _scrollViewer.ChangeView(null,e.NewValue,1);
+        }
+
+        private void Slider_Loaded(object sender, RoutedEventArgs e)
+        {
+            _slider = sender as Slider;
         }
     }
 }

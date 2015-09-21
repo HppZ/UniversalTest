@@ -151,6 +151,6 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Slider Maximum="100" Value="50" VerticalAlignment="Center" Style="{StaticResource SliderStyle1}"></Slider>
+        <Slider Maximum="100" Value="10" Width="50" Orientation="Vertical" VerticalAlignment="Stretch" Style="{StaticResource SliderStyle1}"></Slider>
     </Grid>
 </Page>
