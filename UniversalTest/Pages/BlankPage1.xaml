@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
+
+        <!--ScrollBar-->
         <Style x:Key="ScrollBarStyle1" TargetType="ScrollBar">
             <Setter Property="MinWidth" Value="12"/>
             <Setter Property="MinHeight" Value="12"/>
@@ -330,7 +332,7 @@
                             <Grid x:Name="HorizontalPanningRoot" MinWidth="24">
                                 <Border x:Name="HorizontalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeHighBrush}" HorizontalAlignment="Left" Height="4" MinWidth="12"/>
                             </Grid>
-                            <Grid x:Name="VerticalRoot" IsHitTestVisible="False" >
+                            <Grid x:Name="VerticalRoot" IsHitTestVisible="False" Background="Red">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -341,12 +343,13 @@
                                 <Rectangle Visibility="Visible" x:Name="VerticalTrackRect" Fill="Transparent" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
                                 <RepeatButton Visibility="Collapsed" x:Name="VerticalSmallDecrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="0" Template="{StaticResource VerticalDecrementTemplate}"/>
                                 <RepeatButton Visibility="Visible" x:Name="VerticalLargeDecrease" HorizontalAlignment="Stretch" Height="0" IsTabStop="False" Interval="50" Grid.Row="1" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
-                                <Thumb x:Name="VerticalThumb" Height="30"  MaxHeight="30" MinHeight="30" Template="{StaticResource VerticalThumbTemplate}" Loaded="VerticalThumb_OnLoaded"  Width="30" AutomationProperties.AccessibilityView="Raw" Grid.Row="2" />
+                                <Thumb x:Name="VerticalThumb" Height="30" Tapped="VerticalThumb_OnTapped" DragStarted="VerticalThumb_OnDragStarted"  MaxHeight="30" MinHeight="30" Template="{StaticResource VerticalThumbTemplate}" Loaded="VerticalThumb_OnLoaded"  Width="30" AutomationProperties.AccessibilityView="Raw" Grid.Row="2" />
                                 <RepeatButton Visibility="Visible" x:Name="VerticalLargeIncrease" HorizontalAlignment="Stretch" IsTabStop="False" Interval="50" Grid.Row="3" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
                                 <RepeatButton Visibility="Collapsed" x:Name="VerticalSmallIncrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="4" Template="{StaticResource VerticalIncrementTemplate}"/>
                             </Grid>
-                            <Grid x:Name="VerticalPanningRoot" MinHeight="24">
-                                <Border x:Name="VerticalPanningThumb" BorderThickness="0" Background="{ThemeResource SystemControlForegroundChromeHighBrush}" MinHeight="12" VerticalAlignment="Top" Width="4"/>
+                            <Grid x:Name="VerticalPanningRoot" Background="Green" SizeChanged="VerticalPanningRoot_OnSizeChanged" MinHeight="24">
+                                <Border x:Name="VerticalPanningThumb" BorderThickness="0" 
+                                        Background="Aqua" MinHeight="12" VerticalAlignment="Top" Width="4"/>
                             </Grid>
                         </Grid>
                     </ControlTemplate>
@@ -354,6 +357,8 @@
             </Setter>
         </Style>
 
+
+        <!--ScrollViewer-->
         <Style x:Key="ScrollViewerStyle1" TargetType="ScrollViewer">
             <Setter Property="HorizontalScrollMode" Value="Auto"/>
             <Setter Property="VerticalScrollMode" Value="Auto"/>
@@ -484,6 +489,8 @@
             </Setter>
         </Style>
 
+
+        <!--GridView-->
         <Style x:Key="GridViewStyle1" TargetType="GridView">
             <Setter Property="Padding" Value="0,0,0,10"/>
             <Setter Property="IsTabStop" Value="False"/>
@@ -530,7 +537,12 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Tapped="UIElement_OnTapped">
-        <GridView ItemsSource="{Binding}" Style="{StaticResource GridViewStyle1}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Content="click" Height="50" HorizontalAlignment="Center" Tapped="Test_Tapped"></Button>
+        <GridView Grid.Row="1" ItemsSource="{Binding}" Style="{StaticResource GridViewStyle1}" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Image Source="{Binding PreviewImage}" Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>
