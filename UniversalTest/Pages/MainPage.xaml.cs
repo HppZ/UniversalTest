@@ -28,6 +28,8 @@ namespace UniversalTest
         /// <summary>
         /// 测试展开控件减少数据源自动收起效果   就是当observablecollection remove的时候
         /// </summary>
+        
+
         public MainPage()
         {
             this.InitializeComponent();

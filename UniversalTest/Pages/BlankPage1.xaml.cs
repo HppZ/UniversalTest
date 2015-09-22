@@ -29,7 +29,7 @@ namespace UniversalTest
     public sealed partial class BlankPage1 : Page
     {
         /// <summary>
-        /// 圆球滚动条
+        /// 圆球滚动条  包含两种方案 check commit记录
         /// </summary>
 
         private ObservableCollection<ImageItem> _source;
