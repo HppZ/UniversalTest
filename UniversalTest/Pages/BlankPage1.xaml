@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:slider="using:UniversalTest.Control.Slider"
+    xmlns:scrollBar="using:UniversalTest.Control.ScrollBar"
     mc:Ignorable="d">
     <Page.Resources>
 
@@ -476,7 +477,8 @@
                                 </Grid.RowDefinitions>
                                 <ScrollContentPresenter x:Name="ScrollContentPresenter" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" Grid.RowSpan="2"/>
                                 <ScrollBar Loaded="VerticalScrollBar_OnLoaded" x:Name="VerticalScrollBar" Grid.Column="1" HorizontalAlignment="Right" 
-                                           IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" 
+                                           IsTabStop="False" 
+                                           Maximum="{TemplateBinding ScrollableHeight}" 
                                            Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
                                            Value="{TemplateBinding VerticalOffset}" 
                                            ViewportSize="{TemplateBinding ViewportHeight}" 
@@ -497,10 +499,10 @@
             <Setter Property="IsTabStop" Value="False"/>
             <Setter Property="TabNavigation" Value="Once"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
             <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
             <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
-            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
             <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True"/>
             <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
             <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
@@ -526,22 +528,25 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="GridView">
-                        <Grid Background="Green">
+                        <Grid Background="Transparent">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ScrollViewer Loaded="ScrollViewer_Loaded" Style="{StaticResource ScrollViewerStyle1}" x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"  >
+                            <ScrollViewer Loaded="ScrollViewer_Loaded" x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"  >
                                 <ItemsPresenter FooterTransitions="{TemplateBinding FooterTransitions}" FooterTemplate="{TemplateBinding FooterTemplate}" Footer="{TemplateBinding Footer}" HeaderTemplate="{TemplateBinding HeaderTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" Padding="{TemplateBinding Padding}"/>
                             </ScrollViewer>
                             
                             <!--滚动条-->
-                            <!--<slider:BallSlider2 Grid.Column="1" Loaded="Slider_Loaded" ValueChanged="RangeBase_OnValueChanged" Maximum="{Binding ElementName=ScrollViewer,Path=ScrollableHeight}" 
-                                     Orientation="Vertical" Width="30" RenderTransformOrigin="0.5,0.5">
-                                <slider:BallSlider2.RenderTransform>
-                                    <CompositeTransform Rotation="180"></CompositeTransform>
-                                </slider:BallSlider2.RenderTransform>
-                            </slider:BallSlider2>-->
+                            <scrollBar:BallScrollBar Grid.Column="1" Margin="0 0 20 0"
+                                                     Loaded="BallScrollBar_Loaded"
+                                                     ValueChanged="RangeBase_OnValueChanged" 
+                                                     Visibility="{Binding ElementName=ScrollViewer,Path=ComputedVerticalScrollBarVisibility}" 
+                                                     Value="{Binding ElementName=ScrollViewer,Path=VerticalOffset}" 
+                                                     ViewportSize="{Binding ElementName=ScrollViewer,Path=ViewportHeight}" 
+                                                     Maximum="{Binding ElementName=ScrollViewer,Path=ScrollableHeight}" 
+                                                     Orientation="Vertical" RenderTransformOrigin="0.5,0.5">
+                            </scrollBar:BallScrollBar>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

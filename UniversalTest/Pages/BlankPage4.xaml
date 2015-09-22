@@ -151,6 +151,8 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Slider Maximum="100" Value="10" Width="50" Orientation="Vertical" VerticalAlignment="Stretch" Style="{StaticResource SliderStyle1}"></Slider>
+        <!--<Slider Maximum="100" Value="10" Width="50" Orientation="Vertical" VerticalAlignment="Stretch" Style="{StaticResource SliderStyle1}"></Slider>-->
+        
+        <ScrollBar Value="230" Maximum="1000" ViewportSize="100" IndicatorMode="MouseIndicator" Background="Red" Height="40" Visibility="Visible" Orientation="Horizontal"></ScrollBar>
     </Grid>
 </Page>

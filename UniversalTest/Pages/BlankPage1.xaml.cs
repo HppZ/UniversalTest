@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using UniversalTest.Control.ScrollBar;
 using UniversalTest.Controller;
 using UniversalTest.Helper;
 
@@ -35,6 +36,7 @@ namespace UniversalTest
         private MainController mainController;
 
         private ScrollBar _scrollBar;
+        private BallScrollBar _ballScrollBar;
         private ScrollViewer _scrollViewer;
         private Thumb _verticalThumb;
         private Slider _slider;
@@ -130,7 +132,7 @@ namespace UniversalTest
         #region 调整滚动条
         private double GetThumbHeight()
         {
-            if (_scrollBar != null && _scrollViewer != null)
+            if (_scrollViewer != null)
             {
                 double viewportsize = _scrollViewer.ViewportHeight;
                 var shouldHeight = viewportsize * viewportsize / (_scrollViewer.ScrollableHeight + viewportsize);
@@ -141,18 +143,19 @@ namespace UniversalTest
 
         private void ResetViewportSize()
         {
-            if (_scrollBar != null && _scrollViewer != null && _verticalThumb != null)
+            if ( _scrollViewer != null && _ballScrollBar !=null)
             {
-                if (_scrollBar.IndicatorMode == ScrollingIndicatorMode.TouchIndicator)
+                if (_ballScrollBar.IndicatorMode == ScrollingIndicatorMode.MouseIndicator)
                 {
-                    _scrollBar.ViewportSize = _scrollViewer.ViewportHeight;
+                    _ballScrollBar.ViewportSize = _scrollViewer.ViewportHeight;
                     return;
                 };
 
                 var shouldHeight = GetThumbHeight();
                 if (Math.Abs(shouldHeight) < 0.01) return;
-                var finalViewportSize = _verticalThumb.ActualHeight * _scrollViewer.ViewportHeight / shouldHeight;
-                _scrollBar.ViewportSize = finalViewportSize - (shouldHeight - _verticalThumb.ActualHeight);
+                var thumbHeight = _ballScrollBar.GetThumbHeight();
+                var finalViewportSize = thumbHeight * _scrollViewer.ViewportHeight / shouldHeight;
+                _ballScrollBar.ViewportSize = finalViewportSize - (shouldHeight - thumbHeight);
             }
         }
         #endregion
@@ -177,6 +180,11 @@ namespace UniversalTest
         private void Slider_Loaded(object sender, RoutedEventArgs e)
         {
             _slider = sender as Slider;
+        }
+
+        private void BallScrollBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            _ballScrollBar = sender as BallScrollBar;
         }
     }
 }
