@@ -133,6 +133,11 @@ namespace UniversalTest.Control.ScrollBar
         private void VerticalThumb_OnLoaded(object sender, RoutedEventArgs e)
         {
             _verticalThumb = sender as Thumb;
+
+            if (_indicatorMode == ScrollingIndicatorMode.TouchIndicator)
+            {
+                ChangeMode();
+            }
         }
         private void BallScrollBar_Loaded(object sender, RoutedEventArgs e)
         {
@@ -157,6 +162,18 @@ namespace UniversalTest.Control.ScrollBar
         {
             ChangeMode();
             ResetViewportSize();
+        }
+
+        private void ScrollBar_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if(_indicatorMode == ScrollingIndicatorMode.MouseIndicator)
+                VisualStateManager.GoToState(ScrollBarElement, "PointerEntered", false);
+        }
+
+        private void ScrollBar_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            if (_indicatorMode == ScrollingIndicatorMode.MouseIndicator)
+                VisualStateManager.GoToState(ScrollBarElement, "PointerExited", false);
         }
         #endregion
 
@@ -196,5 +213,6 @@ namespace UniversalTest.Control.ScrollBar
             }
         }
         #endregion
+
     }
 }

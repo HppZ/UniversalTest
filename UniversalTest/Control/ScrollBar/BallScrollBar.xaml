@@ -20,14 +20,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Ellipse Width="30" Height="30" x:Name="ThumbVisual" Fill="Red">
-                            <!--<Ellipse.Fill>
+                        <Ellipse Width="30" Height="30" x:Name="ThumbVisual">
+                            <Ellipse.Fill>
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
                                         <BitmapImage UriSource="ms-appx:///Assets/ControlAssets/WhiteBall.png"></BitmapImage>
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
-                            </Ellipse.Fill>-->
+                            </Ellipse.Fill>
                             <VisualStateManager.VisualStateGroups>
                                 <!--<VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal"/>
@@ -44,18 +44,21 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Rectangle x:Name="ThumbVisual" Fill="{ThemeResource SystemControlForegroundBaseLowBrush}">
+                        <Border CornerRadius="4" x:Name="ThumbVisual" Background="#999999" Width="6">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"/>
                                     <VisualState x:Name="PointerOver">
-                                        <Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="ThumbVisual.(FrameworkElement.Width)" Value="9"/>
+                                        </VisualState.Setters>
+                                        <!--<Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="ThumbVisual">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        </Storyboard>-->
                                     </VisualState>
-                                    <VisualState x:Name="Pressed">
+                                    <!--<VisualState x:Name="Pressed">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="ThumbVisual">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumBrush}"/>
@@ -66,10 +69,10 @@
                                         <Storyboard>
                                             <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ThumbVisual"/>
                                         </Storyboard>
-                                    </VisualState>
+                                    </VisualState>-->
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                        </Rectangle>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -244,9 +247,6 @@
                                         <FontIcon x:Name="Arrow" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" FontSize="6" FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE0E4;"/>
                                     </Grid>
                                 </ControlTemplate>
-
-
-
                                 <ControlTemplate x:Key="HorizontalThumbTemplate" TargetType="Thumb">
                                     <Rectangle x:Name="ThumbVisual" Fill="{ThemeResource SystemControlForegroundBaseLowBrush}">
                                         <VisualStateManager.VisualStateGroups>
@@ -278,8 +278,51 @@
                             </Grid.Resources>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="PointerEntered">
+                                        <VisualState.Setters>
+                                            <Setter Target="VerticalTrackRect.(Shape.Fill).(SolidColorBrush.Color)">
+                                                <Setter.Value>
+                                                    <Color>#FFF8F8F8</Color>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Target="VerticalTrackRect.(Shape.Stroke)">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#FFECECEC"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="PointerExited">
+                                        <VisualState.Setters>
+                                            <Setter Target="VerticalTrackRect.(Shape.Stroke)">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="Transparent"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Target="VerticalTrackRect.(Shape.Fill).(SolidColorBrush.Color)">
+                                                <Setter.Value>
+                                                    <Color>Transparent</Color>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
                                     <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="PointerOver"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <!--<VisualState.Setters>
+                                            <Setter Target="VerticalTrackRect.(Shape.Fill).(SolidColorBrush.Color)">
+                                                <Setter.Value>
+                                                    <Color>#FFF8F8F8</Color>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Target="VerticalTrackRect.(Shape.Stroke)">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#ffececec"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>-->
+                                    </VisualState>
                                     <VisualState x:Name="Disabled">
                                         <Storyboard>
                                             <DoubleAnimation Duration="0" To="0.5" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Root"/>
@@ -393,7 +436,7 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Rectangle Visibility="Visible" x:Name="VerticalTrackRect" Fill="Transparent" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="{ThemeResource ScrollBarTrackBorderThemeThickness}"/>
+                                <Rectangle Visibility="Visible" x:Name="VerticalTrackRect" Fill="Transparent" Margin="0" Grid.RowSpan="5" Stroke="{ThemeResource SystemControlForegroundTransparentBrush}" StrokeThickness="1"/>
                                 <RepeatButton Visibility="Collapsed" x:Name="VerticalSmallDecrease" HorizontalAlignment="Center" Height="12" IsTabStop="False" Interval="50" Margin="0" MinWidth="12" Grid.Row="0" Template="{StaticResource VerticalDecrementTemplate}"/>
                                 <RepeatButton Visibility="Visible" x:Name="VerticalLargeDecrease" HorizontalAlignment="Stretch" Height="0" IsTabStop="False" Interval="50" Grid.Row="1" Template="{StaticResource RepeatButtonTemplate}" VerticalAlignment="Stretch"/>
                                 <Thumb x:Name="VerticalThumb" Loaded="VerticalThumb_OnLoaded" Style="{StaticResource DefaultVerticalThumbStyle}" AutomationProperties.AccessibilityView="Raw" Background="{ThemeResource SystemControlForegroundChromeHighBrush}"  Grid.Row="2"/>
@@ -414,6 +457,8 @@
                IndicatorMode="MouseIndicator"
                HorizontalAlignment="Center"
                Orientation="Vertical"
+               PointerEntered="ScrollBar_PointerEntered"
+               PointerExited="ScrollBar_PointerExited"
                Value="{Binding ElementName=This,Path=Value}"
                Maximum="{Binding ElementName=This,Path=Maximum}"
                ViewportSize="{Binding ElementName=This,Path=ViewportSize}"
