@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -47,6 +48,24 @@ namespace UniversalTest.Control.ScrollBar
         {
             return _verticalThumb.ActualHeight;
         }
+
+        public void ReBind()
+        {
+            var binding = new Binding()
+            {
+                Path = new PropertyPath("Value"),
+                ElementName = "This"
+            };
+
+            ScrollBarElement.SetBinding(RangeBase.ValueProperty, binding);
+        }
+
+        public void SetValue(double value)
+        {
+            Value = value;
+            ReBind();
+        }
+
         #endregion
 
         #region private method
@@ -119,7 +138,7 @@ namespace UniversalTest.Control.ScrollBar
         {
             var p = this.Parent as FrameworkElement;
             _scrollViewer = VisualTreeExtensions.FindFirstElementInVisualTree<ScrollViewer>(p);
-            if(_scrollViewer == null)throw new Exception("incorrect usage");
+            if (_scrollViewer == null) throw new Exception("incorrect usage");
         }
 
         #endregion
@@ -130,6 +149,7 @@ namespace UniversalTest.Control.ScrollBar
         /// </summary>
         private void ScrollBar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
+            Debug.WriteLine("value");
             ValueChanged?.Invoke(sender, e);
         }
 
@@ -160,7 +180,7 @@ namespace UniversalTest.Control.ScrollBar
         /// </summary>
         private void ResetViewportSize()
         {
-            if (_scrollViewer != null )
+            if (_scrollViewer != null)
             {
                 if (this.IndicatorMode == ScrollingIndicatorMode.MouseIndicator)
                 {
