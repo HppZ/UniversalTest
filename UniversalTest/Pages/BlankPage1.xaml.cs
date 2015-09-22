@@ -77,7 +77,6 @@ namespace UniversalTest
             _scrollViewer.ViewChanging += _scrollViewer_ViewChanging;
             _scrollViewer.ViewChanged += _scrollViewer_ViewChanged;
 
-            ResetViewportSize();
         }
         #endregion
 
@@ -102,39 +101,11 @@ namespace UniversalTest
 
         private void BlankPage1_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            ResetViewportSize();
         }
         #endregion
 
         #region 调整滚动条
-        private double GetThumbHeight()
-        {
-            if (_scrollViewer != null)
-            {
-                double viewportsize = _scrollViewer.ViewportHeight;
-                var shouldHeight = viewportsize * viewportsize / (_scrollViewer.ScrollableHeight + viewportsize);
-                return shouldHeight;
-            }
-            return 0;
-        }
-
-        private void ResetViewportSize()
-        {
-            if ( _scrollViewer != null && _ballScrollBar !=null)
-            {
-                if (_ballScrollBar.IndicatorMode == ScrollingIndicatorMode.MouseIndicator)
-                {
-                    _ballScrollBar.ViewportSize = _scrollViewer.ViewportHeight;
-                    return;
-                };
-
-                var shouldHeight = GetThumbHeight();
-                if (Math.Abs(shouldHeight) < 0.01) return;
-                var thumbHeight = _ballScrollBar.GetThumbHeight();
-                var finalViewportSize = thumbHeight * _scrollViewer.ViewportHeight / shouldHeight;
-                _ballScrollBar.ViewportSize = finalViewportSize - (shouldHeight - thumbHeight);
-            }
-        }
+        
         #endregion
 
         #region tapped

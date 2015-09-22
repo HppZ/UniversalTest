@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Sight.Windows10.Helper;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -23,6 +24,7 @@ namespace UniversalTest.Control.ScrollBar
         #region internal element
         private Thumb _verticalThumb;
         private ScrollingIndicatorMode _indicatorMode;
+        private ScrollViewer _scrollViewer;
         #endregion
 
         #region Event
@@ -33,12 +35,15 @@ namespace UniversalTest.Control.ScrollBar
         public BallScrollBar()
         {
             this.InitializeComponent();
+
+            this.Loaded += BallScrollBar_Loaded;
             this.SizeChanged += This_SizeChanged;
         }
+
         #endregion
 
         #region public method
-        public double GetThumbHeight()
+        public double GetThumbActualHeight()
         {
             return _verticalThumb.ActualHeight;
         }
@@ -110,6 +115,13 @@ namespace UniversalTest.Control.ScrollBar
         {
             _verticalThumb = sender as Thumb;
         }
+        private void BallScrollBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            var p = this.Parent as FrameworkElement;
+            _scrollViewer = VisualTreeExtensions.FindFirstElementInVisualTree<ScrollViewer>(p);
+            if(_scrollViewer == null)throw new Exception("incorrect usage");
+        }
+
         #endregion
 
         #region something changed
@@ -124,6 +136,44 @@ namespace UniversalTest.Control.ScrollBar
         private void This_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ChangeMode();
+            ResetViewportSize();
+        }
+        #endregion
+
+        #region adjust viewportsize
+        /// <summary>
+        /// 获取应有的高度
+        /// </summary>
+        private double GetThumbNaturalHeight()
+        {
+            if (_scrollViewer != null)
+            {
+                double viewportsize = _scrollViewer.ViewportHeight;
+                var shouldHeight = viewportsize * viewportsize / (_scrollViewer.ScrollableHeight + viewportsize);
+                return shouldHeight;
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// 重置scrollbar的viewportsize
+        /// </summary>
+        private void ResetViewportSize()
+        {
+            if (_scrollViewer != null )
+            {
+                if (this.IndicatorMode == ScrollingIndicatorMode.MouseIndicator)
+                {
+                    this.ViewportSize = _scrollViewer.ViewportHeight;
+                    return;
+                };
+
+                var shouldHeight = GetThumbNaturalHeight(); // 应有高度
+                if (Math.Abs(shouldHeight) < 0.01) return;
+                var thumbHeight = this.GetThumbActualHeight(); // 实际高度
+                var finalViewportSize = thumbHeight * _scrollViewer.ViewportHeight / shouldHeight;
+                this.ViewportSize = finalViewportSize - (shouldHeight - thumbHeight);
+            }
         }
         #endregion
     }
