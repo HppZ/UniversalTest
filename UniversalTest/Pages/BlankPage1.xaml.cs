@@ -67,6 +67,7 @@ namespace UniversalTest
 
         private void _scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
+            if(_slider == null)return;
             _slider.Value = _scrollViewer.VerticalOffset;
         }
 
