@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -92,6 +93,16 @@ namespace UniversalTest
         private void BlankPage1_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ResetViewportSize();
+
+            var mode = UIViewSettings.GetForCurrentView().UserInteractionMode;
+            if (mode == UserInteractionMode.Touch)
+            {
+                Debug.WriteLine("touch");
+            }
+            else if(mode == UserInteractionMode.Mouse)
+            {
+                Debug.WriteLine("mouse");
+            }
         }
 
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)

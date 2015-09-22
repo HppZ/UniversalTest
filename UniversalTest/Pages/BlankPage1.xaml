@@ -5,6 +5,7 @@
     xmlns:local="using:UniversalTest"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:slider="using:UniversalTest.Control.Slider"
     mc:Ignorable="d">
     <Page.Resources>
 
@@ -533,8 +534,14 @@
                             <ScrollViewer Loaded="ScrollViewer_Loaded" x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"  >
                                 <ItemsPresenter FooterTransitions="{TemplateBinding FooterTransitions}" FooterTemplate="{TemplateBinding FooterTemplate}" Footer="{TemplateBinding Footer}" HeaderTemplate="{TemplateBinding HeaderTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" Padding="{TemplateBinding Padding}"/>
                             </ScrollViewer>
-                            <Slider Grid.Column="1" Loaded="Slider_Loaded" ValueChanged="RangeBase_OnValueChanged" Maximum="{Binding ElementName=ScrollViewer,Path=ScrollableHeight}" 
-                                     Orientation="Vertical" Width="30"></Slider>
+                            
+                            <!--滚动条-->
+                            <slider:BallSlider2 Grid.Column="1" Loaded="Slider_Loaded" ValueChanged="RangeBase_OnValueChanged" Maximum="{Binding ElementName=ScrollViewer,Path=ScrollableHeight}" 
+                                     Orientation="Vertical" Width="30" RenderTransformOrigin="0.5,0.5">
+                                <slider:BallSlider2.RenderTransform>
+                                    <CompositeTransform Rotation="180"></CompositeTransform>
+                                </slider:BallSlider2.RenderTransform>
+                            </slider:BallSlider2>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
