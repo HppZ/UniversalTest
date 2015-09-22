@@ -29,17 +29,22 @@ namespace UniversalTest.Control.ScrollBar
         public event RangeBaseValueChangedEventHandler ValueChanged;
         #endregion
 
+        #region ctor
         public BallScrollBar()
         {
             this.InitializeComponent();
             this.SizeChanged += This_SizeChanged;
         }
+        #endregion
 
-        private void This_SizeChanged(object sender, SizeChangedEventArgs e)
+        #region public method
+        public double GetThumbHeight()
         {
-            ChangeMode();
+            return _verticalThumb.ActualHeight;
         }
+        #endregion
 
+        #region private method
         private void ChangeMode()
         {
             var mode = UIViewSettings.GetForCurrentView().UserInteractionMode;
@@ -59,6 +64,7 @@ namespace UniversalTest.Control.ScrollBar
             Style style = this.Resources[resource] as Style;
             _verticalThumb.Style = style;
         }
+        #endregion
 
         #region public properties
         public Orientation Orientation
@@ -96,15 +102,6 @@ namespace UniversalTest.Control.ScrollBar
 
         #endregion
 
-
-        /// <summary>
-        /// 滚动条值发生变化
-        /// </summary>
-        private void ScrollBar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            ValueChanged?.Invoke(sender, e);
-        }
-
         #region Loaded
         /// <summary>
         ///  垂直滚动条Thumb
@@ -115,10 +112,19 @@ namespace UniversalTest.Control.ScrollBar
         }
         #endregion
 
-
-        public double GetThumbHeight()
+        #region something changed
+        /// <summary>
+        /// 滚动条值发生变化
+        /// </summary>
+        private void ScrollBar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            return _verticalThumb.ActualHeight;
+            ValueChanged?.Invoke(sender, e);
         }
+
+        private void This_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ChangeMode();
+        }
+        #endregion
     }
 }

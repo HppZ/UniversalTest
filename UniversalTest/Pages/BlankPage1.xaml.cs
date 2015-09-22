@@ -32,6 +32,8 @@ namespace UniversalTest
         /// 圆球滚动条  包含两种方案 check commit记录
         /// </summary>
 
+
+        #region internal elements 
         private ObservableCollection<ImageItem> _source;
         private MainController mainController;
 
@@ -39,7 +41,9 @@ namespace UniversalTest
         private BallScrollBar _ballScrollBar;
         private ScrollViewer _scrollViewer;
         private Thumb _verticalThumb;
-        private Slider _slider;
+        #endregion
+
+        #region ctor
         public BlankPage1()
         {
             this.InitializeComponent();
@@ -51,8 +55,17 @@ namespace UniversalTest
             this.SizeChanged += BlankPage1_SizeChanged;
             Loaded += BlankPage1_Loaded;
         }
+        #endregion
 
-        #region Loaded
+        #region loaded
+        /// <summary>
+        /// 圆球滚动条
+        /// </summary>
+        private void BallScrollBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            _ballScrollBar = sender as BallScrollBar;
+        }
+
         private void BlankPage1_Loaded(object sender, RoutedEventArgs e)
         {
             mainController.Init();
@@ -66,68 +79,32 @@ namespace UniversalTest
 
             ResetViewportSize();
         }
+        #endregion
 
+        #region scrollviewer event
         private void _scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            if(_slider == null)return;
-            _slider.Value = _scrollViewer.VerticalOffset;
         }
 
         private void _scrollViewer_ViewChanging(object sender, ScrollViewerViewChangingEventArgs e)
         {
         }
-
-        private void VerticalScrollBar_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            _scrollBar = sender as ScrollBar;
-            _scrollBar.ValueChanged += _scrollBar_ValueChanged;
-
-            ResetViewportSize();
-        }
-
-        private void VerticalThumb_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            _verticalThumb = sender as Thumb;
-            ResetViewportSize();
-        }
         #endregion
 
-        #region Other
+        #region changed
+        private void RangeBase_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            Debug.WriteLine("offset " + _scrollViewer.VerticalOffset);
+            Debug.WriteLine("value " + e.NewValue);
+
+            _scrollViewer.ChangeView(null, e.NewValue, 1);
+        }
+
         private void BlankPage1_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ResetViewportSize();
-
-            var mode = UIViewSettings.GetForCurrentView().UserInteractionMode;
-            if (mode == UserInteractionMode.Touch)
-            {
-                Debug.WriteLine("touch");
-            }
-            else if(mode == UserInteractionMode.Mouse)
-            {
-                Debug.WriteLine("mouse");
-            }
-        }
-
-        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
-
-        private void _scrollBar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-        }
-
-        private void VerticalThumb_OnDragStarted(object sender, DragStartedEventArgs e)
-        {
-            Debug.WriteLine("started");
-        }
-
-        private void VerticalThumb_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            Debug.WriteLine("tapped");
         }
         #endregion
-
 
         #region 调整滚动条
         private double GetThumbHeight()
@@ -160,31 +137,12 @@ namespace UniversalTest
         }
         #endregion
 
+        #region tapped
         private void Test_Tapped(object sender, TappedRoutedEventArgs e)
         {
         }
 
-        private void VerticalPanningRoot_OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            Debug.WriteLine("Size " + e.NewSize);
-        }
+        #endregion
 
-        private void RangeBase_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            Debug.WriteLine("offset "+_scrollViewer.VerticalOffset);
-            Debug.WriteLine("value "+e.NewValue);
-
-            _scrollViewer.ChangeView(null,e.NewValue,1);
-        }
-
-        private void Slider_Loaded(object sender, RoutedEventArgs e)
-        {
-            _slider = sender as Slider;
-        }
-
-        private void BallScrollBar_Loaded(object sender, RoutedEventArgs e)
-        {
-            _ballScrollBar = sender as BallScrollBar;
-        }
     }
 }
