@@ -51,6 +51,9 @@ namespace UniversalTest.Control.ScrollBar
 
         public void ReBind()
         {
+            var bindingex = ScrollBarElement.GetBindingExpression(RangeBase.ValueProperty);
+            if (bindingex != null) return;
+
             var binding = new Binding()
             {
                 Path = new PropertyPath("Value"),
