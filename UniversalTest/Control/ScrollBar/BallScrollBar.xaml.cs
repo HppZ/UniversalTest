@@ -64,7 +64,7 @@ namespace UniversalTest.Control.ScrollBar
         /// <param name="value"></param>
         public void ReBind(double value)
         {
-            var bindingex = ScrollBarElement.GetBindingExpression(RangeBase.ValueProperty);
+            var bindingex = SliderElement.GetBindingExpression(RangeBase.ValueProperty);
             if (bindingex != null)
             {
                 return;
@@ -75,8 +75,8 @@ namespace UniversalTest.Control.ScrollBar
                 Path = new PropertyPath("Value"),
                 ElementName = "This"
             };
-
-            ScrollBarElement.SetBinding(RangeBase.ValueProperty, binding);
+            
+            SliderElement.SetBinding(RangeBase.ValueProperty, binding);
         }
 
         /// <summary>
@@ -122,6 +122,16 @@ namespace UniversalTest.Control.ScrollBar
             Style style = this.Resources[resource] as Style;
             _verticalThumb.Style = style;
         }
+
+        private void ReCalThumbSize()
+        {
+            if(_verticalThumb == null)return;
+
+            var h = (ViewportSize / (Maximum + ViewportSize)) * ViewportSize;
+            _verticalThumb.Height = h;
+            Debug.WriteLine(h);
+        }
+
         #endregion
 
         #region public properties
@@ -130,14 +140,21 @@ namespace UniversalTest.Control.ScrollBar
         /// </summary>
         public Orientation Orientation
         {
-            set { ScrollBarElement.Orientation = value; }
+            set { SliderElement.Orientation = value; }
         }
 
         /// <summary>
         /// 最大值
         /// </summary>
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
-            "Maximum", typeof(Double), typeof(BallScrollBar), new PropertyMetadata(default(Double)));
+            "Maximum", typeof(Double), typeof(BallScrollBar), new PropertyMetadata(default(Double), OnMaximumCallback));
+
+        private static void OnMaximumCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var c = d as BallScrollBar;
+            c.ReCalThumbSize();
+        }
+
         public Double Maximum
         {
             get { return (Double)GetValue(MaximumProperty); }
@@ -160,7 +177,13 @@ namespace UniversalTest.Control.ScrollBar
         /// 视图高度
         /// </summary>
         public static readonly DependencyProperty ViewportSizeProperty = DependencyProperty.Register(
-            "ViewportSize", typeof(double), typeof(BallScrollBar), new PropertyMetadata(default(double)));
+            "ViewportSize", typeof(double), typeof(BallScrollBar), new PropertyMetadata(default(double), OnViewportSizeCallback));
+
+        private static void OnViewportSizeCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var c = d as BallScrollBar;
+            c.ReCalThumbSize();
+        }
 
         public double ViewportSize
         {
@@ -187,6 +210,8 @@ namespace UniversalTest.Control.ScrollBar
             {
                 CheckUserInteractionMode();
             }
+
+            ReCalThumbSize();
         }
 
         /// <summary>
@@ -211,6 +236,15 @@ namespace UniversalTest.Control.ScrollBar
             ValueChanged?.Invoke(sender, e);
         }
 
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            Show();
+
+            Debug.WriteLine("fake "+e.NewValue);
+
+            ValueChanged?.Invoke(sender, e);
+        }
+
         /// <summary>
         /// 大小变化
         /// </summary>
@@ -230,7 +264,7 @@ namespace UniversalTest.Control.ScrollBar
         private void ScrollBar_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             if (_indicatorMode == ScrollingIndicatorMode.MouseIndicator)
-                VisualStateManager.GoToState(ScrollBarElement, "PointerEntered", true);
+                VisualStateManager.GoToState(SliderElement, "PointerEntered", true);
         }
 
         /// <summary>
@@ -241,7 +275,7 @@ namespace UniversalTest.Control.ScrollBar
         private void ScrollBar_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             if (_indicatorMode == ScrollingIndicatorMode.MouseIndicator)
-                VisualStateManager.GoToState(ScrollBarElement, "PointerExited", true);
+                VisualStateManager.GoToState(SliderElement, "PointerExited", true);
         }
 
         /// <summary>
@@ -275,6 +309,7 @@ namespace UniversalTest.Control.ScrollBar
         /// </summary>
         private void ResetViewportSize()
         {
+            return;
             if (_scrollViewer != null)
             {
                 if (this.IndicatorMode == ScrollingIndicatorMode.MouseIndicator)
@@ -331,13 +366,15 @@ namespace UniversalTest.Control.ScrollBar
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                var sb = new Storyboard();
-                StoryboardHelper.CreatAnimation(Root, sb, "Opacity", 150, 0, new QuadraticEase() { EasingMode = EasingMode.EaseIn }, true);
-                sb.Begin();
+                Root.Opacity = 0;
+                //var sb = new Storyboard();
+                //StoryboardHelper.CreatAnimation(Root, sb, "Opacity", 150, 0, new QuadraticEase() { EasingMode = EasingMode.EaseIn }, true);
+                //sb.Begin();
             });
         }
 
         #endregion
 
+        
     }
 }

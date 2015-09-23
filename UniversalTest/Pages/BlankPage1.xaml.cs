@@ -83,7 +83,6 @@ namespace UniversalTest
         #region scrollviewer event
         private void _scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            Debug.WriteLine("viewer");
 
             _ballScrollBar.SetValue(_scrollViewer.VerticalOffset);
         }
@@ -96,8 +95,6 @@ namespace UniversalTest
         #region changed
         private void RangeBase_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            Debug.WriteLine("scrollbar");
-
             _scrollViewer.ChangeView(null, e.NewValue, 1);
         }
 
@@ -117,5 +114,9 @@ namespace UniversalTest
 
         #endregion
 
+        private void ScrollBar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            Debug.WriteLine("real " + e.NewValue);
+        }
     }
 }
