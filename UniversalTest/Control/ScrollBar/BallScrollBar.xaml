@@ -2,7 +2,6 @@
     x:Class="UniversalTest.Control.ScrollBar.BallScrollBar"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:UniversalTest.Control.ScrollBar"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -24,7 +23,7 @@
                             <Ellipse.Fill>
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
-                                        <BitmapImage UriSource="ms-appx:///Assets/ControlAssets/WhiteBall.png"></BitmapImage>
+                                        <BitmapImage UriSource="ms-appx:///Assets/AlbumImages/Control/WhiteBall.png"></BitmapImage>
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Ellipse.Fill>
@@ -44,19 +43,28 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Border CornerRadius="4" x:Name="ThumbVisual" Background="#999999" Width="6">
+                        <Border CornerRadius="4" x:Name="ThumbVisual" HorizontalAlignment="Center" Background="#999999" Width="6">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"/>
                                     <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>
+                                        <!--<VisualState.Setters>
                                             <Setter Target="ThumbVisual.(FrameworkElement.Width)" Value="9"/>
-                                        </VisualState.Setters>
+                                        </VisualState.Setters>-->
                                         <!--<Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="ThumbVisual">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>-->
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="ThumbVisual">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.08" Value="9">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <QuadraticEase EasingMode="EaseIn"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
                                     </VisualState>
                                     <!--<VisualState x:Name="Pressed">
                                         <Storyboard>
@@ -79,7 +87,7 @@
         </Style>
 
         <Style x:Key="ScrollBarStyle2" TargetType="ScrollBar">
-            <Setter Property="MinWidth" Value="12"/>
+            <Setter Property="MinWidth" Value="0"/>
             <Setter Property="MinHeight" Value="12"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="Transparent"/>
@@ -282,17 +290,18 @@
                                         <VisualState.Setters>
                                             <Setter Target="VerticalTrackRect.(Shape.Fill).(SolidColorBrush.Color)">
                                                 <Setter.Value>
-                                                    <Color>#FFF8F8F8</Color>
+                                                    <Color>Transparent</Color>
                                                 </Setter.Value>
                                             </Setter>
                                             <Setter Target="VerticalTrackRect.(Shape.Stroke)">
                                                 <Setter.Value>
-                                                    <SolidColorBrush Color="#FFECECEC"/>
+                                                    <SolidColorBrush Color="Transparent"/>
                                                 </Setter.Value>
                                             </Setter>
                                         </VisualState.Setters>
                                     </VisualState>
 
+                                    
                                     <VisualState x:Name="PointerExited">
                                         <VisualState.Setters>
                                             <Setter Target="VerticalTrackRect.(Shape.Stroke)">
@@ -453,10 +462,12 @@
         </Style>
     </UserControl.Resources>
 
-    <ScrollBar x:Name="ScrollBarElement" 
+    <Grid x:Name="Root">
+        <ScrollBar x:Name="ScrollBarElement"
                IndicatorMode="MouseIndicator"
                HorizontalAlignment="Center"
                Orientation="Vertical"
+               PointerMoved="ScrollBar_PointerMoved"
                PointerEntered="ScrollBar_PointerEntered"
                PointerExited="ScrollBar_PointerExited"
                Value="{Binding ElementName=This,Path=Value}"
@@ -464,4 +475,5 @@
                ViewportSize="{Binding ElementName=This,Path=ViewportSize}"
                Style="{StaticResource ScrollBarStyle2}" 
                ValueChanged="ScrollBar_ValueChanged"></ScrollBar>
+    </Grid>
 </UserControl>

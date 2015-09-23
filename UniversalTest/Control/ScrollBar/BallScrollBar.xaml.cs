@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -13,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Sight.Windows10.Helper;
 
@@ -23,13 +26,15 @@ namespace UniversalTest.Control.ScrollBar
     public sealed partial class BallScrollBar : UserControl
     {
         #region internal element
-        private Thumb _verticalThumb;
-        private ScrollingIndicatorMode _indicatorMode;
-        private ScrollViewer _scrollViewer;
+        private Thumb _verticalThumb; // 滚动条内滑块
+        private ScrollingIndicatorMode _indicatorMode; // 用户输入模式
+        private ScrollViewer _scrollViewer; // 滚动条所在的scrollviewer
+        private Timer _timer; // 延迟隐藏的计时器
+
         #endregion
 
         #region Event
-        public event RangeBaseValueChangedEventHandler ValueChanged;
+        public event RangeBaseValueChangedEventHandler ValueChanged; // 滚动条滚动值变化
         #endregion
 
         #region ctor
@@ -44,15 +49,26 @@ namespace UniversalTest.Control.ScrollBar
         #endregion
 
         #region public method
+        /// <summary>
+        /// 获取滑块应有高度
+        /// </summary>
+        /// <returns></returns>
         public double GetThumbActualHeight()
         {
             return _verticalThumb.ActualHeight;
         }
 
-        public void ReBind()
+        /// <summary>
+        /// 重新绑定滑块的值
+        /// </summary>
+        /// <param name="value"></param>
+        public void ReBind(double value)
         {
             var bindingex = ScrollBarElement.GetBindingExpression(RangeBase.ValueProperty);
-            if (bindingex != null) return;
+            if (bindingex != null)
+            {
+                return;
+            }
 
             var binding = new Binding()
             {
@@ -63,18 +79,33 @@ namespace UniversalTest.Control.ScrollBar
             ScrollBarElement.SetBinding(RangeBase.ValueProperty, binding);
         }
 
+        /// <summary>
+        /// 设置当前的值
+        /// </summary>
+        /// <param name="value"></param>
         public void SetValue(double value)
         {
-            Value = value;
-            ReBind();
+            ReBind(value);
         }
 
         #endregion
 
         #region private method
-        private void ChangeMode()
+        /// <summary>
+        /// 检查用户输入模式
+        /// </summary>
+        private void CheckUserInteractionMode()
         {
             var mode = UIViewSettings.GetForCurrentView().UserInteractionMode;
+            ChangeStyle(mode);
+        }
+
+        /// <summary>
+        /// 切换滑块样式
+        /// </summary>
+        /// <param name="mode"></param>
+        private void ChangeStyle(UserInteractionMode mode)
+        {
             string resource = "";
             if (mode == UserInteractionMode.Touch)
             {
@@ -94,11 +125,17 @@ namespace UniversalTest.Control.ScrollBar
         #endregion
 
         #region public properties
+        /// <summary>
+        /// 方向
+        /// </summary>
         public Orientation Orientation
         {
             set { ScrollBarElement.Orientation = value; }
         }
 
+        /// <summary>
+        /// 最大值
+        /// </summary>
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
             "Maximum", typeof(Double), typeof(BallScrollBar), new PropertyMetadata(default(Double)));
         public Double Maximum
@@ -107,6 +144,9 @@ namespace UniversalTest.Control.ScrollBar
             set { SetValue(MaximumProperty, value); }
         }
 
+        /// <summary>
+        /// 当前值
+        /// </summary>
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             "Value", typeof(double), typeof(BallScrollBar), new PropertyMetadata(default(double)));
 
@@ -116,6 +156,9 @@ namespace UniversalTest.Control.ScrollBar
             set { SetValue(ValueProperty, value); }
         }
 
+        /// <summary>
+        /// 视图高度
+        /// </summary>
         public static readonly DependencyProperty ViewportSizeProperty = DependencyProperty.Register(
             "ViewportSize", typeof(double), typeof(BallScrollBar), new PropertyMetadata(default(double)));
 
@@ -125,13 +168,16 @@ namespace UniversalTest.Control.ScrollBar
             set { SetValue(ViewportSizeProperty, value); }
         }
 
+        /// <summary>
+        /// 用户输入模式
+        /// </summary>
         public ScrollingIndicatorMode IndicatorMode => this._indicatorMode;
 
         #endregion
 
         #region Loaded
         /// <summary>
-        ///  垂直滚动条Thumb
+        ///  垂直滚动条加载完成
         /// </summary>
         private void VerticalThumb_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -139,9 +185,13 @@ namespace UniversalTest.Control.ScrollBar
 
             if (_indicatorMode == ScrollingIndicatorMode.TouchIndicator)
             {
-                ChangeMode();
+                CheckUserInteractionMode();
             }
         }
+
+        /// <summary>
+        /// 滚动条加载完成
+        /// </summary>
         private void BallScrollBar_Loaded(object sender, RoutedEventArgs e)
         {
             var p = this.Parent as FrameworkElement;
@@ -157,26 +207,51 @@ namespace UniversalTest.Control.ScrollBar
         /// </summary>
         private void ScrollBar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            Debug.WriteLine("value");
+            Show();
             ValueChanged?.Invoke(sender, e);
         }
 
+        /// <summary>
+        /// 大小变化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void This_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            ChangeMode();
+            CheckUserInteractionMode();
             ResetViewportSize();
         }
 
+        /// <summary>
+        /// 指针进入滚动条
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScrollBar_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            if(_indicatorMode == ScrollingIndicatorMode.MouseIndicator)
-                VisualStateManager.GoToState(ScrollBarElement, "PointerEntered", false);
+            if (_indicatorMode == ScrollingIndicatorMode.MouseIndicator)
+                VisualStateManager.GoToState(ScrollBarElement, "PointerEntered", true);
         }
 
+        /// <summary>
+        /// 指针离开滚动条
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScrollBar_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             if (_indicatorMode == ScrollingIndicatorMode.MouseIndicator)
-                VisualStateManager.GoToState(ScrollBarElement, "PointerExited", false);
+                VisualStateManager.GoToState(ScrollBarElement, "PointerExited", true);
+        }
+
+        /// <summary>
+        /// 指针在滚动条内移动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ScrollBar_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            Show();
         }
         #endregion
 
@@ -215,6 +290,53 @@ namespace UniversalTest.Control.ScrollBar
                 this.ViewportSize = finalViewportSize - (shouldHeight - thumbHeight);
             }
         }
+        #endregion
+
+        #region 隐藏 显示
+        /// <summary>
+        /// 显示滚动条
+        /// </summary>
+        /// <param name="toShow"></param>
+        public void Show(bool toShow = true)
+        {
+            if (toShow)
+            {
+                Root.Opacity = 1;
+                StartTimer();
+            }
+            else
+            {
+                Root.Opacity = 0;
+            }
+        }
+
+        /// <summary>
+        /// 计时器启动
+        /// </summary>
+        private void StartTimer()
+        {
+            int dueTime = 2000;
+            if (_timer == null)
+                _timer = new Timer(TimerCompleted, null, dueTime, -1);
+            else
+            {
+                _timer.Change(dueTime, Timeout.Infinite);
+            }
+        }
+
+        /// <summary>
+        /// 计时器到时
+        /// </summary>
+        private async void TimerCompleted(object state)
+        {
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                var sb = new Storyboard();
+                StoryboardHelper.CreatAnimation(Root, sb, "Opacity", 150, 0, new QuadraticEase() { EasingMode = EasingMode.EaseIn }, true);
+                sb.Begin();
+            });
+        }
+
         #endregion
 
     }
