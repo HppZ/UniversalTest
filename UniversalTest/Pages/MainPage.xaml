@@ -9,26 +9,9 @@
     xmlns:control="using:UniversalTest.Control"
     mc:Ignorable="d">
     <Page.Resources>
-        <Storyboard x:Name="Storyboard1">
-            <DoubleAnimation Duration="0:0:0.3" To="0" EnableDependentAnimation="True" Storyboard.TargetProperty="(FrameworkElement.Height)"
-                             Storyboard.TargetName="Grid">
-                <DoubleAnimation.EasingFunction>
-                    <QuadraticEase EasingMode="EaseIn"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
+        
     </Page.Resources>
 
     <Grid Background="White">
-            <!--<controls:ExpandableControl ControlHeight="50" Visibility="Collapsed" Title="123" TitleInfoText="456">
-                <controls:ExpandableControl.UserActionContent>
-                    <TextBlock Text="shdoshodsh" Foreground="Red"></TextBlock>
-                </controls:ExpandableControl.UserActionContent>
-            </controls:ExpandableControl>-->
-
-            <!--<control:SideBarItem Margin="0 50 0 0" Width="300" VerticalAlignment="Top"></control:SideBarItem>-->
-        <control:SideBar Margin="0 50 0 0" x:Name="SideBarElement" Width="184" HorizontalAlignment="Left" VerticalAlignment="Stretch"></control:SideBar>
-        
-        <Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="50" Click="ButtonBase_OnClick"></Button>
     </Grid>
 </Page>
