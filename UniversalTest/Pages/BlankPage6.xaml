@@ -325,7 +325,7 @@
                   VerticalAlignment="Top"
                   HorizontalAlignment="Right"
                   Visibility="Collapsed" >
-                                <Image x:Name="MultiSelectCheck" Source="ms-appx:///Assets/PageAssets/PhotoGridView_selected.png" Opacity="0" ></Image>
+                                <Image x:Name="MultiSelectCheck" CacheMode="BitmapCache" Source="ms-appx:///Assets/PageAssets/PhotoGridView_selected.png" Opacity="0" ></Image>
                                 <!--<FontIcon 
                       FontFamily="{ThemeResource SymbolThemeFontFamily}"
                       Glyph="&#xE73E;"
