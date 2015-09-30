@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="UniversalTest.Pages.BlankPage5"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UniversalTest.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:win10="using:Win10"
+    mc:Ignorable="d">
+
+    <Grid x:Name="grid"  Background="White" >
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer x:Name="Slider1" VerticalAlignment="Top" MaxHeight="300">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                    <TextBlock Text="123"></TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Slider Orientation="Vertical" IsDirectionReversed="true" x:Name="Slider2" Grid.Column="1"></Slider>
+
+            <!--分别绑定到上面两个元素,当绑定到scrolviewer的verticaloffset时,拖动下面这个元素,scrollviewer不会滚动-->
+            <!--但是绑定到上面这个slider却能实现双向绑定,互相影响-->
+            <win10:MyUserControl1  Grid.Column="2"  Value="{Binding ElementName=Slider1,Path=VerticalOffset,Mode=TwoWay}"></win10:MyUserControl1>
+        </Grid>
+
+    </Grid>
+</Page>

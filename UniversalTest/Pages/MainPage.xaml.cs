@@ -39,6 +39,7 @@ namespace UniversalTest
         // BlankPage2 ----------- TextBox的 visualstate
         // BlankPage3 ----------- 右键菜单 (popup)
         // BlankPage4 ----------- slider 做 圆球滚动条
+        // BlankPage5 ----------- slider 与 scrollviewer  双向绑定
 
 
     }
