@@ -40,6 +40,7 @@ namespace UniversalTest
         // BlankPage3 ----------- 右键菜单 (popup)
         // BlankPage4 ----------- slider 做 圆球滚动条
         // BlankPage5 ----------- slider 与 scrollviewer  双向绑定
+        // BlankPage6 ----------- 自定义gridviewitem 而不自定义gridview
 
 
     }
