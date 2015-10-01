@@ -63,6 +63,9 @@
 
             <!--分别绑定到上面两个元素,当绑定到scrolviewer的verticaloffset时,拖动下面这个元素,scrollviewer不会滚动-->
             <!--但是绑定到上面这个slider却能实现双向绑定,互相影响-->
+            
+            <!--因为scrollviewer的offset只有get，所以twoway无效-->
+            
             <win10:MyUserControl1  Grid.Column="2"  Value="{Binding ElementName=Slider1,Path=VerticalOffset,Mode=TwoWay}"></win10:MyUserControl1>
         </Grid>
 
