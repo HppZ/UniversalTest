@@ -11,6 +11,6 @@
     d:DesignWidth="400">
 
     <Grid Background="Transparent">
-        <Slider x:Name="Slider2" Orientation="Vertical" Value="{Binding ElementName=This,Path=Value,Mode=TwoWay}"  IsDirectionReversed="True"></Slider>
+        <Slider x:Name="Slider2" ValueChanged="RangeBase_OnValueChanged" Orientation="Vertical" Value="{Binding ElementName=This,Path=Value,Mode=TwoWay}"  IsDirectionReversed="True"></Slider>
     </Grid>
 </UserControl>

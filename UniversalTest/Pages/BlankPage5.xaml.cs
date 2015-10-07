@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Win10;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,5 +27,12 @@ namespace UniversalTest.Pages
         {
             this.InitializeComponent();
         }
+
+        private void MyUserControl1_OnValueChanged(object arg1, double arg2)
+        {
+            var bi = MyControl1.GetBindingExpression(MyUserControl1.ValueProperty);
+            Slider111.Value = arg2;
+        }
+
     }
 }

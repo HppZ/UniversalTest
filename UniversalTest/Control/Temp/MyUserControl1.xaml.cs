@@ -23,6 +23,7 @@ namespace Win10
         {
             this.InitializeComponent();
         }
+        public event Action<object, double> ValueChanged; // 滚动条滚动值变化
 
 
         //public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
@@ -37,10 +38,26 @@ namespace Win10
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             "Value", typeof (Double), typeof (MyUserControl1), new PropertyMetadata(default(Double)));
 
+        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var bi = (d as MyUserControl1).GetBindingExpression(MyUserControl1.ValueProperty);
+
+
+            //(d as MyUserControl1).ValueChanged?.Invoke(null,(double)e.NewValue);
+        }
+
+
         public Double Value
         {
             get { return (Double) GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
+        }
+
+
+        private void RangeBase_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            var bi = this.GetBindingExpression(MyUserControl1.ValueProperty);
+            ValueChanged?.Invoke(null,e.NewValue);
         }
     }
 }
