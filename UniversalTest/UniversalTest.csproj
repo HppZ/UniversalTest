@@ -103,10 +103,14 @@
     <Compile Include="Control\ScrollBar\BallScrollBar.xaml.cs">
       <DependentUpon>BallScrollBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\ScrollViewer\ThreeImageViewer.xaml.cs">
+      <DependentUpon>ThreeImageViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Slider\BallSlider.xaml.cs">
       <DependentUpon>BallSlider.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Slider\BallSlider2.cs" />
+    <Compile Include="Control\Temp\CustomControl1.cs" />
     <Compile Include="Control\Temp\MyUserControl1.xaml.cs">
       <DependentUpon>MyUserControl1.xaml</DependentUpon>
     </Compile>
@@ -179,6 +183,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Control\ScrollViewer\ThreeImageViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\Slider\BallSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -237,9 +245,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Control\ScrollViewer\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

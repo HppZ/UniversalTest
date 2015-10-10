@@ -28,7 +28,7 @@ namespace UniversalTest.Control.ScrollBar
         #region internal element
         private Thumb _verticalThumb; // 滚动条内滑块
         private ScrollingIndicatorMode _indicatorMode; // 用户输入模式
-        private ScrollViewer _scrollViewer; // 滚动条所在的scrollviewer
+        private Windows.UI.Xaml.Controls.ScrollViewer _scrollViewer; // 滚动条所在的scrollviewer
         private Timer _timer; // 延迟隐藏的计时器
 
         #endregion
@@ -220,7 +220,7 @@ namespace UniversalTest.Control.ScrollBar
         private void BallScrollBar_Loaded(object sender, RoutedEventArgs e)
         {
             var p = this.Parent as FrameworkElement;
-            _scrollViewer = VisualTreeExtensions.FindFirstElementInVisualTree<ScrollViewer>(p);
+            _scrollViewer = VisualTreeExtensions.FindFirstElementInVisualTree<Windows.UI.Xaml.Controls.ScrollViewer>(p);
             if (_scrollViewer == null) throw new Exception("incorrect usage");
         }
 
