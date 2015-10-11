@@ -24,10 +24,5 @@ namespace UniversalTest.Control.ScrollViewer.Children
             this.InitializeComponent();
         }
 
-        public ImageSource Source
-        {
-            set { ImageEle.Source = value; }
-        }
-
     }
 }

@@ -62,7 +62,7 @@ namespace UniversalTest.Control.ScrollViewer
                 var child = CanvasContainer.Children[i];
                 child.RenderTransform = new CompositeTransform();
                 child.RenderTransformOrigin = new Point(0.5, 0.5);
-                (child as ViewerItem).Source = _images[i].PreviewImage;
+                (child as FrameworkElement).DataContext = _images[i];
                 InitPosition(child);
             }
         }
@@ -117,7 +117,7 @@ namespace UniversalTest.Control.ScrollViewer
                 ele.Width = ele.Height * IMAGE_WH_RATIO;
             }
 
-            var childWidth = (CanvasContainer.Children[0] as ViewerItem).Width;
+            var childWidth = (CanvasContainer.Children[0] as FrameworkElement).Width;
             CanvasContainer.Width = childWidth + SIDE_DISTANCE_RATIO * childWidth * 2;
         }
 
@@ -127,8 +127,23 @@ namespace UniversalTest.Control.ScrollViewer
         /// <summary>
         /// 更新所有子项位置
         /// </summary>
-        private void GotoPreOrNext()
+        private void GotoPreOrNext(bool toNext)
         {
+            foreach (var child in CanvasContainer.Children)
+            {
+                var tag = int.Parse((child as FrameworkElement).Tag.ToString());
+                if (toNext)
+                {
+                    (child as FrameworkElement).Tag = (++tag) % 4; // update tag
+                }
+                else
+                {
+                    (child as FrameworkElement).Tag = (--tag + 4) %4;
+                }
+
+            }
+
+
         }
         #endregion
 
@@ -136,12 +151,12 @@ namespace UniversalTest.Control.ScrollViewer
         //-------------------------------------------------------------------
         private void Left_Tapped(object sender, RoutedEventArgs e)
         {
-
+            GotoPreOrNext(false);
         }
 
         private void Right_Tapped(object sender, RoutedEventArgs e)
         {
-
+            GotoPreOrNext(true);
         }
         #endregion
     }

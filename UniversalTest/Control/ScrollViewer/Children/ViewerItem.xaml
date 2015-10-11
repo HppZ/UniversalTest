@@ -10,6 +10,6 @@
     d:DesignWidth="400">
 
     <Grid >
-        <Image x:Name="ImageEle" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+        <Image x:Name="ImageEle" Stretch="UniformToFill" Source="{Binding PreviewImage}" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
     </Grid>
 </UserControl>
