@@ -103,6 +103,9 @@
     <Compile Include="Control\ScrollBar\BallScrollBar.xaml.cs">
       <DependentUpon>BallScrollBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\ScrollViewer\Children\ViewerItem.xaml.cs">
+      <DependentUpon>ViewerItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\ScrollViewer\ThreeImageViewer.xaml.cs">
       <DependentUpon>ThreeImageViewer.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,9 @@
     </Compile>
     <Compile Include="Pages\BlankPage6.xaml.cs">
       <DependentUpon>BlankPage6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BlankPage7.xaml.cs">
+      <DependentUpon>BlankPage7.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -179,6 +185,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Control\ScrollBar\BallScrollBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\ScrollViewer\Children\ViewerItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BlankPage6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage7.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
