@@ -25,7 +25,7 @@ namespace UniversalTest.Control.ScrollViewer
         private List<ImageItem> _images;
         private const double IMAGE_WH_RATIO = 4.0 / 3; // 照片宽高比
         private const double SCALE_RATIO = 0.8; // 缩放比例
-        private const double SIDE_DISTANCE_RATIO = 4.5 / 16; // 两边间距占Image的比例
+        private const double SIDE_DISTANCE_RATIO = 5.0 / 16; // 两边间距占Image的比例
 
         public ThreeImageViewer()
         {
@@ -87,7 +87,7 @@ namespace UniversalTest.Control.ScrollViewer
 
         private void UpdatePosition(UIElement element)
         {
-            var center = this.ActualWidth / 2;
+            var center = CanvasContainer.ActualWidth / 2;
 
             var item = element as FrameworkElement;
             var trans = item.RenderTransform as CompositeTransform;
@@ -114,5 +114,14 @@ namespace UniversalTest.Control.ScrollViewer
             }
         }
 
+        private void Left_Tapped(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Right_Tapped(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

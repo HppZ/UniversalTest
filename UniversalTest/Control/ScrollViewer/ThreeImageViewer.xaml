@@ -15,11 +15,21 @@
     </UserControl.Resources>
     
     <Grid Background="Aqua">
-        <Canvas x:Name="CanvasContainer">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Canvas x:Name="CanvasContainer" Grid.Column="1">
             <children:ViewerItem Tag="0" ></children:ViewerItem>
             <children:ViewerItem Tag="1"></children:ViewerItem>
             <children:ViewerItem Tag="2"></children:ViewerItem>
             <children:ViewerItem Tag="3"></children:ViewerItem>
         </Canvas>
+
+        <Button Grid.Column="0" Width="30" Height="50" Content="P" Click="Left_Tapped" Background="Red"></Button>
+        <Button Grid.Column="2" Width="30" Height="50" Content="N" Click="Right_Tapped" Background="Red"></Button>
+        
     </Grid>
 </UserControl>
