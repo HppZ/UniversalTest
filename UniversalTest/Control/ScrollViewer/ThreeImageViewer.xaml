@@ -20,8 +20,8 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <Canvas x:Name="CanvasContainer" Grid.Column="1">
+
+        <Canvas x:Name="CanvasContainer" Grid.Column="1" SizeChanged="CanvasContainer_SizeChanged">
             <children:ViewerItem Tag="0" ></children:ViewerItem>
             <children:ViewerItem Tag="1"></children:ViewerItem>
             <children:ViewerItem Tag="2"></children:ViewerItem>

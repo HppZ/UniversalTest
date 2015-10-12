@@ -75,24 +75,35 @@ namespace UniversalTest.Control.ScrollViewer
         private void InitPosition(UIElement element)
         {
             var center = CanvasContainer.ActualWidth / 2;
+            Debug.WriteLine("center " + center);
+
             var item = element as FrameworkElement;
             var trans = item.RenderTransform as CompositeTransform;
             if (item.Tag.ToString() == "0")
             {
-                Canvas.SetLeft(element, center - item.ActualWidth / 2 - item.ActualWidth * SIDE_DISTANCE_RATIO);
+                var v = center - item.ActualWidth/2 - item.ActualWidth*SIDE_DISTANCE_RATIO;
+                Canvas.SetLeft(element, v);
                 trans.ScaleX = SCALE_RATIO;
                 trans.ScaleY = SCALE_RATIO;
+
+                Debug.WriteLine("0 " + v);
             }
             else if (item.Tag.ToString() == "1")
             {
-                Canvas.SetLeft(element, center - item.ActualWidth / 2);
+                var v = center - item.ActualWidth / 2;
+                Canvas.SetLeft(element, v);
                 Canvas.SetZIndex(item, 1);
+
+                Debug.WriteLine("1 " + v);
             }
             else if (item.Tag.ToString() == "2")
             {
-                Canvas.SetLeft(element, center - item.ActualWidth / 2 + item.ActualWidth * SIDE_DISTANCE_RATIO);
+                var v = center - item.ActualWidth / 2 + item.ActualWidth * SIDE_DISTANCE_RATIO;
+                Canvas.SetLeft(element, v);
                 trans.ScaleX = SCALE_RATIO;
                 trans.ScaleY = SCALE_RATIO;
+
+                Debug.WriteLine("2 " + v);
             }
             else if (item.Tag.ToString() == "3")
             {
@@ -137,7 +148,8 @@ namespace UniversalTest.Control.ScrollViewer
             var img3 = GetItemByTag(3);
 
             var center = CanvasContainer.ActualWidth / 2;
-            var duration = 200;
+            var duration = 2100;
+            var beginTime = 1000;
             Storyboard storyboard = new Storyboard();
 
             // img0
@@ -159,7 +171,10 @@ namespace UniversalTest.Control.ScrollViewer
             // img3
             Canvas.SetLeft(img3, center - img3.ActualWidth / 2 + img3.ActualWidth * SIDE_DISTANCE_RATIO);
             var item = GetNextOrPreItem(img2, toNext);
-            img3.DataContext = item;
+            if (img3.DataContext != item)
+            {
+                img3.DataContext = item;
+            }
             var trans = img3.RenderTransform as CompositeTransform;
             trans.ScaleX = SCALE_RATIO;
             trans.ScaleY = SCALE_RATIO;
@@ -167,12 +182,12 @@ namespace UniversalTest.Control.ScrollViewer
 
             // zindex
             ObjectAnimationUsingKeyFrames oa1 = new ObjectAnimationUsingKeyFrames();
-            oa1.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(0), Value = 0 });
+            oa1.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(beginTime), Value = 0 });
             Storyboard.SetTargetProperty(oa1,"(Canvas.ZIndex)");
             Storyboard.SetTarget(oa1,img1);
 
             ObjectAnimationUsingKeyFrames oa2 = new ObjectAnimationUsingKeyFrames();
-            oa2.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(0), Value = 11 });
+            oa2.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(beginTime), Value = 1 });
             Storyboard.SetTargetProperty(oa2, "(Canvas.ZIndex)");
             Storyboard.SetTarget(oa2, img2);
 
@@ -185,7 +200,18 @@ namespace UniversalTest.Control.ScrollViewer
             {
                 Debug.WriteLine("Completed");
                 UpdateTag(toNext);
+                ResetPosition();
             };
+        }
+
+        private void ResetPosition()
+        {
+            foreach (var child in CanvasContainer.Children)
+            {
+                var trans = child.RenderTransform as CompositeTransform;
+                InitPosition(child);
+                trans.TranslateX = 0;
+            }
         }
 
         /// <summary>
@@ -243,5 +269,10 @@ namespace UniversalTest.Control.ScrollViewer
             GotoPreOrNext(true);
         }
         #endregion
+
+        private void CanvasContainer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Debug.WriteLine("canvas size ");
+        }
     }
 }
