@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using UniversalTest.Control.ScrollViewer.Children;
 using UniversalTest.Controller;
+using UniversalTest.Helper;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -84,13 +86,13 @@ namespace UniversalTest.Control.ScrollViewer
             else if (item.Tag.ToString() == "1")
             {
                 Canvas.SetLeft(element, center - item.ActualWidth / 2);
+                Canvas.SetZIndex(item, 1);
             }
             else if (item.Tag.ToString() == "2")
             {
                 Canvas.SetLeft(element, center - item.ActualWidth / 2 + item.ActualWidth * SIDE_DISTANCE_RATIO);
                 trans.ScaleX = SCALE_RATIO;
                 trans.ScaleY = SCALE_RATIO;
-                Canvas.SetZIndex(item, -1);
             }
             else if (item.Tag.ToString() == "3")
             {
@@ -129,21 +131,103 @@ namespace UniversalTest.Control.ScrollViewer
         /// </summary>
         private void GotoPreOrNext(bool toNext)
         {
+            var img0 = GetItemByTag(0);
+            var img1 = GetItemByTag(1);
+            var img2 = GetItemByTag(2);
+            var img3 = GetItemByTag(3);
+
+            var center = CanvasContainer.ActualWidth / 2;
+            var duration = 200;
+            Storyboard storyboard = new Storyboard();
+
+            // img0
+            StoryboardHelper.CreatAnimation(img0, storyboard, "UIElement.Opacity", duration, 0, 0, null, false);
+
+            // img1
+            var tanslateX = img1.ActualWidth * SIDE_DISTANCE_RATIO;
+
+            double toValue = toNext ? -tanslateX : tanslateX;
+            StoryboardHelper.CreatAnimation(img1.RenderTransform, storyboard, "(CompositeTransform.TranslateX)", duration, 0, toValue, null, false);
+            StoryboardHelper.CreatAnimation(img1.RenderTransform, storyboard, "(CompositeTransform.ScaleX)", duration, 0, SCALE_RATIO, null, false);
+            StoryboardHelper.CreatAnimation(img1.RenderTransform, storyboard, "(CompositeTransform.ScaleY)", duration, 0, SCALE_RATIO, null, false);
+
+            // img2
+            StoryboardHelper.CreatAnimation(img2.RenderTransform, storyboard, "(CompositeTransform.TranslateX)", duration, 0, toValue, null, false);
+            StoryboardHelper.CreatAnimation(img2.RenderTransform, storyboard, "(CompositeTransform.ScaleX)", duration, 0, 1, null, false);
+            StoryboardHelper.CreatAnimation(img2.RenderTransform, storyboard, "(CompositeTransform.ScaleY)", duration, 0, 1, null, false);
+
+            // img3
+            Canvas.SetLeft(img3, center - img3.ActualWidth / 2 + img3.ActualWidth * SIDE_DISTANCE_RATIO);
+            var item = GetNextOrPreItem(img2, toNext);
+            img3.DataContext = item;
+            var trans = img3.RenderTransform as CompositeTransform;
+            trans.ScaleX = SCALE_RATIO;
+            trans.ScaleY = SCALE_RATIO;
+            StoryboardHelper.CreatAnimation(img3, storyboard, "UIElement.Opacity", duration, 0, 1, null, false);
+
+            // zindex
+            ObjectAnimationUsingKeyFrames oa1 = new ObjectAnimationUsingKeyFrames();
+            oa1.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(0), Value = 0 });
+            Storyboard.SetTargetProperty(oa1,"(Canvas.ZIndex)");
+            Storyboard.SetTarget(oa1,img1);
+
+            ObjectAnimationUsingKeyFrames oa2 = new ObjectAnimationUsingKeyFrames();
+            oa2.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(0), Value = 11 });
+            Storyboard.SetTargetProperty(oa2, "(Canvas.ZIndex)");
+            Storyboard.SetTarget(oa2, img2);
+
+            storyboard.Children.Add(oa1);
+            storyboard.Children.Add(oa2);
+
+
+            storyboard.Begin();
+            storyboard.Completed += (e1, e2) =>
+            {
+                Debug.WriteLine("Completed");
+                UpdateTag(toNext);
+            };
+        }
+
+        /// <summary>
+        /// 获取下个数据源
+        /// </summary>
+        private ImageItem GetNextOrPreItem(FrameworkElement element, bool toNext)
+        {
+            var index = _images.IndexOf(element.DataContext as ImageItem);
+            if (index == -1) throw new Exception("index not found");
+            index = toNext ? ++index : --index;
+            if (index >= 0 || index < _images.Count)
+            {
+                return _images[index];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private FrameworkElement GetItemByTag(int index)
+        {
+            var r = CanvasContainer.Children.Where(x => (x as FrameworkElement).Tag.ToString() == index.ToString());
+            if (r.Count() > 1) throw new Exception("tag重复");
+            return (FrameworkElement)r.FirstOrDefault();
+        }
+
+        private void UpdateTag(bool toNext)
+        {
             foreach (var child in CanvasContainer.Children)
             {
                 var tag = int.Parse((child as FrameworkElement).Tag.ToString());
-                if (toNext)
+                if (!toNext)
                 {
                     (child as FrameworkElement).Tag = (++tag) % 4; // update tag
                 }
                 else
                 {
-                    (child as FrameworkElement).Tag = (--tag + 4) %4;
+                    (child as FrameworkElement).Tag = (--tag + 4) % 4;
                 }
-
+                Debug.WriteLine("tag " + (child as FrameworkElement).Tag);
             }
-
-
         }
         #endregion
 

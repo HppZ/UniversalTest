@@ -6,10 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    x:Name="ThisCtl"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
     <Grid >
         <Image x:Name="ImageEle" Stretch="UniformToFill" Source="{Binding PreviewImage}" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+        <TextBlock Text="{Binding  ElementName=ThisCtl,Path=Tag}" Foreground="red" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
     </Grid>
 </UserControl>
