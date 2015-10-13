@@ -29,7 +29,7 @@ namespace UniversalTest.Control.ScrollViewer
         private List<ImageItem> _images;
         private const double IMAGE_WH_RATIO = 4.0 / 3; // 照片宽高比
         private const double SCALE_RATIO = 0.8; // 缩放比例
-        private const double SIDE_DISTANCE_RATIO = 5.0 / 16; // 两边间距占Image的比例
+        private const double SIDE_DISTANCE_RATIO = 14.0 / 16; // 两边间距占Image的比例
         #endregion
 
         #region Ctor
@@ -148,9 +148,10 @@ namespace UniversalTest.Control.ScrollViewer
             var img3 = GetItemByTag(3);
 
             var center = CanvasContainer.ActualWidth / 2;
-            var duration = 2100;
-            var beginTime = 1000;
+            var duration = 600;
+            var beginTime = 80;
             Storyboard storyboard = new Storyboard();
+            var ease = new QuarticEase(){EasingMode = EasingMode.EaseOut};
 
             // img0
             StoryboardHelper.CreatAnimation(img0, storyboard, "UIElement.Opacity", duration, 0, 0, null, false);
@@ -159,14 +160,14 @@ namespace UniversalTest.Control.ScrollViewer
             var tanslateX = img1.ActualWidth * SIDE_DISTANCE_RATIO;
 
             double toValue = toNext ? -tanslateX : tanslateX;
-            StoryboardHelper.CreatAnimation(img1.RenderTransform, storyboard, "(CompositeTransform.TranslateX)", duration, 0, toValue, null, false);
-            StoryboardHelper.CreatAnimation(img1.RenderTransform, storyboard, "(CompositeTransform.ScaleX)", duration, 0, SCALE_RATIO, null, false);
-            StoryboardHelper.CreatAnimation(img1.RenderTransform, storyboard, "(CompositeTransform.ScaleY)", duration, 0, SCALE_RATIO, null, false);
+            StoryboardHelper.CreatAnimation(img1.RenderTransform, storyboard, "(CompositeTransform.TranslateX)", duration, 0, toValue, ease, false);
+            StoryboardHelper.CreatAnimation(img1.RenderTransform, storyboard, "(CompositeTransform.ScaleX)", duration, 0, SCALE_RATIO, ease, false);
+            StoryboardHelper.CreatAnimation(img1.RenderTransform, storyboard, "(CompositeTransform.ScaleY)", duration, 0, SCALE_RATIO, ease, false);
 
             // img2
-            StoryboardHelper.CreatAnimation(img2.RenderTransform, storyboard, "(CompositeTransform.TranslateX)", duration, 0, toValue, null, false);
-            StoryboardHelper.CreatAnimation(img2.RenderTransform, storyboard, "(CompositeTransform.ScaleX)", duration, 0, 1, null, false);
-            StoryboardHelper.CreatAnimation(img2.RenderTransform, storyboard, "(CompositeTransform.ScaleY)", duration, 0, 1, null, false);
+            StoryboardHelper.CreatAnimation(img2.RenderTransform, storyboard, "(CompositeTransform.TranslateX)", duration, beginTime, toValue, ease, false);
+            StoryboardHelper.CreatAnimation(img2.RenderTransform, storyboard, "(CompositeTransform.ScaleX)", duration, 0, 1, ease, false);
+            StoryboardHelper.CreatAnimation(img2.RenderTransform, storyboard, "(CompositeTransform.ScaleY)", duration, 0, 1, ease, false);
 
             // img3
             Canvas.SetLeft(img3, center - img3.ActualWidth / 2 + img3.ActualWidth * SIDE_DISTANCE_RATIO);
@@ -182,12 +183,12 @@ namespace UniversalTest.Control.ScrollViewer
 
             // zindex
             ObjectAnimationUsingKeyFrames oa1 = new ObjectAnimationUsingKeyFrames();
-            oa1.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(beginTime), Value = 0 });
+            oa1.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(0), Value = 0 });
             Storyboard.SetTargetProperty(oa1,"(Canvas.ZIndex)");
             Storyboard.SetTarget(oa1,img1);
 
             ObjectAnimationUsingKeyFrames oa2 = new ObjectAnimationUsingKeyFrames();
-            oa2.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(beginTime), Value = 1 });
+            oa2.KeyFrames.Add(new DiscreteObjectKeyFrame() { KeyTime = TimeSpan.FromMilliseconds(0), Value = 1 });
             Storyboard.SetTargetProperty(oa2, "(Canvas.ZIndex)");
             Storyboard.SetTarget(oa2, img2);
 
