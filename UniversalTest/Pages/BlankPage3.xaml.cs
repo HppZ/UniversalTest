@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using UniversalTest.Control.Menu;
+using UniversalTest.Control.Menu.Child;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,9 +28,9 @@ namespace UniversalTest.Pages
     /// </summary>
     public sealed partial class BlankPage3 : Page
     {
+        ObservableCollection<MyClass> _vm = new ObservableCollection<MyClass>();
 
-        ObservableCollection<int> _vm = new ObservableCollection<int>(); 
-
+        private CascadeMenu _cascadeMenu;
         /// <summary>
         /// 右键菜单 popup
         /// </summary>
@@ -38,10 +40,38 @@ namespace UniversalTest.Pages
 
             for (int i = 0; i < 10; i++)
             {
-                _vm.Add(i);
+                _vm.Add(new MyClass() {Text = i.ToString()});
             }
+            Loaded += BlankPage3_Loaded;
+           
         }
-       
-        
+
+        private void BlankPage3_Loaded(object sender, RoutedEventArgs e)
+        {
+            _cascadeMenu = new CascadeMenu();
+            _cascadeMenu.Items.Add(new CascadeMenuItem() {Text = "123"});
+            _cascadeMenu.Items.Add(new CascadeMenuSeparator());
+            _cascadeMenu.Items.Add(new CascadeMenuSubItem()
+            {
+                Text = "abc",
+                Items =
+                {
+                    new CascadeMenuItem() { Text = "456"},
+                    new CascadeMenuSeparator(),
+                    new CascadeMenuListViewItem() {ItemsSource = _vm}
+                }
+            });
+        }
+ 
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            _cascadeMenu.ShowAt(sender as UIElement, new Point(0, 50));
+        }
+    }
+
+    class MyClass
+    {
+        public string Text { get; set; }
     }
 }

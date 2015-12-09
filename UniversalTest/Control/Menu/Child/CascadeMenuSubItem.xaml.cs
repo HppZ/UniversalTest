@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -16,15 +18,23 @@ namespace UniversalTest.Control.Menu.Child
 
         private SolidColorBrush _normalBackgroundBrush; // normal state
         private SolidColorBrush _normalForegroundBrush;
+
+        private CascadeMenu _subMenu; // 子项菜单
+
+        private bool _isHovering; // 是否指针悬浮
         #endregion
 
         public CascadeMenuSubItem()
         {
             this.InitializeComponent();
-            Loaded += CascadeMenuSubItem_Loaded;
+
             InitBrushes();
+            Loaded += CascadeMenuSubItem_Loaded;
         }
 
+        /// <summary>
+        /// 初始化子菜单 after Loaded
+        /// </summary>
         private void CascadeMenuSubItem_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             InitItems();
@@ -73,12 +83,11 @@ namespace UniversalTest.Control.Menu.Child
         /// </summary>
         private void InitItems()
         {
-            if (Items == null) return;
-
-            foreach (var item in Items)
+            if (Items == null || Items.Count <= 0) return;
+            _subMenu = new CascadeMenu()
             {
-                ChildrenContainer.Children.Add(item);
-            }
+                Items = Items
+            };
         }
         #endregion
 
@@ -88,6 +97,8 @@ namespace UniversalTest.Control.Menu.Child
         /// </summary>
         private void OnHover(bool toHover)
         {
+            _isHovering = toHover;
+            ShowSubMenu(toHover);
             if (toHover)
             {
                 Root.Background = _hoverBackgroundBrush;
@@ -98,8 +109,16 @@ namespace UniversalTest.Control.Menu.Child
             {
                 Root.Background = _normalBackgroundBrush;
                 this.Foreground = _normalForegroundBrush;
-                ArrowElement.Foreground = _normalForegroundBrush;
+               ArrowElement.Foreground = _normalForegroundBrush;
             }
+        }
+
+        /// <summary>
+        /// 悬浮一段时间后显后显示子菜单
+        /// </summary>
+        private void StartTimer()
+        {
+            
         }
         #endregion
 
@@ -115,6 +134,23 @@ namespace UniversalTest.Control.Menu.Child
         }
         #endregion
 
+        #region 子菜单
+        /// <summary>
+        /// 显示子菜单
+        /// </summary>
+        private void ShowSubMenu(bool toShow)
+        {
+            if (_subMenu == null) return;
 
+            if (toShow)
+            {
+                _subMenu.ShowAt(this, new Point(0,0));
+            }
+            else
+            {
+                _subMenu.Close();
+            }
+        }
+        #endregion
     }
 }

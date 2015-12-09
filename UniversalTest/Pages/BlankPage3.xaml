@@ -184,18 +184,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        
+
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <MenuFlyoutItem Style="{StaticResource MenuFlyoutItemStyle1}"></MenuFlyoutItem>
-        <MenuFlyoutSubItem Style="{StaticResource MenuFlyoutSubItemStyle1}"></MenuFlyoutSubItem>
-        <menu:CascadeMenu Width="240"  Height="490" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 100 0 0">
-            <menu:CascadeMenu.Items>
-                <child:CascadeMenuItem Text="123"></child:CascadeMenuItem>
-                <child:CascadeMenuSeparator></child:CascadeMenuSeparator>
-                <!--<child:CascadeMenuSubItem>
-                </child:CascadeMenuSubItem>-->
-            </menu:CascadeMenu.Items>
-        </menu:CascadeMenu>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  >
+        <Button Tapped="UIElement_OnTapped" Width="100" Height="50" Background="Red" Margin="0 10 0 0"
+                HorizontalAlignment="Center" VerticalAlignment="Top"></Button>
     </Grid>
 </Page>

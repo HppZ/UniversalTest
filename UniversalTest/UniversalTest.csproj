@@ -106,6 +106,9 @@
     <Compile Include="Control\Menu\Child\CascadeMenuItem.xaml.cs">
       <DependentUpon>CascadeMenuItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Menu\Child\CascadeMenuListViewItem.xaml.cs">
+      <DependentUpon>CascadeMenuListViewItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Menu\Child\CascadeMenuSeparator.xaml.cs">
       <DependentUpon>CascadeMenuSeparator.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Menu\Child\CascadeMenuItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Menu\Child\CascadeMenuListViewItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

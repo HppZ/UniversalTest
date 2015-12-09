@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid Background="White">
+    <Grid Background="White" Width="490">
         <!--外阴影-->
         <Image Source="ms-appx:///Assets/ControlAssets/shadow.png" Stretch="Fill" NineGrid="13 20 13 15"></Image>
         <!--内容-->
