@@ -100,6 +100,18 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\MainController.cs" />
+    <Compile Include="Control\Menu\CascadeMenu.xaml.cs">
+      <DependentUpon>CascadeMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Menu\Child\CascadeMenuItem.xaml.cs">
+      <DependentUpon>CascadeMenuItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Menu\Child\CascadeMenuSeparator.xaml.cs">
+      <DependentUpon>CascadeMenuSeparator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Menu\Child\CascadeMenuSubItem.xaml.cs">
+      <DependentUpon>CascadeMenuSubItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Pie\PieSlice.cs" />
     <Compile Include="Control\ScrollBar\BallScrollBar.xaml.cs">
       <DependentUpon>BallScrollBar.xaml</DependentUpon>
@@ -186,6 +198,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Control\Menu\CascadeMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Menu\Child\CascadeMenuItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Menu\Child\CascadeMenuSeparator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Menu\Child\CascadeMenuSubItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\ScrollBar\BallScrollBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
