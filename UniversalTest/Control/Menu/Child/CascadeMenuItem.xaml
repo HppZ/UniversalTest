@@ -5,10 +5,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    x:Name="This"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="HoverBackgroundBrush" Color="#FF3683F9"></SolidColorBrush>
+        <SolidColorBrush x:Key="HoverForegroundBrush" Color="White"></SolidColorBrush>
 
+        <SolidColorBrush x:Key="NormalBackgroundBrush" Color="White"></SolidColorBrush>
+        <SolidColorBrush x:Key="NormalForegroundBrush" Color="Black"></SolidColorBrush>
+    </UserControl.Resources>
+    
+    <Grid x:Name="Root" Background="Transparent" Height="40" PointerEntered="OnPointerEntered" PointerExited="OnPointerExited">
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+            <BitmapIcon UriSource="{Binding ElementName=This,Path=Icon}" VerticalAlignment="Center"></BitmapIcon>
+            <TextBlock Text="{Binding ElementName=This,Path=Text}" VerticalAlignment="Center" Margin="10 0 0 0"></TextBlock>
+        </StackPanel>
     </Grid>
 </UserControl>

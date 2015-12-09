@@ -5,10 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Height="5"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
-
-    </Grid>
+    <Border BorderThickness="0 1 0 0" VerticalAlignment="Center" BorderBrush="DarkGray"></Border>
 </UserControl>

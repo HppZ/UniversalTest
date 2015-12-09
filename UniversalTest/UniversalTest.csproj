@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Arrowhead-Right.png" />
+    <Content Include="Assets\ControlAssets\shadow.png" />
     <Content Include="Assets\ControlAssets\WhiteBall.png" />
     <Content Include="Assets\gallery2.jpg" />
     <Content Include="Assets\icon_add%402x.png" />
