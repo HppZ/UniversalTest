@@ -1,11 +1,13 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System.Diagnostics;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace UniversalTest.Control.Menu.Child
 {
-    public sealed partial class CascadeMenuItem : UserControl
+    public sealed partial class CascadeMenuItem : CascadeMenuItemBase
     {
 
         #region fields
@@ -21,10 +23,11 @@ namespace UniversalTest.Control.Menu.Child
         public CascadeMenuItem()
         {
             this.InitializeComponent();
+
             InitBrushes();
         }
-        #endregion
 
+        #endregion
 
         #region property
         /// <summary>
@@ -38,10 +41,8 @@ namespace UniversalTest.Control.Menu.Child
         public string Text { get; set; }
         #endregion
 
-
-
         // public
-
+        
 
 
         // private
@@ -83,12 +84,25 @@ namespace UniversalTest.Control.Menu.Child
         private void OnPointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             OnHover(true);
+            EnteredAction?.Invoke(this, true);
         }
 
         private void OnPointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             OnHover(false);
+            EnteredAction?.Invoke(this, false);
         }
+
+        /// <summary>
+        ///  点击
+        /// </summary>
+        private void Root_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            base.OnSelectionChanged(this, null);
+        }
+
         #endregion
+
+
     }
 }

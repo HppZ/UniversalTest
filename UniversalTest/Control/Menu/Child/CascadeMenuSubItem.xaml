@@ -1,10 +1,11 @@
-﻿<UserControl
+﻿<child:CascadeMenuItemBase
     x:Class="UniversalTest.Control.Menu.Child.CascadeMenuSubItem"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:menu="using:UniversalTest.Control.Menu"
+    xmlns:child="using:UniversalTest.Control.Menu.Child"
     mc:Ignorable="d"
     x:Name="This"
     d:DesignHeight="300"
@@ -18,7 +19,7 @@
         <SolidColorBrush x:Key="NormalForegroundBrush" Color="Black"></SolidColorBrush>
     </UserControl.Resources>
 
-    <Grid x:Name="Root" Background="Transparent" Height="40" PointerEntered="OnPointerEntered" PointerExited="OnPointerExited">
+    <Grid x:Name="Root" Background="Transparent" PointerEntered="OnPointerEntered" PointerExited="OnPointerExited">
         <!--icon + 标题-->
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
             <BitmapIcon UriSource="{Binding ElementName=This,Path=Icon}" VerticalAlignment="Center"></BitmapIcon>
@@ -28,4 +29,4 @@
         <!--箭头-->
         <BitmapIcon x:Name="ArrowElement" HorizontalAlignment="Right"></BitmapIcon>
     </Grid>
-</UserControl>
+</child:CascadeMenuItemBase>

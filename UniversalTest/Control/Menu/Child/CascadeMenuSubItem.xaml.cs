@@ -1,6 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Windows.Devices.AllJoyn;
 using Windows.Foundation;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
@@ -9,7 +15,7 @@ using Windows.UI.Xaml.Media;
 
 namespace UniversalTest.Control.Menu.Child
 {
-    public sealed partial class CascadeMenuSubItem : UserControl
+    public sealed partial class CascadeMenuSubItem : CascadeMenuItemBase
     {
         #region fields
         // brushes
@@ -20,10 +26,11 @@ namespace UniversalTest.Control.Menu.Child
         private SolidColorBrush _normalForegroundBrush;
 
         private CascadeMenu _subMenu; // 子项菜单
-
-        private bool _isHovering; // 是否指针悬浮
+        private Timer _delayTimer; // 延时显示计时器
+        private bool _isHovering;
         #endregion
 
+        #region ctor
         public CascadeMenuSubItem()
         {
             this.InitializeComponent();
@@ -37,14 +44,17 @@ namespace UniversalTest.Control.Menu.Child
         /// </summary>
         private void CascadeMenuSubItem_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            Loaded -= CascadeMenuSubItem_Loaded;
+
             InitItems();
         }
+        #endregion
 
         #region property
         /// <summary>
         /// 子项
         /// </summary>
-        public IList<Windows.UI.Xaml.Controls.Control> Items { get; set; } = new List<Windows.UI.Xaml.Controls.Control>();
+        public IList<CascadeMenuItemBase> Items { get; set; } = new List<CascadeMenuItemBase>();
 
         /// <summary>
         /// 显示图标
@@ -57,13 +67,57 @@ namespace UniversalTest.Control.Menu.Child
         public string Text { get; set; }
         #endregion
 
-
-
         // public
 
-
+        /// <summary>
+        /// 关闭子菜单
+        /// </summary>
+        public override void CloseSubMenu()
+        {
+            _subMenu?.Close();
+            OnUnhoverState();
+        }
 
         // private
+
+        #region state
+        /// <summary>
+        /// 显示子菜单
+        /// </summary>
+        private bool ShowSubMenu()
+        {
+            if (_subMenu == null) return false;
+
+            if (!_subMenu.IsShowing) // 子菜单没有显示, 并且没有被关闭
+            {
+                _subMenu.ShowAt(this, new Point(ActualWidth - 20, ActualHeight - 20));
+            }
+
+            return _subMenu.IsShowing;
+        }
+
+        /// <summary>
+        /// 设置focus状态
+        /// </summary>
+        private void OnHoverState()
+        {
+            _isHovering = true;
+            Root.Background = _hoverBackgroundBrush;
+            this.Foreground = _hoverForegroundBrush;
+            ArrowElement.Foreground = _hoverForegroundBrush;
+        }
+
+        private void OnUnhoverState()
+        {
+            _isHovering = false;
+            if (!_subMenu.IsShowing) // 子菜单没有显示 则 goto unhoverstate
+            {
+                Root.Background = _normalBackgroundBrush;
+                this.Foreground = _normalForegroundBrush;
+                ArrowElement.Foreground = _normalForegroundBrush;
+            }
+        }
+        #endregion
 
         #region init
         /// <summary>
@@ -83,74 +137,77 @@ namespace UniversalTest.Control.Menu.Child
         /// </summary>
         private void InitItems()
         {
-            if (Items == null || Items.Count <= 0) return;
-            _subMenu = new CascadeMenu()
+            if (Items == null || Items.Count <= 0 || _subMenu != null) return; // 没有数据源 或 已初始化
+
+            _subMenu = new CascadeMenu(false)
             {
-                Items = Items
+                Items = Items,
             };
-        }
-        #endregion
-
-        #region state
-        /// <summary>
-        /// 处理指针hover状
-        /// </summary>
-        private void OnHover(bool toHover)
-        {
-            _isHovering = toHover;
-            ShowSubMenu(toHover);
-            if (toHover)
-            {
-                Root.Background = _hoverBackgroundBrush;
-                this.Foreground = _hoverForegroundBrush;
-                ArrowElement.Foreground = _hoverForegroundBrush;
-            }
-            else
-            {
-                Root.Background = _normalBackgroundBrush;
-                this.Foreground = _normalForegroundBrush;
-               ArrowElement.Foreground = _normalForegroundBrush;
-            }
+            _subMenu.SelectionChanged += _subMenu_SelectionChanged;
         }
 
         /// <summary>
-        /// 悬浮一段时间后显后显示子菜单
+        /// invoke 子项选择事件
         /// </summary>
-        private void StartTimer()
+        private void _subMenu_SelectionChanged(CascadeMenuItemBase arg1, object arg2)
         {
-            
+            base.OnSelectionChanged(arg1, arg2);
         }
         #endregion
 
-        #region 指针事件
+        #region event
+
+        #region 指针进入/离开
         private void OnPointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            OnHover(true);
+            StartTimer();
+            OnHoverState();
+            EnteredAction?.Invoke(this, true);
+
+            Debug.WriteLine("进入subItem");
         }
 
         private void OnPointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            OnHover(false);
+            OnUnhoverState();
+            if (!_subMenu.IsShowing) // 指针离开 && 没有显示子项
+            {
+                EnteredAction?.Invoke(this, false);
+            }
+
+            Debug.WriteLine("离开subItem");
         }
+
+        /// <summary>
+        /// 延时显示子菜单
+        /// </summary>
+        private void StartTimer()
+        {
+            if (_delayTimer == null)
+            { _delayTimer = new Timer(TimerCallBack, null, 300, -1); }
+            else
+            { _delayTimer.Change(300, -1); }
+        }
+
+        /// <summary>
+        /// 延时显示子菜单
+        /// </summary>
+        private void TimerCallBack(object state)
+        {
+            Debug.WriteLine("TimerCallBack " + _isHovering);
+            if (_isHovering)
+            {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                {
+                    ShowSubMenu(); // 显示子菜单
+                });
+            }
+        }
+
         #endregion
 
-        #region 子菜单
-        /// <summary>
-        /// 显示子菜单
-        /// </summary>
-        private void ShowSubMenu(bool toShow)
-        {
-            if (_subMenu == null) return;
-
-            if (toShow)
-            {
-                _subMenu.ShowAt(this, new Point(0,0));
-            }
-            else
-            {
-                _subMenu.Close();
-            }
-        }
         #endregion
     }
 }

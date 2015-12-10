@@ -17,19 +17,20 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UniversalTest.Control.Menu.Child
 {
-    public sealed partial class CascadeMenuListViewItem : UserControl
+    public sealed partial class CascadeMenuListViewItem : CascadeMenuItemBase
     {
 
         #region ctor
         public CascadeMenuListViewItem()
         {
             this.InitializeComponent();
+            Height = double.NaN;
         }
         #endregion
 
         #region property
         /// <summary>
-        /// 替换默认数据模板
+        /// 改变默认数据模板
         /// </summary>
         public DataTemplate ItemDataTemplate
         {
@@ -53,7 +54,6 @@ namespace UniversalTest.Control.Menu.Child
             get { return (object) GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
-
         #endregion
 
 
@@ -61,12 +61,29 @@ namespace UniversalTest.Control.Menu.Child
         /// <summary>
         /// 选择改变
         /// </summary>
-        private void RootListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnItemTapped(object sender, TappedRoutedEventArgs e)
         {
-            
+            base.OnSelectionChanged(this, sender);
         }
         #endregion
 
+
+        #region 指针 进入/ 离开
+        private void OnPointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            EnteredAction?.Invoke(this, true);
+        }
+
+        private void OnPointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            EnteredAction?.Invoke(this, false);
+        }
+
+        private void OnItemPointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
+        #endregion
 
 
     }

@@ -4,7 +4,7 @@
 
 namespace UniversalTest.Control.Menu.Child
 {
-    public sealed partial class CascadeMenuSeparator : UserControl
+    public sealed partial class CascadeMenuSeparator : CascadeMenuItemBase
     {
         public CascadeMenuSeparator()
         {

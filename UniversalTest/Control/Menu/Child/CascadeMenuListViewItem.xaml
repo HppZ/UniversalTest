@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<local:CascadeMenuItemBase
     x:Class="UniversalTest.Control.Menu.Child.CascadeMenuListViewItem"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,9 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    x:Name="This"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.Resources>
+        <SolidColorBrush x:Key="HoverBackgroundBrush" Color="#FF3683F9"></SolidColorBrush>
+        <SolidColorBrush x:Key="NormalBackgroundBrush" Color="White"></SolidColorBrush>
+        <SolidColorBrush x:Key="NormalForegroundBrush" Color="Black"></SolidColorBrush>
+
         <Style x:Key="ListViewItemStyle2" TargetType="ListViewItem">
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
@@ -16,30 +21,60 @@
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
             <Setter Property="TabNavigation" Value="Local"/>
             <Setter Property="IsHoldingEnabled" Value="True"/>
-            <Setter Property="Padding" Value="12,0,12,0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
             <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}"/>
             <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>
             <Setter Property="Height" Value="40"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ListViewItemPresenter CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" ContentMargin="{TemplateBinding Padding}" CheckMode="Inline" ContentTransitions="{TemplateBinding ContentTransitions}" CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}" FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}" SelectionCheckMarkVisualEnabled="True" SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" SelectedPointerOverBackground="{ThemeResource SystemControlHighlightListAccentMediumBrush}" SelectedBackground="{ThemeResource SystemControlHighlightListAccentLowBrush}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ListViewItemPresenter Tapped="OnItemTapped"
+                                               PointerPressed="OnItemPointerPressed"
+                                               CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
+                                               ContentMargin="{TemplateBinding Padding}" 
+                                               CheckMode="Inline" 
+                                               ContentTransitions="{TemplateBinding ContentTransitions}" 
+                                               CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
+                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" 
+                                               DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" 
+                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                               FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                               FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" 
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                               PointerOverForeground="{StaticResource NormalBackgroundBrush}" 
+                                               PressedBackground="{StaticResource HoverBackgroundBrush}"
+                                               PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                               PointerOverBackground="{StaticResource HoverBackgroundBrush}" 
+                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 
+                                               SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}" 
+                                               SelectionCheckMarkVisualEnabled="True" 
+                                               SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" 
+                                               SelectedPointerOverBackground="{ThemeResource SystemControlHighlightListAccentMediumBrush}" 
+                                               SelectedBackground="{ThemeResource SystemControlHighlightListAccentLowBrush}" 
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
 
-    <ListView x:Name="RootListView" SelectionChanged="RootListView_OnSelectionChanged" ItemContainerStyle="{StaticResource ListViewItemStyle2}">
+    <ListView x:Name="RootListView" PointerEntered="OnPointerEntered" PointerExited="OnPointerExited"
+              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+              ItemsSource="{Binding ElementName=This,Path=ItemsSource}" 
+              SelectionMode="None" ItemContainerStyle="{StaticResource ListViewItemStyle2}">
+        <ListView.ItemContainerTransitions>
+            <TransitionCollection></TransitionCollection>
+        </ListView.ItemContainerTransitions>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <BitmapIcon UriSource="{Binding ElementName=This,Path=Icon}" VerticalAlignment="Center"></BitmapIcon>
-                    <TextBlock Text="{Binding ElementName=This,Path=Text}" VerticalAlignment="Center" Margin="10 0 0 0"></TextBlock>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" >
+                    <BitmapIcon UriSource="{Binding Icon}" VerticalAlignment="Center"></BitmapIcon>
+                    <TextBlock Text="{Binding Text}" VerticalAlignment="Center" Margin="10 0 0 0"></TextBlock>
                 </StackPanel>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
-</UserControl>
+</local:CascadeMenuItemBase>

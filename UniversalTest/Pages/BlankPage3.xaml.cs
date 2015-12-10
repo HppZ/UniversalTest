@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -48,8 +49,12 @@ namespace UniversalTest.Pages
 
         private void BlankPage3_Loaded(object sender, RoutedEventArgs e)
         {
+            Loaded -= BlankPage3_Loaded;
+
             _cascadeMenu = new CascadeMenu();
             _cascadeMenu.Items.Add(new CascadeMenuItem() {Text = "123"});
+            _cascadeMenu.Items.Add(new CascadeMenuSeparator());
+            _cascadeMenu.Items.Add(new CascadeMenuListViewItem() { ItemsSource = _vm, MaxHeight = 200 });
             _cascadeMenu.Items.Add(new CascadeMenuSeparator());
             _cascadeMenu.Items.Add(new CascadeMenuSubItem()
             {
@@ -58,12 +63,26 @@ namespace UniversalTest.Pages
                 {
                     new CascadeMenuItem() { Text = "456"},
                     new CascadeMenuSeparator(),
-                    new CascadeMenuListViewItem() {ItemsSource = _vm}
+                    new CascadeMenuListViewItem() {ItemsSource = _vm, MaxHeight = 200}
                 }
             });
-        }
- 
 
+            _cascadeMenu.SelectionChanged += _cascadeMenu_SelectionChanged;
+
+        }
+
+        /// <summary>
+        /// 选择发生改变
+        /// </summary>
+        private void _cascadeMenu_SelectionChanged(CascadeMenuItemBase arg1, object arg2)
+        {
+            Debug.WriteLine(arg1);
+            Debug.WriteLine(arg2);
+        }
+
+        /// <summary>
+        /// 显示菜单
+        /// </summary>
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             _cascadeMenu.ShowAt(sender as UIElement, new Point(0, 50));
@@ -72,6 +91,7 @@ namespace UniversalTest.Pages
 
     class MyClass
     {
+        public ImageSource Icon { get; set; }
         public string Text { get; set; }
     }
 }
