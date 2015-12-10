@@ -120,10 +120,16 @@
     <Compile Include="Control\ScrollBar\BallScrollBar.xaml.cs">
       <DependentUpon>BallScrollBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\ScrollViewer\Children\ViewerItem.xaml.cs">
+    <Compile Include="Control\ScrollViewer\First\Children\ViewerItem.xaml.cs">
       <DependentUpon>ViewerItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\ScrollViewer\ThreeImageViewer.xaml.cs">
+    <Compile Include="Control\ScrollViewer\First\ThreeImageViewer.xaml.cs">
+      <DependentUpon>ThreeImageViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ScrollViewer\Second\Children\ViewerItem.xaml.cs">
+      <DependentUpon>ViewerItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ScrollViewer\Second\ThreeImageViewer.xaml.cs">
       <DependentUpon>ThreeImageViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Slider\BallSlider.xaml.cs">
@@ -227,13 +233,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Control\ScrollViewer\Children\ViewerItem.xaml">
+    <Page Include="Control\ScrollViewer\First\Children\ViewerItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Control\ScrollViewer\ThreeImageViewer.xaml">
+    <Page Include="Control\ScrollViewer\First\ThreeImageViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\ScrollViewer\Second\Children\ViewerItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\ScrollViewer\Second\ThreeImageViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Control\Slider\BallSlider.xaml">
       <SubType>Designer</SubType>

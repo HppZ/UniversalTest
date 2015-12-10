@@ -262,6 +262,8 @@ namespace UniversalTest.Control.ScrollViewer
         //-------------------------------------------------------------------
         private void Left_Tapped(object sender, RoutedEventArgs e)
         {
+            // 只做了下一步
+            return;
             GotoPreOrNext(false);
         }
 

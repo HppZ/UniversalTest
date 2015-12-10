@@ -34,14 +34,14 @@ namespace UniversalTest
             this.InitializeComponent();
         }
 
+        // 打算做个导航, 仅仅是打算
 
-        // BlankPage1 ----------- 圆球滚动条
-        // BlankPage2 ----------- TextBox的 visualstate
-        // BlankPage3 ----------- 右键菜单 (popup)
-        // BlankPage4 ----------- slider 做 圆球滚动条
-        // BlankPage5 ----------- slider 与 scrollviewer  双向绑定
+        // BlankPage1 ----------- 圆球滚动条 触屏模式下自动切换到圆球便于手指拖动
+        // BlankPage2 ----------- TextBox的 visualstate test
+        // BlankPage3 ----------- 右键层级菜单
+        // BlankPage4 ----------- slider 做 圆球滚动条 和 1 一样
+        // BlankPage5 ----------- slider 与 scrollviewer  双向绑定 
         // BlankPage6 ----------- 自定义gridviewitem 而不自定义gridview
-
-
+        // BlankPage7 ----------- 图片切换控件 自动从系统图库取图，点击页面直接上/下一张 直到崩溃 :)
     }
 }

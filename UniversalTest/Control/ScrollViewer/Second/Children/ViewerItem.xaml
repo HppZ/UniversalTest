@@ -1,0 +1,18 @@
+﻿<UserControl
+    x:Class="UniversalTest.Control.ScrollViewer.Second.Children.ViewerItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UniversalTest.Control.ScrollViewer.Children"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Name="ThisCtl"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid >
+        <Image x:Name="ImageEle" Stretch="UniformToFill" Source="{Binding PreviewImage}" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+        <Grid x:Name="Mask" Background="Black" Opacity="0"></Grid>
+        <!--<TextBlock Text="{Binding  ElementName=ThisCtl,Path=Tag}" Foreground="red" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>-->
+    </Grid>
+</UserControl>

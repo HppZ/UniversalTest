@@ -26,5 +26,18 @@ namespace UniversalTest.Pages
         {
             this.InitializeComponent();
         }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var flag = e.GetPosition(Window.Current.Content).X > Window.Current.Bounds.Width / 2;
+            if (flag)
+            {
+                ImageViewer.SelectedIndex += 1;
+            }
+            else if (ImageViewer.SelectedIndex > 0)
+            {
+                ImageViewer.SelectedIndex -= 1;
+            }
+        }
     }
 }

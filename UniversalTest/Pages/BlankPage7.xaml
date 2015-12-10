@@ -6,9 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:scrollViewer="using:UniversalTest.Control.ScrollViewer"
+    xmlns:second="using:UniversalTest.Control.ScrollViewer.Second"
     mc:Ignorable="d">
 
-    <Grid Background="White">
-        <scrollViewer:ThreeImageViewer Width="500" Height="150"></scrollViewer:ThreeImageViewer>
+    <Grid Background="White"  Tapped="UIElement_OnTapped">
+        <second:ThreeImageViewer x:Name="ImageViewer" Width="500" Height="150"></second:ThreeImageViewer>
     </Grid>
 </Page>
