@@ -41,10 +41,10 @@ namespace UniversalTest.Pages
 
             for (int i = 0; i < 10; i++)
             {
-                _vm.Add(new MyClass() {Text = i.ToString()});
+                _vm.Add(new MyClass() { Text = i.ToString() });
             }
             Loaded += BlankPage3_Loaded;
-           
+
         }
 
         private void BlankPage3_Loaded(object sender, RoutedEventArgs e)
@@ -52,10 +52,10 @@ namespace UniversalTest.Pages
             Loaded -= BlankPage3_Loaded;
 
             _cascadeMenu = new CascadeMenu();
-            _cascadeMenu.Items.Add(new CascadeMenuItem() {Text = "123"});
+            _cascadeMenu.Items.Add(new CascadeMenuItem() { Text = "123" });
             _cascadeMenu.Items.Add(new CascadeMenuSeparator());
-            _cascadeMenu.Items.Add(new CascadeMenuListViewItem() { ItemsSource = _vm, MaxHeight = 200 });
-            _cascadeMenu.Items.Add(new CascadeMenuSeparator());
+            //_cascadeMenu.Items.Add(new CascadeMenuListViewItem() { ItemsSource = _vm, MaxHeight = 200 });
+            //_cascadeMenu.Items.Add(new CascadeMenuSeparator());
             _cascadeMenu.Items.Add(new CascadeMenuSubItem()
             {
                 Text = "abc",
@@ -71,6 +71,48 @@ namespace UniversalTest.Pages
 
         }
 
+        // 
+
+        //        cascade.Items.Add(new CascadeMenuSeparator());
+
+        //                var galleries = _viewController.GetAllGalleriesData(); // 有相册
+        //                if (galleries != null && galleries.Count > 0)
+        //                {
+
+        //                    cascade.Items.Add(new CascadeMenuListViewItem()
+        //        {
+        //            Header = "添加到",
+        //                        ItemDataTemplate = Resources["CascadeListViewItemDataTemplate"] as DataTemplate, // 是CascadeMenuSubItem ， Items绑定Items
+        //                        ItemsSource = new ObservableCollection<CascadeItem>()
+        //                        {
+        //                            new CascadeItem()
+        //                            {
+        //                                Icon = new Uri(resource+ "albums.png"),
+        //                                Text = "已有相册",
+        //                                Items = new ObservableCollection<CascadeMenuItemBase>() {new CascadeMenuListViewItem() { ItemsSource = galleries} }
+        //                            }
+        //                        }
+
+        //                        //DataContext = new List<CascadeMenuListViewItem>()
+        //                        //{
+        //                        //    new CascadeMenuListViewItem() {ItemsSource = galleries, MaxHeight = 200, Tag = CASCADE_GALLERY}
+        //                        //}
+        //                    });
+        //                    cascade.Items.Add(new CascadeMenuSeparator());
+        //                }
+        //}
+
+
+        //public class CascadeItem
+        //{
+        //    public Uri Icon { get; set; }
+        //    public string Text { get; set; }
+        //    public ObservableCollection<CascadeMenuItemBase> Items { get; set; } // HERE
+        //}
+
+
+
+
         /// <summary>
         /// 选择发生改变
         /// </summary>
@@ -85,7 +127,7 @@ namespace UniversalTest.Pages
         /// </summary>
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            _cascadeMenu.ShowAt(sender as UIElement, new Point(0, 50));
+            //_cascadeMenu.ShowAt(sender as UIElement, new Point(0, 50));
         }
     }
 
