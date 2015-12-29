@@ -136,6 +136,9 @@
       <DependentUpon>BallSlider.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Slider\BallSlider2.cs" />
+    <Compile Include="Control\Temp\BallScrollBar.xaml.cs">
+      <DependentUpon>BallScrollBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Temp\MyUserControl1.xaml.cs">
       <DependentUpon>MyUserControl1.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,10 @@
     <Page Include="Control\Slider\BallSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Temp\BallScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Control\Temp\MyUserControl1.xaml">
       <Generator>MSBuild:Compile</Generator>

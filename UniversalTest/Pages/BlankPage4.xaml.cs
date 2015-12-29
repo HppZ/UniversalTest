@@ -46,5 +46,10 @@ namespace UniversalTest.Pages
         }
         //--------------------------------------------------------------------------
 
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Debug.WriteLine("1111111111111");
+            Debug.Assert(false);
+        }
     }
 }
