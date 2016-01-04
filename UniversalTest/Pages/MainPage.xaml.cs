@@ -37,11 +37,11 @@ namespace UniversalTest
         // 打算做个导航, 仅仅是打算
 
         // BlankPage1 ----------- 圆球滚动条 触屏模式下自动切换到圆球便于手指拖动
-        // BlankPage2 ----------- TextBox的 visualstate test
+        // BlankPage2 ----------- listview重排序控件
         // BlankPage3 ----------- 右键层级菜单
         // BlankPage4 ----------- slider 做 圆球滚动条 和 1 一样
         // BlankPage5 ----------- slider 与 scrollviewer  双向绑定 
-        // BlankPage6 ----------- 自定义gridviewitem 而不自定义gridview
+        // BlankPage6 ----------- GridView绑定Uri
         // BlankPage7 ----------- 图片切换控件 自动从系统图库取图，点击页面直接上/下一张 直到崩溃 :)
     }
 }

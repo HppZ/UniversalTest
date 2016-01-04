@@ -34,9 +34,9 @@ namespace UniversalTest.Pages
             Loaded += BlankPage6_Loaded;
         }
 
-        private void BlankPage6_Loaded(object sender, RoutedEventArgs e)
+        private async void BlankPage6_Loaded(object sender, RoutedEventArgs e)
         {
-            _mainController.Init();
+            await _mainController.Init();
         }
     }
 
