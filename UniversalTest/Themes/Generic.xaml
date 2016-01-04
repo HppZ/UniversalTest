@@ -6,4 +6,18 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Themes/Resource/BallSlider2.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="local2:PullToFresh" xmlns:local2="using:UniversalTest.Control.Listview">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local2:PullToFresh">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
