@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,6 +26,8 @@ namespace UniversalTest.Pages
     public sealed partial class BlankPage6 : Page
     {
         private MainController _mainController;
+        private ScrollViewer _scrollViewer;
+        private ItemsWrapGrid _itemsWrapGrid;
         public BlankPage6()
         {
             this.InitializeComponent();
@@ -38,13 +41,25 @@ namespace UniversalTest.Pages
         {
             await _mainController.Init();
         }
-    }
 
-    public class MyGridViewItem : GridViewItem
-    {
-        public MyGridViewItem()
+
+        private void ScrollViewer_OnLoaded(object sender, RoutedEventArgs e)
         {
-            IsSelected = true;
+            _scrollViewer  = sender as ScrollViewer;
+            _scrollViewer.ViewChanged += _scrollViewer_ViewChanged;
+        }
+
+        private void _scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (!e.IsIntermediate) // scroll completed
+            {
+                Debug.WriteLine(_itemsWrapGrid?.FirstVisibleIndex);
+            }
+        }
+
+        private void FrameworkElement_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            _itemsWrapGrid = sender as ItemsWrapGrid;
         }
     }
 }
