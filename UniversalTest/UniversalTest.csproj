@@ -197,6 +197,7 @@
     <Content Include="Assets\icon_like%402x.png" />
     <Content Include="Assets\icon_search%402x.png" />
     <Content Include="Assets\icon_share%402x.png" />
+    <Content Include="Assets\PageAssets\img103.png" />
     <Content Include="Assets\PageAssets\PhotoGridView_selected.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

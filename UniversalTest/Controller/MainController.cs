@@ -46,19 +46,17 @@ namespace UniversalTest.Controller
     {
         public string LocalPath { get; set; }
 
-        //public BitmapImage PreviewImage
-        //{
-        //    get
-        //    {
-        //        BitmapImage bitmap = new BitmapImage();
-        //        SetPreviewImage(bitmap);
-        //        return bitmap;
-        //    }
-        //    set
-        //    {
-        //        OnPropertyChanged();
-        //    }
-        //}
+        public BitmapImage PreviewImage
+        {
+            get
+            {
+                return new BitmapImage(CachePath);
+            }
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
 
         public Uri cachePath;
         public Uri CachePath
