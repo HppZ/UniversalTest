@@ -100,7 +100,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\MainController.cs" />
-    <Compile Include="Control\Listview\PullToFresh.cs" />
+    <Compile Include="Control\ListView\PullToFresh.cs" />
     <Compile Include="Control\Menu\CascadeMenu.xaml.cs">
       <DependentUpon>CascadeMenu.xaml</DependentUpon>
     </Compile>
@@ -320,9 +320,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Control\ListView\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
