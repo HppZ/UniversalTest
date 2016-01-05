@@ -100,6 +100,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\MainController.cs" />
+    <Compile Include="Control\Listview\PullToFresh.cs" />
     <Compile Include="Control\Menu\CascadeMenu.xaml.cs">
       <DependentUpon>CascadeMenu.xaml</DependentUpon>
     </Compile>
