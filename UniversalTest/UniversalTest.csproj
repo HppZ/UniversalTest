@@ -139,6 +139,7 @@
     <Compile Include="Control\Temp\MyUserControl1.xaml.cs">
       <DependentUpon>MyUserControl1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Panel\VirtualizingPanel.cs" />
     <Compile Include="Helper\DebugHelper.cs" />
     <Compile Include="Helper\StoryboardHelper.cs" />
     <Compile Include="Pages\BlankPage1.xaml.cs">
