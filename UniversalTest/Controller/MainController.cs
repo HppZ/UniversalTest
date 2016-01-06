@@ -6,8 +6,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.BulkAccess;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Search;
 using Windows.Storage.Streams;
@@ -35,7 +37,6 @@ namespace UniversalTest.Controller
                 Source.Add(new ImageItem()
                 {
                     LocalPath = file.Path,
-                    //CachePath = new Uri("ms-appdata:///Local/" + file.Name)
                 });
             }
         }
@@ -44,29 +45,21 @@ namespace UniversalTest.Controller
 
     public class ImageItem : INotifyPropertyChanged
     {
-        public string LocalPath { get; set; }
-
-        public BitmapImage PreviewImage
+        public ImageItem()
         {
-            get
-            {
-                return new BitmapImage(CachePath);
-            }
-            set
-            {
-                OnPropertyChanged();
-            }
+            PreviewImage = new BitmapImage();
         }
 
+        public string LocalPath { get; set; }
+
+        public BitmapImage PreviewImage { get; set; }
+
+        public bool Loaded { get; set; }
         public Uri cachePath;
         public Uri CachePath
         {
             get
-            {
-                if (cachePath == null)
-                {
-                    SetPreviewImage();
-                }
+            { 
                 return cachePath;
             }
             set

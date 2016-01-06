@@ -25,7 +25,7 @@ namespace UniversalTest.Pages
     public sealed partial class BlankPage8 : Page
     {
         private MainController _mainController;
-        private RangeCollection<ImageItem> _imageItems;
+        private RangeCollection _imageItems;
         public BlankPage8()
         {
             this.InitializeComponent();
@@ -36,7 +36,7 @@ namespace UniversalTest.Pages
         private async void BlankPage8_Loaded(object sender, RoutedEventArgs e)
         {
             await _mainController.Init();
-            _imageItems = new RangeCollection<ImageItem>(_mainController.Source);
+            _imageItems = new RangeCollection(_mainController.Source);
             DataContext = _imageItems;
         }
     }
