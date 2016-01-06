@@ -11,6 +11,7 @@ using Windows.Storage;
 using Windows.Storage.BulkAccess;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Search;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
@@ -24,7 +25,8 @@ namespace UniversalTest.Model
     public class RangeCollection : ObservableCollection<ImageItem>, IItemsRangeInfo
     {
         private List<Request> _requesting = new List<Request>();
-        private FileInformationFactory _factory;
+        //private FileInformationFactory _factory;
+        private StorageFileQueryResult _fileQueryResult;
         public RangeCollection(IEnumerable<ImageItem> collection) : base(collection)
         {
             Init();
@@ -38,8 +40,8 @@ namespace UniversalTest.Model
         public void Init()
         {
             QueryOptions options = new QueryOptions(CommonFileQuery.OrderBySearchRank, new List<string>() { ".jpg", ".png" });
-            var query = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(options);
-            _factory = new FileInformationFactory(query, ThumbnailMode.SingleItem, 256, ThumbnailOptions.UseCurrentScale, true);
+            _fileQueryResult = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(options);
+            //_factory = new FileInformationFactory(query, ThumbnailMode.SingleItem, 256, ThumbnailOptions.UseCurrentScale, true);
         }
 
 
@@ -48,14 +50,14 @@ namespace UniversalTest.Model
         /// </summary>
         public void RangesChanged(ItemIndexRange visibleRange, IReadOnlyList<ItemIndexRange> trackedItems)
         {
-            //var r = (from x in _requesting
-            //         where
-            //             x.IndexRange.FirstIndex == visibleRange.FirstIndex
-            //             &&
-            //             x.IndexRange.LastIndex == visibleRange.LastIndex
+            var r = (from x in _requesting
+                     where
+                         x.IndexRange.FirstIndex == visibleRange.FirstIndex
+                         &&
+                         x.IndexRange.LastIndex == visibleRange.LastIndex
 
-            //         select x).ToList();
-            //if (r.Any()) return;
+                     select x).ToList();
+            if (r.Any()) return;
             Debug.WriteLine("first " + visibleRange.FirstIndex + "  last " + visibleRange.LastIndex);
 
             // 检查已经不需要的请求
@@ -82,19 +84,16 @@ namespace UniversalTest.Model
         {
             try
             {
-                IReadOnlyList<FileInformation> results =
-                    await _factory.GetFilesAsync((uint)range.FirstIndex, Math.Max(range.Length, 20)).AsTask(ct);
+                var results = await _fileQueryResult.GetFilesAsync((uint)range.FirstIndex, Math.Max(range.Length, 30)).AsTask(ct);
                 if (results != null)
                 {
-
                     for (int i = 0; i < results.Count; i++)
                     {
                         ct.ThrowIfCancellationRequested();
                         var t = Items.First(x => x.LocalPath == results[i].Path);
                         if (!t.Loaded)
                         {
-                            await t.PreviewImage.SetSourceAsync(results[i].Thumbnail).AsTask(ct);
-                            t.Loaded = true;
+                           await t.SetPreviewImage(ct);
                         }
                     }
                 }

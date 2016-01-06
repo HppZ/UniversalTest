@@ -13,6 +13,7 @@ using Windows.Storage.BulkAccess;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Search;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using UniversalTest.Annotations;
 
@@ -45,16 +46,29 @@ namespace UniversalTest.Controller
 
     public class ImageItem : INotifyPropertyChanged
     {
-        public ImageItem()
-        {
-            PreviewImage = new BitmapImage();
-        }
+        private SemaphoreSlim _semaphore = new SemaphoreSlim(1);
 
         public string LocalPath { get; set; }
 
-        public BitmapImage PreviewImage { get; set; }
+        public BitmapImage PreviewImage
+        {
+            get
+            {
+                var b = new BitmapImage();
+                if (cachePath != null)
+                {
+                    b.UriSource = cachePath;
+                }
+                return b;
+            }
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
 
         public bool Loaded { get; set; }
+
         public Uri cachePath;
         public Uri CachePath
         {
@@ -65,23 +79,43 @@ namespace UniversalTest.Controller
             set
             {
                 cachePath = value;
-                OnPropertyChanged();
+                //OnPropertyChanged();
+                OnPropertyChanged("PreviewImage");
             }
         }
 
-        private async Task SetPreviewImage()
+        public async Task SetPreviewImage(CancellationToken ct)
         {
-            var file = await StorageFile.GetFileFromPathAsync(LocalPath);
-            var thumb = await file.GetThumbnailAsync(ThumbnailMode.SingleItem, 500);
-            var name = Path.GetFileName(LocalPath);
-            var cacheFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
-            CachePath = new Uri(ApplicationData.Current.LocalFolder.Path + "\\" + cacheFile.Name);
-
-            Windows.Storage.Streams.Buffer buffer = new Windows.Storage.Streams.Buffer(Convert.ToUInt32(thumb.Size));
-            IBuffer iBuf = await thumb.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.None);
-            using (var strm = await cacheFile.OpenAsync(FileAccessMode.ReadWrite))
+            await _semaphore.WaitAsync();
+            try
             {
-                await strm.WriteAsync(iBuf);
+                if (Loaded) return;
+                var file = await StorageFile.GetFileFromPathAsync(LocalPath).AsTask(ct);
+                var thumb = await file.GetThumbnailAsync(ThumbnailMode.SingleItem, 256);
+                var name = Path.GetFileName(LocalPath);
+                //var name = Path.GetRandomFileName()+".jpg";
+                var cacheFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+
+                Windows.Storage.Streams.Buffer buffer = new Windows.Storage.Streams.Buffer(Convert.ToUInt32(thumb.Size));
+                IBuffer iBuf = await thumb.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.None);
+                using (var strm = await cacheFile.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    await strm.WriteAsync(iBuf);
+                }
+                CachePath = new Uri("ms-appdata:///Local" + "/" + cacheFile.Name);
+                Loaded = true;
+            }
+            catch (OperationCanceledException)
+            {
+                
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                _semaphore.Release();
             }
         }
 

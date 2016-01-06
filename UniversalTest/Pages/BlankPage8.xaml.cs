@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using UniversalTest.Controller;
 using UniversalTest.Model;
@@ -38,6 +39,14 @@ namespace UniversalTest.Pages
             await _mainController.Init();
             _imageItems = new RangeCollection(_mainController.Source);
             DataContext = _imageItems;
+        }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            var img = grid.Children[0] as Image;
+           var b =  img.Source as BitmapImage;
+            
         }
     }
 }
