@@ -12,8 +12,8 @@
             <GridView.ItemTemplate >
                 <DataTemplate >
                     <Grid>
-                        <Image Source="ms-appx:///Assets/PageAssets/img103.png"  Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>
-                        <Image Source="{Binding PreviewImage}" Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>
+                        <!--<Image Source="ms-appx:///Assets/PageAssets/img103.png"  Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>-->
+                        <Image Source="{Binding CachePath}" Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>

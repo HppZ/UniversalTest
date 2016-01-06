@@ -35,8 +35,8 @@ namespace UniversalTest.Controller
                 Source.Add(new ImageItem()
                 {
                     LocalPath = file.Path,
-                    CachePath = new Uri("ms-appdata:///Local/" + file.Name)
-            });
+                    //CachePath = new Uri("ms-appdata:///Local/" + file.Name)
+                });
             }
         }
     }
@@ -63,11 +63,15 @@ namespace UniversalTest.Controller
         {
             get
             {
+                if (cachePath == null)
+                {
+                    SetPreviewImage();
+                }
                 return cachePath;
             }
             set
             {
-                cachePath = value; 
+                cachePath = value;
                 OnPropertyChanged();
             }
         }
@@ -77,8 +81,8 @@ namespace UniversalTest.Controller
             var file = await StorageFile.GetFileFromPathAsync(LocalPath);
             var thumb = await file.GetThumbnailAsync(ThumbnailMode.SingleItem, 500);
             var name = Path.GetFileName(LocalPath);
-            var cacheFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.OpenIfExists);
-            CachePath = new Uri("ms-appdata:///Local/" + cacheFile.Name);
+            var cacheFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+            CachePath = new Uri(ApplicationData.Current.LocalFolder.Path + "\\" + cacheFile.Name);
 
             Windows.Storage.Streams.Buffer buffer = new Windows.Storage.Streams.Buffer(Convert.ToUInt32(thumb.Size));
             IBuffer iBuf = await thumb.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.None);
