@@ -145,6 +145,7 @@
     </Compile>
     <Compile Include="Helper\DebugHelper.cs" />
     <Compile Include="Helper\StoryboardHelper.cs" />
+    <Compile Include="Model\RangeCollection.cs" />
     <Compile Include="Pages\BlankPage1.xaml.cs">
       <DependentUpon>BlankPage1.xaml</DependentUpon>
     </Compile>
