@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="UniversalTest.Pages.BlankPage8"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UniversalTest.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <GridView ItemsSource="{Binding}" >
+            <GridView.ItemTemplate >
+                <DataTemplate >
+                    <Grid>
+                        <Image Source="ms-appx:///Assets/PageAssets/img103.png"  Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>
+                        <Image Source="{Binding PreviewImage}" Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>
