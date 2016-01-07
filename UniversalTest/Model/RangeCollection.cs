@@ -12,12 +12,14 @@ using Windows.Storage.BulkAccess;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Search;
 using Windows.System.Threading;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using UniversalTest.Controller;
 using UniversalTest.Helper;
+using UniversalTest.Pages;
 
 namespace UniversalTest.Model
 {
@@ -30,6 +32,7 @@ namespace UniversalTest.Model
         //private FileInformationFactory _factory;
         private StorageFileQueryResult _fileQueryResult;
         private ItemIndexRange _currentRange;
+        private CoreDispatcher _dispatcher = BlankPage8.MainDispatcher;
         bool _allLoaded;
         public RangeCollection(IEnumerable<ImageItem> list) : base(list)
         {
@@ -53,24 +56,28 @@ namespace UniversalTest.Model
             queryOptions.SetThumbnailPrefetch(ThumbnailMode.SingleItem, 256, ThumbnailOptions.UseCurrentScale);
             _fileQueryResult = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(queryOptions);
 
-            GetAll();
+           GetAll();
         }
 
         private async void GetAll()
         {
             CancellationTokenSource source = new CancellationTokenSource();
-            await Task.Factory.StartNew(async () =>
-           {
-               foreach (var item in Items)
-               {
-                   await item.SetPreviewImage(source.Token);
-               }
-               _allLoaded = true;
-           }, TaskCreationOptions.LongRunning);
-            //await ThreadPool.RunAsync(async (e) =>
+            // await Task.Factory.StartNew(async () =>
             //{
-
-            //}, WorkItemPriority.Normal);
+            //    foreach (var item in Items)
+            //    {
+            //        await item.SetPreviewImage(source.Token);
+            //    }
+            //    _allLoaded = true;
+            //}, TaskCreationOptions.None);
+            await ThreadPool.RunAsync(async (e) =>
+            {
+                foreach (var item in Items)
+                {
+                    await item.SetPreviewImage(source.Token);
+                }
+                _allLoaded = true;
+            }, WorkItemPriority.Low);
         }
 
 
@@ -107,8 +114,9 @@ namespace UniversalTest.Model
             {
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Debug.WriteLine("Error A " + e.Message);
             }
         }
 
@@ -116,24 +124,30 @@ namespace UniversalTest.Model
         {
             try
             {
-                var results = await _fileQueryResult.GetFilesAsync((uint)range.FirstIndex, range.Length).AsTask(ct);
-                if (results != null)
+                await Task.Run(async () =>
                 {
-                    for (int i = 0; i < results.Count; i++)
+                    var results = await _fileQueryResult.GetFilesAsync((uint)range.FirstIndex, range.Length).AsTask(ct);
+                    if (results != null)
                     {
-                        ct.ThrowIfCancellationRequested();
-                        var t = Items.First(x => x.LocalPath == results[i].Path);
-                        if (!t.Loaded)
+                        for (int i = 0; i < results.Count; i++)
                         {
-                            var thumb = await t.SetPreviewImage(ct);
-                            var index = Items.IndexOf(t);
-                            if (thumb != null && index <= _currentRange.LastIndex && index >= _currentRange.FirstIndex)
+                            ct.ThrowIfCancellationRequested();
+                            var t = Items.First(x => x.LocalPath == results[i].Path);
+                            if (!t.Loaded)
                             {
-                                t.CachePath = thumb;
+                                var thumb = await t.SetPreviewImage(ct);
+                                var index = Items.IndexOf(t);
+                                if (thumb != null && index <= _currentRange.LastIndex && index >= _currentRange.FirstIndex)
+                                {
+                                    await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                                    {
+                                        t.CachePath = thumb;
+                                    });
+                                }
                             }
                         }
                     }
-                }
+                });
             }
             catch (OperationCanceledException)
             {
@@ -141,6 +155,7 @@ namespace UniversalTest.Model
             }
             catch (Exception e)
             {
+                Debug.WriteLine("Error B " + e.Message);
             }
         }
 

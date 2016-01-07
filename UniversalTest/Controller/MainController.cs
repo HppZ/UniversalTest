@@ -119,10 +119,8 @@ namespace UniversalTest.Controller
             {
                 if (!Loaded)
                 {
-
                     var file = await StorageFile.GetFileFromPathAsync(LocalPath).AsTask(ct);
                     var thumb = await file.GetThumbnailAsync(ThumbnailMode.SingleItem, 256).AsTask(ct); // 如果已经拿到thumbnail则不在cancel了，直接保存
-                                                                                                        //var name = Path.GetFileName(LocalPath);
                     var name = Path.GetRandomFileName() + ".jpg";
                     var cacheFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting).AsTask(ct);
 
@@ -131,7 +129,7 @@ namespace UniversalTest.Controller
                     using (var strm = await cacheFile.OpenAsync(FileAccessMode.ReadWrite))
                     {
                         await strm.WriteAsync(iBuf);
-                        await strm.FlushAsync();
+                        //await strm.FlushAsync();
                     }
 
                     cachePath = new Uri("ms-appdata:///Local" + "/" + cacheFile.Name);
@@ -145,6 +143,7 @@ namespace UniversalTest.Controller
             }
             catch (Exception e)
             {
+                Debug.WriteLine("Error C " + e.Message);
             }
             finally
             {

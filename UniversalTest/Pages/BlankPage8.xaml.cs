@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,9 +29,11 @@ namespace UniversalTest.Pages
     {
         private MainController _mainController;
         private RangeCollection _imageItems;
+        public static CoreDispatcher MainDispatcher;
         public BlankPage8()
         {
             this.InitializeComponent();
+            MainDispatcher = this.Dispatcher;
             _mainController = new MainController();
             Loaded += BlankPage8_Loaded;
         }
