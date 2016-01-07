@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,31 +17,54 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using UniversalTest.Annotations;
+using UniversalTest.Model;
 
 namespace UniversalTest.Controller
 {
     public class MainController
     {
-        public ObservableCollection<ImageItem> Source = new ObservableCollection<ImageItem>();
+        public RangeCollection Source;
+
+        //public ObservableCollection<ImageItem> Source = new ObservableCollection<ImageItem>();
 
         public async Task Init()
         {
-            await GetFilesInPictureLibrary();
-        }
-
-        private async Task GetFilesInPictureLibrary()
-        {
-            QueryOptions options = new QueryOptions(CommonFileQuery.OrderBySearchRank, new List<string>() { ".jpg", ".png" });
-            var query = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(options);
-            var files = await query.GetFilesAsync();
-            foreach (var file in files)
+            var queryOptions = new QueryOptions(CommonFileQuery.OrderByDate,
+                new string[] { ".jpg", ".png", ".jpeg", ".bmp" })
             {
-                Source.Add(new ImageItem()
+                FolderDepth = FolderDepth.Deep,
+                IndexerOption = IndexerOption.OnlyUseIndexer,
+                UserSearchFilter = "System.Kind:=System.Kind#Picture"
+            };
+            queryOptions.SetThumbnailPrefetch(ThumbnailMode.SingleItem, 256, ThumbnailOptions.UseCurrentScale);
+            var _fileQueryResult = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(queryOptions);
+            var files = await _fileQueryResult.GetFilesAsync();
+            Debug.WriteLine("Count "+files.Count);
+            var list = new List<ImageItem>();
+            foreach (var f in files)
+            {
+                list.Add(new ImageItem()
                 {
-                    LocalPath = file.Path,
+                    LocalPath =  f.Path
                 });
             }
+
+            Source = new RangeCollection(list);
         }
+
+        //private async Task GetFilesInPictureLibrary()
+        //{
+        //    QueryOptions options = new QueryOptions(CommonFileQuery.OrderBySearchRank, new List<string>() { ".jpg", ".png" });
+        //    var query = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(options);
+        //    var files = await query.GetFilesAsync();
+        //    foreach (var file in files)
+        //    {
+        //        Source.Add(new ImageItem()
+        //        {
+        //            LocalPath = file.Path,
+        //        });
+        //    }
+        //}
     }
 
 
@@ -54,12 +78,11 @@ namespace UniversalTest.Controller
         {
             get
             {
-                var b = new BitmapImage();
                 if (cachePath != null)
                 {
-                    b.UriSource = cachePath;
+                    return new BitmapImage(cachePath);
                 }
-                return b;
+                return null;
             }
             set
             {
@@ -73,7 +96,7 @@ namespace UniversalTest.Controller
         public Uri CachePath
         {
             get
-            { 
+            {
                 return cachePath;
             }
             set
@@ -91,23 +114,24 @@ namespace UniversalTest.Controller
             {
                 if (Loaded) return;
                 var file = await StorageFile.GetFileFromPathAsync(LocalPath).AsTask(ct);
-                var thumb = await file.GetThumbnailAsync(ThumbnailMode.SingleItem, 256);
-                var name = Path.GetFileName(LocalPath);
-                //var name = Path.GetRandomFileName()+".jpg";
-                var cacheFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting);
+                var thumb = await file.GetThumbnailAsync(ThumbnailMode.SingleItem, 256).AsTask(ct); // 如果已经拿到thumbnail则不在cancel了，直接保存
+                //var name = Path.GetFileName(LocalPath);
+                var name = Path.GetRandomFileName() + ".jpg";
+                var cacheFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting).AsTask(ct);
 
                 Windows.Storage.Streams.Buffer buffer = new Windows.Storage.Streams.Buffer(Convert.ToUInt32(thumb.Size));
-                IBuffer iBuf = await thumb.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.None);
+                IBuffer iBuf = await thumb.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.None).AsTask(ct);
                 using (var strm = await cacheFile.OpenAsync(FileAccessMode.ReadWrite))
                 {
                     await strm.WriteAsync(iBuf);
+                    await strm.FlushAsync();
                 }
                 CachePath = new Uri("ms-appdata:///Local" + "/" + cacheFile.Name);
                 Loaded = true;
             }
             catch (OperationCanceledException)
             {
-                
+
             }
             catch (Exception e)
             {

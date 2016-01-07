@@ -5,15 +5,18 @@
     xmlns:local="using:UniversalTest.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controller="using:UniversalTest.Controller"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <GridView ItemsSource="{Binding}" >
+        <GridView ItemsSource="{Binding}" ShowsScrollingPlaceholders="False">
             <GridView.ItemTemplate >
-                <DataTemplate >
-                    <Grid Background="Transparent" Tapped="UIElement_OnTapped">
+                <DataTemplate x:DataType="controller:ImageItem">
+                    <Grid Background="Transparent" Tapped="UIElement_OnTapped" >
+                        <Grid Background="Gray" Width="200" Height="200" >
+                        </Grid>
                         <!--<Image Source="ms-appx:///Assets/PageAssets/img103.png"  Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>-->
-                        <Image Source="{Binding PreviewImage}"  Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>
+                        <Image Source="{x:Bind PreviewImage,Mode=OneWay}" x:Phase="2" Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>

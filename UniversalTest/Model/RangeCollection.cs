@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using UniversalTest.Controller;
+using UniversalTest.Helper;
 
 namespace UniversalTest.Model
 {
@@ -27,21 +28,27 @@ namespace UniversalTest.Model
         private List<Request> _requesting = new List<Request>();
         //private FileInformationFactory _factory;
         private StorageFileQueryResult _fileQueryResult;
-        public RangeCollection(IEnumerable<ImageItem> collection) : base(collection)
+        public RangeCollection(IEnumerable<ImageItem> list):base(list)
         {
             Init();
         }
 
         public void Dispose()
         {
-
+            Debug.WriteLine("Dispose   ##############");
         }
 
         public void Init()
         {
-            QueryOptions options = new QueryOptions(CommonFileQuery.OrderBySearchRank, new List<string>() { ".jpg", ".png" });
-            _fileQueryResult = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(options);
-            //_factory = new FileInformationFactory(query, ThumbnailMode.SingleItem, 256, ThumbnailOptions.UseCurrentScale, true);
+            var queryOptions = new QueryOptions(CommonFileQuery.OrderByDate,
+                new string[] {".jpg", ".png", ".jpeg", ".bmp"})
+            {
+                FolderDepth = FolderDepth.Deep,
+                IndexerOption = IndexerOption.OnlyUseIndexer,
+                UserSearchFilter = "System.Kind:=System.Kind#Picture"
+            };
+            queryOptions.SetThumbnailPrefetch(ThumbnailMode.SingleItem, 256, ThumbnailOptions.UseCurrentScale);
+            _fileQueryResult = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(queryOptions);
         }
 
 
@@ -58,6 +65,7 @@ namespace UniversalTest.Model
 
                      select x).ToList();
             if (r.Any()) return;
+
             Debug.WriteLine("first " + visibleRange.FirstIndex + "  last " + visibleRange.LastIndex);
 
             // 检查已经不需要的请求
@@ -84,7 +92,7 @@ namespace UniversalTest.Model
         {
             try
             {
-                var results = await _fileQueryResult.GetFilesAsync((uint)range.FirstIndex, Math.Max(range.Length, 30)).AsTask(ct);
+                var results = await _fileQueryResult.GetFilesAsync((uint)range.FirstIndex, range.Length).AsTask(ct);
                 if (results != null)
                 {
                     for (int i = 0; i < results.Count; i++)
@@ -114,13 +122,15 @@ namespace UniversalTest.Model
         public void CancelNotNeededRequest(ItemIndexRange range)
         {
             var r = (from x in _requesting
-                     where x.IndexRange.FirstIndex - 20 > range.LastIndex || x.IndexRange.LastIndex +20 < range.FirstIndex
+                     where x.IndexRange.FirstIndex - 5 > range.LastIndex || x.IndexRange.LastIndex + 5 < range.FirstIndex // 范围不同
                      select x).ToList();
             foreach (var request in r)
             {
-                _requesting.Remove(request); // 移出改请求
+                _requesting.Remove(request); // 移出请求
                 request.Cancel();
             }
+
+            Debug.WriteLine("还剩 " + _requesting.Count +" 个请求");
         }
 
 

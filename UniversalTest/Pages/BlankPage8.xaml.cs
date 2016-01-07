@@ -37,16 +37,15 @@ namespace UniversalTest.Pages
         private async void BlankPage8_Loaded(object sender, RoutedEventArgs e)
         {
             await _mainController.Init();
-            _imageItems = new RangeCollection(_mainController.Source);
+            _imageItems = _mainController.Source;
             DataContext = _imageItems;
         }
 
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            var grid = sender as Grid;
-            var img = grid.Children[0] as Image;
-           var b =  img.Source as BitmapImage;
-            
+           // var grid = sender as Grid;
+           // var img = grid.Children[0] as Image;
+           //var b =  img.Source as BitmapImage;
         }
     }
 }
