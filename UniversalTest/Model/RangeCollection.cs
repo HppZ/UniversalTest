@@ -11,6 +11,7 @@ using Windows.Storage;
 using Windows.Storage.BulkAccess;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Search;
+using Windows.System.Threading;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
@@ -28,20 +29,22 @@ namespace UniversalTest.Model
         private List<Request> _requesting = new List<Request>();
         //private FileInformationFactory _factory;
         private StorageFileQueryResult _fileQueryResult;
-        public RangeCollection(IEnumerable<ImageItem> list):base(list)
+        private ItemIndexRange _currentRange;
+        bool _allLoaded;
+        public RangeCollection(IEnumerable<ImageItem> list) : base(list)
         {
-            Init();
+
         }
 
         public void Dispose()
         {
-            Debug.WriteLine("Dispose   ##############");
+            Debug.WriteLine("Dispose ##############");
         }
 
         public void Init()
         {
             var queryOptions = new QueryOptions(CommonFileQuery.OrderByDate,
-                new string[] {".jpg", ".png", ".jpeg", ".bmp"})
+                new string[] { ".jpg", ".png", ".jpeg", ".bmp" })
             {
                 FolderDepth = FolderDepth.Deep,
                 IndexerOption = IndexerOption.OnlyUseIndexer,
@@ -49,6 +52,25 @@ namespace UniversalTest.Model
             };
             queryOptions.SetThumbnailPrefetch(ThumbnailMode.SingleItem, 256, ThumbnailOptions.UseCurrentScale);
             _fileQueryResult = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(queryOptions);
+
+            GetAll();
+        }
+
+        private async void GetAll()
+        {
+            CancellationTokenSource source = new CancellationTokenSource();
+            await Task.Factory.StartNew(async () =>
+           {
+               foreach (var item in Items)
+               {
+                   await item.SetPreviewImage(source.Token);
+               }
+               _allLoaded = true;
+           }, TaskCreationOptions.LongRunning);
+            //await ThreadPool.RunAsync(async (e) =>
+            //{
+
+            //}, WorkItemPriority.Normal);
         }
 
 
@@ -57,6 +79,8 @@ namespace UniversalTest.Model
         /// </summary>
         public void RangesChanged(ItemIndexRange visibleRange, IReadOnlyList<ItemIndexRange> trackedItems)
         {
+            _currentRange = visibleRange;
+            if (_allLoaded) return;
             var r = (from x in _requesting
                      where
                          x.IndexRange.FirstIndex == visibleRange.FirstIndex
@@ -101,7 +125,12 @@ namespace UniversalTest.Model
                         var t = Items.First(x => x.LocalPath == results[i].Path);
                         if (!t.Loaded)
                         {
-                           await t.SetPreviewImage(ct);
+                            var thumb = await t.SetPreviewImage(ct);
+                            var index = Items.IndexOf(t);
+                            if (thumb != null && index <= _currentRange.LastIndex && index >= _currentRange.FirstIndex)
+                            {
+                                t.CachePath = thumb;
+                            }
                         }
                     }
                 }
@@ -130,7 +159,7 @@ namespace UniversalTest.Model
                 request.Cancel();
             }
 
-            Debug.WriteLine("还剩 " + _requesting.Count +" 个请求");
+            Debug.WriteLine("还剩 " + _requesting.Count + " 个请求");
         }
 
 

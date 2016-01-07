@@ -39,17 +39,18 @@ namespace UniversalTest.Controller
             queryOptions.SetThumbnailPrefetch(ThumbnailMode.SingleItem, 256, ThumbnailOptions.UseCurrentScale);
             var _fileQueryResult = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(queryOptions);
             var files = await _fileQueryResult.GetFilesAsync();
-            Debug.WriteLine("Count "+files.Count);
+            Debug.WriteLine("Count " + files.Count);
             var list = new List<ImageItem>();
             foreach (var f in files)
             {
                 list.Add(new ImageItem()
                 {
-                    LocalPath =  f.Path
+                    LocalPath = f.Path
                 });
             }
 
             Source = new RangeCollection(list);
+            Source.Init();
         }
 
         //private async Task GetFilesInPictureLibrary()
@@ -92,7 +93,7 @@ namespace UniversalTest.Controller
 
         public bool Loaded { get; set; }
 
-        public Uri cachePath;
+        private Uri cachePath;
         public Uri CachePath
         {
             get
@@ -101,46 +102,55 @@ namespace UniversalTest.Controller
             }
             set
             {
-                cachePath = value;
-                //OnPropertyChanged();
-                OnPropertyChanged("PreviewImage");
+                if (value != null)
+                {
+                    cachePath = value;
+                    //OnPropertyChanged();
+                    OnPropertyChanged("PreviewImage");
+                }
             }
         }
 
-        public async Task SetPreviewImage(CancellationToken ct)
+        public async Task<Uri> SetPreviewImage(CancellationToken ct)
         {
             await _semaphore.WaitAsync();
+            Uri result = null;
             try
             {
-                if (Loaded) return;
-                var file = await StorageFile.GetFileFromPathAsync(LocalPath).AsTask(ct);
-                var thumb = await file.GetThumbnailAsync(ThumbnailMode.SingleItem, 256).AsTask(ct); // 如果已经拿到thumbnail则不在cancel了，直接保存
-                //var name = Path.GetFileName(LocalPath);
-                var name = Path.GetRandomFileName() + ".jpg";
-                var cacheFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting).AsTask(ct);
-
-                Windows.Storage.Streams.Buffer buffer = new Windows.Storage.Streams.Buffer(Convert.ToUInt32(thumb.Size));
-                IBuffer iBuf = await thumb.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.None).AsTask(ct);
-                using (var strm = await cacheFile.OpenAsync(FileAccessMode.ReadWrite))
+                if (!Loaded)
                 {
-                    await strm.WriteAsync(iBuf);
-                    await strm.FlushAsync();
+
+                    var file = await StorageFile.GetFileFromPathAsync(LocalPath).AsTask(ct);
+                    var thumb = await file.GetThumbnailAsync(ThumbnailMode.SingleItem, 256).AsTask(ct); // 如果已经拿到thumbnail则不在cancel了，直接保存
+                                                                                                        //var name = Path.GetFileName(LocalPath);
+                    var name = Path.GetRandomFileName() + ".jpg";
+                    var cacheFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(name, CreationCollisionOption.ReplaceExisting).AsTask(ct);
+
+                    Windows.Storage.Streams.Buffer buffer = new Windows.Storage.Streams.Buffer(Convert.ToUInt32(thumb.Size));
+                    IBuffer iBuf = await thumb.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.None).AsTask(ct);
+                    using (var strm = await cacheFile.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        await strm.WriteAsync(iBuf);
+                        await strm.FlushAsync();
+                    }
+
+                    cachePath = new Uri("ms-appdata:///Local" + "/" + cacheFile.Name);
+                    Loaded = true;
                 }
-                CachePath = new Uri("ms-appdata:///Local" + "/" + cacheFile.Name);
-                Loaded = true;
+                result = cachePath;
             }
-            catch (OperationCanceledException)
+            catch (OperationCanceledException e)
             {
 
             }
             catch (Exception e)
             {
-                throw;
             }
             finally
             {
                 _semaphore.Release();
             }
+            return result;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
