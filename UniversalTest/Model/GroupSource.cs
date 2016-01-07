@@ -23,8 +23,8 @@ namespace UniversalTest.Model
 
     public class GroupSourceItem:IItemsRangeInfo
     {
-        public string Key { get; set; } = "key";
-        public ObservableCollection<int> Data { get; set; } = new ObservableCollection<int>() {1,2,3,4,5,6,7};
+        public string Key { get; set; }  
+        public ObservableCollection<int> Data { get; set; }  
         public void Dispose()
         {
         }
