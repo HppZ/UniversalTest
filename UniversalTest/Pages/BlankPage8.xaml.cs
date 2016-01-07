@@ -40,27 +40,9 @@ namespace UniversalTest.Pages
 
         private async void BlankPage8_Loaded(object sender, RoutedEventArgs e)
         {
-            var g = new GroupSource();
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            g.Add(new GroupSourceItem());
-            CollectionSource.Source = g;
-
-
-            //await _mainController.Init();
-            //_imageItems = _mainController.Source;
-            //DataContext = _imageItems;
+            await _mainController.Init();
+            _imageItems = _mainController.Source;
+            DataContext = _imageItems;
         }
 
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
