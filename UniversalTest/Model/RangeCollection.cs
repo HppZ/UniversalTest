@@ -133,7 +133,7 @@ namespace UniversalTest.Model
                         {
                             ct.ThrowIfCancellationRequested();
                             var t = Items.First(x => x.LocalPath == results[i].Path);
-                            if (!t.Loaded)
+                            if (!t.UiLoaded)
                             {
                                 var thumb = await t.SetPreviewImage(ct);
                                 var index = Items.IndexOf(t);
@@ -176,7 +176,6 @@ namespace UniversalTest.Model
 
             Debug.WriteLine("还剩 " + _requesting.Count + " 个请求");
         }
-
 
     }
 

@@ -81,6 +81,7 @@ namespace UniversalTest.Controller
             {
                 if (cachePath != null)
                 {
+                    UiLoaded = true;
                     return new BitmapImage(cachePath);
                 }
                 return null;
@@ -90,6 +91,8 @@ namespace UniversalTest.Controller
                 OnPropertyChanged();
             }
         }
+
+        public bool UiLoaded { get; set; }
 
         public bool Loaded { get; set; }
 
