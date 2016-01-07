@@ -8,18 +8,35 @@
     xmlns:controller="using:UniversalTest.Controller"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <CollectionViewSource x:Name="CollectionSource" IsSourceGrouped="True" ItemsPath="Data"/>
+    </Page.Resources>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <GridView ItemsSource="{Binding}" ShowsScrollingPlaceholders="False">
+        <GridView ItemsSource="{Binding Source={StaticResource CollectionSource}}" 
+                  ShowsScrollingPlaceholders="False">
             <GridView.ItemTemplate >
-                <DataTemplate x:DataType="controller:ImageItem">
+                <DataTemplate >
                     <Grid Background="Transparent" Tapped="UIElement_OnTapped" >
                         <Grid Background="Gray" Width="200" Height="200" >
                         </Grid>
                         <!--<Image Source="ms-appx:///Assets/PageAssets/img103.png"  Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>-->
-                        <Image Source="{x:Bind PreviewImage,Mode=OneWay}" x:Phase="1" Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>
+                        <!--<Image Source="{x:Bind PreviewImage,Mode=OneWay}" x:Phase="1" Height="250" Margin="20 0 20 0" Width="200" Stretch="Uniform"></Image>-->
+                        <TextBlock Foreground="Red" FontSize="30" Text="{Binding}"></TextBlock>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
+            <GridView.GroupStyle>
+                <GroupStyle HidesIfEmpty="False">
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid Background="Aqua" Height="50">
+                                <TextBlock Foreground="Red" FontSize="30" Text="{Binding Key}"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </GridView.GroupStyle>
         </GridView>
     </Grid>
 </Page>
