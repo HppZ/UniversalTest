@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System.Threading;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,6 +35,38 @@ namespace UniversalTest
         public MainPage()
         {
             this.InitializeComponent();
+            Loaded += MainPage_Loaded;
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            T1();
+        }
+
+        private async void T1()
+        {
+           await ThreadPool.RunAsync(async (e1) =>
+            {
+               await T2();
+                Debug.WriteLine("after t2");
+            }, WorkItemPriority.Low);
+        }
+
+        private async Task T2()
+        {
+            List<Task> request = new List<Task>();
+            for (int i = 0; i < 12; i++)
+            {
+                var r = Task.Delay(1000);
+                request.Add(r);
+                if ((i + 1)%3 == 0)
+                {
+                    Debug.WriteLine("before delay " + i);
+                    await Task.WhenAll(request);
+                    Debug.WriteLine("after delay " + i);
+                }
+            }
+            Debug.WriteLine("Done");
         }
 
         // 打算做个导航, 仅仅是打算
