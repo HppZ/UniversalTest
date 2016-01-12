@@ -121,6 +121,7 @@
       <DependentUpon>CascadeMenuSubItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Pie\PieSlice.cs" />
+    <Compile Include="Control\Progress\ProgressButton.cs" />
     <Compile Include="Control\ScrollBar\BallScrollBar.xaml.cs">
       <DependentUpon>BallScrollBar.xaml</DependentUpon>
     </Compile>
@@ -331,6 +332,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\Resource\ProgressButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup />

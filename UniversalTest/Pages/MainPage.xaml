@@ -8,32 +8,22 @@
     xmlns:controls="using:Sight.Windows10.Views.Controls"
     xmlns:control="using:UniversalTest.Control"
     xmlns:animatedPieSlice="using:AnimatedPieSlice"
+    xmlns:progress="using:UniversalTest.Control.Progress"
     mc:Ignorable="d">
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Aqua" Width="400" Height="400">
-            <animatedPieSlice:PieSlice x:Name="pieSlice"
-                        TopCenter="200 0"
-                        Radius="200"
-                        Stroke="Red"
-                        SweepAngle ="359"
-                        StrokeThickness="4"
-                        Fill="Yellow" />
-            
-            
-        </Grid>
-
+        <progress:ProgressButton x:Name="ProgressButton1" Margin="200" CornerRadius="2" BorderBrush="Aqua" FontSize="50" BorderThickness="1" Content="㗊，微软大法好好好" Value="35"></progress:ProgressButton>
     </Grid>
 
     <Page.Triggers>
         <EventTrigger>
             <BeginStoryboard>
                 <Storyboard>
-                    <!--<DoubleAnimation Storyboard.TargetName="pieSlice"
-                                     Storyboard.TargetProperty="SweepAngle"
+                    <DoubleAnimation Storyboard.TargetName="ProgressButton1"
+                                     Storyboard.TargetProperty="Value"
                                      EnableDependentAnimation="True"
-                                     From="1" To="359" Duration="0:0:3"
+                                     From="0" To="100" Duration="0:0:5"
                                      AutoReverse="True"
-                                     RepeatBehavior="Forever" />-->
+                                     RepeatBehavior="Forever" />
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
