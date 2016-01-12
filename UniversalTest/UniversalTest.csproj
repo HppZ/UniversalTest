@@ -120,6 +120,7 @@
     <Compile Include="Control\Menu\Child\CascadeMenuSubItem.xaml.cs">
       <DependentUpon>CascadeMenuSubItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Panel\CustomPanel.cs" />
     <Compile Include="Control\Pie\PieSlice.cs" />
     <Compile Include="Control\Progress\ProgressButton.cs" />
     <Compile Include="Control\ScrollBar\BallScrollBar.xaml.cs">
@@ -184,6 +185,9 @@
     </Compile>
     <Compile Include="Pages\BlankPage8.xaml.cs">
       <DependentUpon>BlankPage8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BlankPage9.xaml.cs">
+      <DependentUpon>BlankPage9.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -317,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BlankPage8.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage9.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
