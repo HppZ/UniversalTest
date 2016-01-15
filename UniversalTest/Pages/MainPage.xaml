@@ -11,19 +11,18 @@
     xmlns:progress="using:UniversalTest.Control.Progress"
     mc:Ignorable="d">
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <progress:ProgressButton x:Name="ProgressButton1" Margin="200" CornerRadius="2" BorderBrush="Aqua" FontSize="50" BorderThickness="1" Content="㗊，微软大法好好好" Value="35"></progress:ProgressButton>
     </Grid>
 
     <Page.Triggers>
         <EventTrigger>
             <BeginStoryboard>
                 <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="ProgressButton1"
+                    <!--<DoubleAnimation Storyboard.TargetName="ProgressButton1"
                                      Storyboard.TargetProperty="Value"
                                      EnableDependentAnimation="True"
                                      From="0" To="100" Duration="0:0:5"
                                      AutoReverse="True"
-                                     RepeatBehavior="Forever" />
+                                     RepeatBehavior="Forever" />-->
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
