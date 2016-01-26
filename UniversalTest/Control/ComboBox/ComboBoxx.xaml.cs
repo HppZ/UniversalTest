@@ -31,8 +31,8 @@ namespace UniversalTest.Control.ComboBox
         {
             ComboBoxEle.ItemsSource = new ObservableCollection<string>()
             {
-                "1",
-                "1","1","1","1","1",
+                "A",
+                "a","J","g","i","1",
             };
         }
     }
