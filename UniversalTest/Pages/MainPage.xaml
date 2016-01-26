@@ -9,8 +9,10 @@
     xmlns:control="using:UniversalTest.Control"
     xmlns:animatedPieSlice="using:AnimatedPieSlice"
     xmlns:progress="using:UniversalTest.Control.Progress"
+    xmlns:comboBox="using:UniversalTest.Control.ComboBox"
     mc:Ignorable="d">
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <comboBox:ComboBoxx VerticalAlignment="Center"></comboBox:ComboBoxx>
     </Grid>
 
     <Page.Triggers>

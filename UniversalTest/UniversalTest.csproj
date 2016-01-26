@@ -103,6 +103,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\MainController.cs" />
+    <Compile Include="Control\ComboBox\ComboBoxx.xaml.cs">
+      <DependentUpon>ComboBoxx.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\ListView\PullToFresh.cs" />
     <Compile Include="Control\Menu\CascadeMenu.xaml.cs">
       <DependentUpon>CascadeMenu.xaml</DependentUpon>
@@ -207,6 +210,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Arrowhead-Right.png" />
+    <Content Include="Assets\ControlAssets\arrow.png" />
+    <Content Include="Assets\ControlAssets\popup-shadow.png" />
     <Content Include="Assets\ControlAssets\shadow.png" />
     <Content Include="Assets\ControlAssets\WhiteBall.png" />
     <Content Include="Assets\gallery2.jpg" />
@@ -231,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Control\ComboBox\ComboBoxx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\Menu\CascadeMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
