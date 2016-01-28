@@ -28,10 +28,18 @@ namespace UniversalTest
         /// <summary>
         /// 目录
         /// </summary>
-        
+        Random random = new Random();
+        byte[] b = new byte[3];
         public MainPage()
         {
             this.InitializeComponent();
+            Tapped += MainPage_Tapped;
+        }
+
+        private void MainPage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            random.NextBytes(b);
+            GridElement.Background = new SolidColorBrush(Color.FromArgb(0xFF, b[0], b[1], b[2]));
         }
 
         // 打算做个导航, 仅仅是打算

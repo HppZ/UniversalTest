@@ -20,7 +20,7 @@
     <PackageCertificateKeyFile>UniversalTest_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -103,6 +103,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\MainController.cs" />
+    <Compile Include="Control\Button\ShadowButton.xaml.cs">
+      <DependentUpon>ShadowButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\ComboBox\ComboBoxx.xaml.cs">
       <DependentUpon>ComboBoxx.xaml</DependentUpon>
     </Compile>
@@ -211,6 +214,8 @@
   <ItemGroup>
     <Content Include="Assets\Arrowhead-Right.png" />
     <Content Include="Assets\ControlAssets\arrow.png" />
+    <Content Include="Assets\ControlAssets\buttonshadow.scale-100.png" />
+    <Content Include="Assets\ControlAssets\buttonshadow.scale-200.png" />
     <Content Include="Assets\ControlAssets\popup-shadow.png" />
     <Content Include="Assets\ControlAssets\shadow.png" />
     <Content Include="Assets\ControlAssets\WhiteBall.png" />
@@ -236,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Control\Button\ShadowButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Control\ComboBox\ComboBoxx.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

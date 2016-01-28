@@ -7,7 +7,7 @@ namespace UniversalTest.Control.Progress
 {
     // 方法1 这里就是
     // 放法2 用渐变 gradient brush
-    public sealed class ProgressButton : Button
+    public sealed class ProgressButton : Windows.UI.Xaml.Controls.Button
     {
         private Border _progressBorder = null;
         private Border _border = null;
