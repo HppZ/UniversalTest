@@ -109,6 +109,9 @@
     <Compile Include="Control\ComboBox\ComboBoxx.xaml.cs">
       <DependentUpon>ComboBoxx.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Dialog\WebviewWindow.xaml.cs">
+      <DependentUpon>WebviewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\ListView\PullToFresh.cs" />
     <Compile Include="Control\Menu\CascadeMenu.xaml.cs">
       <DependentUpon>CascadeMenu.xaml</DependentUpon>
@@ -167,6 +170,9 @@
     </Compile>
     <Compile Include="Pages\BlankPage11.xaml.cs">
       <DependentUpon>BlankPage11.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BlankPage12.xaml.cs">
+      <DependentUpon>BlankPage12.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BlankPage2.xaml.cs">
       <DependentUpon>BlankPage2.xaml</DependentUpon>
@@ -255,6 +261,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Control\Dialog\WebviewWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Control\Menu\CascadeMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -316,6 +326,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BlankPage11.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage12.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

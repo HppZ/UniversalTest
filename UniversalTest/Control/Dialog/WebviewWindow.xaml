@@ -1,0 +1,31 @@
+﻿<UserControl
+    x:Class="Sight.Windows10.Views.Album.WebviewWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Name="This"
+    >
+
+    <Grid>
+        <Grid x:Name="ShadowGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <!--外阴影-->
+            <Image x:Name="ShadowImage" Source="ms-appx:///Assets/AlbumImages/Control/shadow_menu_prompt.png" Stretch="Fill" Margin="-11 -9 -11 -13" NineGrid="13 20 13 15"></Image>
+        </Grid>
+        
+        <Grid x:Name="RootGrid" CornerRadius="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SizeChanged="RootGrid_OnSizeChanged">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Height="32" Background="#eeeeee">
+                <TextBlock x:Name="TitleTxt" Text="{Binding ElementName=This,Path=TitleString}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16 0 0 0"></TextBlock>
+                <Image Margin="0 0 16 0" Width="13" Tapped="Close_Tapped" Height="13" Source="ms-appx:///Assets/AlbumImages/Control/close.png" HorizontalAlignment="Right"></Image>
+            </Grid>
+            <Grid Grid.Row="1" Background="White">
+                <WebView x:Name="WebViewElement" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" DefaultBackgroundColor="White"></WebView>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
