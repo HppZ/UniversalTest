@@ -15,7 +15,7 @@ namespace AnimatedPieSlice
         {
             CenterProperty = DependencyProperty.Register("TopCenter",
                 typeof(Point), typeof(PieSlice),
-                new PropertyMetadata(new Point(100, 0), OnPropertyChanged));
+                new PropertyMetadata(new Point(100.0, 0), OnPropertyChanged));
 
             RadiusProperty = DependencyProperty.Register("Radius",
                 typeof(double), typeof(PieSlice),

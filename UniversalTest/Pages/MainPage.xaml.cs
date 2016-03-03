@@ -32,6 +32,44 @@ namespace UniversalTest
         public MainPage()
         {
             this.InitializeComponent();
+            Loaded += MainPage_Loaded;
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation doubleAnimation = new DoubleAnimation()
+            {
+                EnableDependentAnimation = true,
+                From = 0,
+                To = 359.9,
+                Duration = TimeSpan.FromMilliseconds(3000),
+                EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut}
+            };
+
+            Storyboard sb  =new Storyboard() ;
+            sb.Completed += Sb_Completed;
+            Storyboard.SetTarget(doubleAnimation, PieSlice);
+            Storyboard.SetTargetProperty(doubleAnimation, "SweepAngle");
+            sb.Children.Add(doubleAnimation);
+            sb.Begin();
+        }
+
+        private void Sb_Completed(object sender, object e)
+        {
+            var flag = PieSlice.Stroke == BlueBrush;
+            if (flag) // blue for now
+            {
+                BackgroundEllipse.Stroke = BlueBrush;
+                PieSlice.Stroke = WhiteBrush;
+            }
+            else
+            {
+                BackgroundEllipse.Stroke = WhiteBrush;
+                PieSlice.Stroke = BlueBrush;
+            }
+
+            var sb = sender as Storyboard;
+            sb?.Begin();
         }
 
 
@@ -45,3 +83,5 @@ namespace UniversalTest
 
     }
 }
+
+

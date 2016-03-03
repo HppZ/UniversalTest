@@ -9,33 +9,37 @@
     xmlns:control="using:UniversalTest.Control"
     xmlns:animatedPieSlice="using:AnimatedPieSlice"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <SolidColorBrush x:Name="BlueBrush" Color="#3683F9"></SolidColorBrush>
+        <SolidColorBrush x:Name="WhiteBrush" Color="White"></SolidColorBrush>
+    </Page.Resources>
+
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Aqua" Width="400" Height="400">
-            <animatedPieSlice:PieSlice x:Name="pieSlice"
-                        TopCenter="200 0"
-                        Radius="200"
-                        Stroke="Red"
-                        SweepAngle ="359"
-                        StrokeThickness="4"
-                        Fill="Yellow" />
-            
-            
+        <!--<Ellipse  Stroke="White" StrokeThickness="19.9" UseLayoutRounding="False" Width="420" Height="420"></Ellipse>-->
+        <Grid  Width="400" Height="400" UseLayoutRounding="False">
+            <Path x:Name="BackgroundEllipse" Stroke="{StaticResource BlueBrush}" StrokeThickness="19.2" UseLayoutRounding="False">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure IsClosed="False" IsFilled="False" StartPoint="400,200">
+                            <PathFigure.Segments>
+                                <ArcSegment SweepDirection="Clockwise" Size="200,200" IsLargeArc="True" Point="400,199.999">
+                                </ArcSegment>
+                            </PathFigure.Segments>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
         </Grid>
 
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="False" 
+              Background="Transparent" Width="400" Height="400">
+            <animatedPieSlice:PieSlice  UseLayoutRounding="False"
+                        x:Name="PieSlice"
+                        TopCenter="200 0"
+                        Radius="200"
+                        Stroke="White"
+                        StrokeThickness="20"/>
+        </Grid>
     </Grid>
-
-    <Page.Triggers>
-        <EventTrigger>
-            <BeginStoryboard>
-                <Storyboard>
-                    <!--<DoubleAnimation Storyboard.TargetName="pieSlice"
-                                     Storyboard.TargetProperty="SweepAngle"
-                                     EnableDependentAnimation="True"
-                                     From="1" To="359" Duration="0:0:3"
-                                     AutoReverse="True"
-                                     RepeatBehavior="Forever" />-->
-                </Storyboard>
-            </BeginStoryboard>
-        </EventTrigger>
-    </Page.Triggers>
 </Page>
