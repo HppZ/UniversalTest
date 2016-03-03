@@ -8,6 +8,7 @@
     xmlns:controls="using:Sight.Windows10.Views.Controls"
     xmlns:control="using:UniversalTest.Control"
     xmlns:animatedPieSlice="using:AnimatedPieSlice"
+    xmlns:media3D="using:Windows.UI.Xaml.Media.Media3D"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -17,28 +18,21 @@
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <!--<Ellipse  Stroke="White" StrokeThickness="19.9" UseLayoutRounding="False" Width="420" Height="420"></Ellipse>-->
-        <Grid  Width="400" Height="400" UseLayoutRounding="False">
-            <Path x:Name="BackgroundEllipse" Stroke="{StaticResource BlueBrush}" StrokeThickness="19.2" UseLayoutRounding="False">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathFigure IsClosed="False" IsFilled="False" StartPoint="400,200">
-                            <PathFigure.Segments>
-                                <ArcSegment SweepDirection="Clockwise" Size="200,200" IsLargeArc="True" Point="400,199.999">
-                                </ArcSegment>
-                            </PathFigure.Segments>
-                        </PathFigure>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Grid>
+        <Grid.Transform3D>
+            <media3D:PerspectiveTransform3D />
+        </Grid.Transform3D>
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="False" 
               Background="Transparent" Width="400" Height="400">
+            <Grid.Transform3D>
+                <media3D:CompositeTransform3D x:Name="RotationYCompositeTransform3D" CenterY="200" CenterX="200"/>
+            </Grid.Transform3D>
+
             <animatedPieSlice:PieSlice  UseLayoutRounding="False"
                         x:Name="PieSlice"
                         TopCenter="200 0"
                         Radius="200"
-                        Stroke="White"
+                        Stroke="{StaticResource BlueBrush}"
                         StrokeThickness="20"/>
         </Grid>
     </Grid>

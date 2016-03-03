@@ -56,19 +56,25 @@ namespace UniversalTest
 
         private void Sb_Completed(object sender, object e)
         {
-            var flag = PieSlice.Stroke == BlueBrush;
+            var sb = sender as Storyboard;
+            var doubleAnimation = (sb.Children[0] as DoubleAnimation);
+
+            var flag = Math.Abs(RotationYCompositeTransform3D.RotationY) < 0.1;
             if (flag) // blue for now
             {
-                BackgroundEllipse.Stroke = BlueBrush;
-                PieSlice.Stroke = WhiteBrush;
+                RotationYCompositeTransform3D.RotationY = 180;
+                //PieSlice.Stroke = WhiteBrush;
+                doubleAnimation.From = 359.9;
+                doubleAnimation.To = 0;
             }
             else
             {
-                BackgroundEllipse.Stroke = WhiteBrush;
-                PieSlice.Stroke = BlueBrush;
+                RotationYCompositeTransform3D.RotationY = 0;
+                //PieSlice.Stroke = BlueBrush;
+                doubleAnimation.From = 0;
+                doubleAnimation.To = 359.9;
             }
 
-            var sb = sender as Storyboard;
             sb?.Begin();
         }
 
