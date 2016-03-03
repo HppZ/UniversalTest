@@ -127,9 +127,13 @@
       <DependentUpon>CascadeMenuSubItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Panel\CustomPanel.cs" />
+    <Compile Include="Control\Pie\PiePath.cs" />
     <Compile Include="Control\Pie\PieSlice.cs" />
     <Compile Include="Control\Progress\InfiniteProgress.xaml.cs">
       <DependentUpon>InfiniteProgress.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Progress\PieProgressControl.xaml.cs">
+      <DependentUpon>PieProgressControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Progress\ProgressButton.cs" />
     <Compile Include="Control\ScrollBar\BallScrollBar.xaml.cs">
@@ -281,6 +285,10 @@
     <Page Include="Control\Progress\InfiniteProgress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Progress\PieProgressControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Control\ScrollBar\BallScrollBar.xaml">
       <SubType>Designer</SubType>

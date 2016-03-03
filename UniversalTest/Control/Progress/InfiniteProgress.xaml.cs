@@ -52,13 +52,16 @@ namespace UniversalTest.Control.Progress
         /// </summary>
         public void Begin()
         {
+            _storyboard.Children.Clear();
+
             DoubleAnimation doubleAnimation = new DoubleAnimation()
             {
                 EnableDependentAnimation = true,
                 From = 0,
                 To = 359.9,
-                Duration = TimeSpan.FromMilliseconds(2000),
-                EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut }
+                Duration = TimeSpan.FromMilliseconds(4000),
+                EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut },
+                FillBehavior = FillBehavior.HoldEnd
             };
 
             _storyboard.Completed += Sb_Completed;
@@ -109,14 +112,14 @@ namespace UniversalTest.Control.Progress
             if (flag) // blue for now
             {
                 RotationYCompositeTransform3D.RotationY = 180;
-                doubleAnimation.From = 359.9;
+                doubleAnimation.From = 359.99;
                 doubleAnimation.To = 0;
             }
             else
             {
                 RotationYCompositeTransform3D.RotationY = 0;
                 doubleAnimation.From = 0;
-                doubleAnimation.To = 359.9;
+                doubleAnimation.To = 359.99;
             }
 
             sb?.Begin();
@@ -127,7 +130,24 @@ namespace UniversalTest.Control.Progress
         /// </summary>
         private void BeginEndAnimation()
         {
-            
+            _storyboard.Stop();
+            PieSlice.SweepAngle = 359.999;
+            _storyboard.Children.Clear();
+
+            // 动画使其strokethickness到radius
+            DoubleAnimation doubleAnimation = new DoubleAnimation()
+            {
+                EnableDependentAnimation = true,
+                To = PieSlice.Radius, 
+                Duration = TimeSpan.FromMilliseconds(5000),
+                //EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut }
+            };
+
+            Storyboard.SetTarget(doubleAnimation, PieSlice);
+            Storyboard.SetTargetProperty(doubleAnimation, "StrokeThickness");
+            _storyboard.Children.Add(doubleAnimation);
+            _storyboard.Completed -= Sb_Completed;
+            _storyboard.Begin();
         }
         #endregion
 
