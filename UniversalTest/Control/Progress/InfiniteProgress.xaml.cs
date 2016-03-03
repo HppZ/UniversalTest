@@ -60,8 +60,8 @@ namespace UniversalTest.Control.Progress
                 EnableDependentAnimation = true,
                 From = 0,
                 To = 359.9,
-                Duration = TimeSpan.FromMilliseconds(4000),
-                EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut },
+                Duration = TimeSpan.FromMilliseconds(2000),
+                EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseInOut,Exponent = 7},
                 FillBehavior = FillBehavior.HoldEnd
             };
 
@@ -135,31 +135,8 @@ namespace UniversalTest.Control.Progress
         {
             PieSlice.SweepAngle = 359.999;
             PieSlice.SetClosedAndFilled();
-
-            var sb = new Storyboard();
-
-            // scaleX
-            DoubleAnimation doubleAnimationX = new DoubleAnimation()
-            {
-                EnableDependentAnimation = true,
-                To = 1.1,
-                Duration = TimeSpan.FromMilliseconds(5000),
-                EasingFunction = new ElasticEase() { EasingMode = EasingMode.EaseInOut,Springiness = 0,Oscillations = 1}
-            };
-            Storyboard.SetTarget(doubleAnimationX, PieSlice);
-            Storyboard.SetTargetProperty(doubleAnimationX, "(UIElement.Transform3D).(CompositeTransform3D.ScaleX)");
-
-            // scaleY
-            DoubleAnimation doubleAnimationY = new DoubleAnimation()
-            {
-                EnableDependentAnimation = true,
-                To = 1.1,
-                Duration = TimeSpan.FromMilliseconds(5000),
-                EasingFunction = new ElasticEase() { EasingMode = EasingMode.EaseInOut, Springiness = 0, Oscillations = 1 }
-            };
-            Storyboard.SetTarget(doubleAnimationY, PieSlice);
-            Storyboard.SetTargetProperty(doubleAnimationY, "(UIElement.Transform3D).(CompositeTransform3D.ScaleY)");
-
+ 
+            var sb = ScaleStoryboard;
             // color
             var blue = BlueBrush.Color;
             ColorAnimation colorAnimation = new ColorAnimation()
@@ -170,8 +147,7 @@ namespace UniversalTest.Control.Progress
             Storyboard.SetTarget(colorAnimation, PieSlice);
             Storyboard.SetTargetProperty(colorAnimation, "(Shape.Fill).(SolidColorBrush.Color)");
 
-            sb.Children.Add(doubleAnimationX);
-            sb.Children.Add(doubleAnimationY);
+            
             sb.Children.Add(colorAnimation);
 
             sb.Begin();

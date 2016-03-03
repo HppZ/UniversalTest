@@ -14,6 +14,21 @@
 
     <UserControl.Resources>
         <SolidColorBrush x:Name="BlueBrush" Color="#3683F9"></SolidColorBrush>
+        <Storyboard x:Name="ScaleStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Transform3D).(media3D:CompositeTransform3D.ScaleX)" Storyboard.TargetName="PieSlice">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.32" Value="1.2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.44" Value="0.73"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.76" Value="1.04"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.96" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Transform3D).(media3D:CompositeTransform3D.ScaleY)" Storyboard.TargetName="PieSlice">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.32" Value="1.2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.44" Value="0.73"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.76" Value="1.04"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.96" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
     </UserControl.Resources>
 
     <UserControl.RenderTransform>
