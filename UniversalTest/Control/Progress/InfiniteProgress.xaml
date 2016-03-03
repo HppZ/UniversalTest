@@ -9,30 +9,33 @@
     xmlns:media3D="using:Windows.UI.Xaml.Media.Media3D"
     mc:Ignorable="d"
     x:Name="This"
-    d:DesignHeight="400"
-    d:DesignWidth="400">
+    d:DesignHeight="800"
+    d:DesignWidth="800">
 
     <UserControl.Resources>
         <SolidColorBrush x:Name="BlueBrush" Color="#3683F9"></SolidColorBrush>
     </UserControl.Resources>
+
+    <UserControl.RenderTransform>
+        <CompositeTransform x:Name="ThisCompositeTransform"></CompositeTransform>
+    </UserControl.RenderTransform>
     
     <Grid Background="Transparent">
         <Grid.Transform3D>
             <media3D:PerspectiveTransform3D />
         </Grid.Transform3D>
 
-        <Grid UseLayoutRounding="False" Background="Transparent">
-            <Grid.Transform3D>
-                <media3D:CompositeTransform3D x:Name="RotationYCompositeTransform3D" CenterY="200" CenterX="200"/>
-            </Grid.Transform3D>
-
-            <animatedPieSlice:PieSlice  
+        <animatedPieSlice:PieSlice  
                         x:Name="PieSlice"
                         UseLayoutRounding="False"
                         TopCenter="200 0"
                         Radius="200"
+                        Fill="White"
                         Stroke="{StaticResource BlueBrush}"
-                        StrokeThickness="{Binding ElementName=This,Path=StrokeThickness}"/>
-        </Grid>
+                        StrokeThickness="{Binding ElementName=This,Path=StrokeThickness}">
+            <animatedPieSlice:PieSlice.Transform3D>
+                <media3D:CompositeTransform3D x:Name="RotationYCompositeTransform3D" CenterY="200" CenterX="200"/>
+            </animatedPieSlice:PieSlice.Transform3D>
+        </animatedPieSlice:PieSlice>
     </Grid>
 </UserControl>

@@ -13,7 +13,7 @@
     xmlns:button="using:UniversalTest.Control.Button"
     mc:Ignorable="d">
     <Grid x:Name="GridElement" Background="Transparent">
-        <progress:InfiniteProgress x:Name="InfiniteProgressEle" Width="70" Height="70"></progress:InfiniteProgress>
+        <progress:InfiniteProgress x:Name="InfiniteProgressEle" Width="200" Height="200"></progress:InfiniteProgress>
     </Grid>
     
 </Page>

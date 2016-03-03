@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,11 +38,11 @@ namespace UniversalTest.Control.Progress
 
         #region property
         public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
-            "StrokeThickness", typeof (double), typeof (InfiniteProgress), new PropertyMetadata(20));
+            "StrokeThickness", typeof(double), typeof(InfiniteProgress), new PropertyMetadata(20));
 
         public double StrokeThickness
         {
-            get { return (double) GetValue(StrokeThicknessProperty); }
+            get { return (double)GetValue(StrokeThicknessProperty); }
             set { SetValue(StrokeThicknessProperty, value); }
         }
         #endregion
@@ -90,13 +91,15 @@ namespace UniversalTest.Control.Progress
             var vh = this.ActualHeight / 2;
             RotationYCompositeTransform3D.CenterX = vw;
             RotationYCompositeTransform3D.CenterY = vh;
-            PieSlice.TopCenter = new Point(vw, 0);
-            PieSlice.Radius = vw;
+            var p = PieSlice.StrokeThickness / 2;
+            PieSlice.TopCenter = new Point(vw, p);
+            PieSlice.Radius = vw - p;
 
-
+            //PieSlice.SweepAngle = 359.99;
+            //PieSlice.SetClosedAndFilled();
             Begin();
         }
-       
+
         private void Sb_Completed(object sender, object e)
         {
             if (_isStoped) // 停止了
@@ -130,24 +133,48 @@ namespace UniversalTest.Control.Progress
         /// </summary>
         private void BeginEndAnimation()
         {
-            _storyboard.Stop();
             PieSlice.SweepAngle = 359.999;
-            _storyboard.Children.Clear();
+            PieSlice.SetClosedAndFilled();
 
-            // 动画使其strokethickness到radius
-            DoubleAnimation doubleAnimation = new DoubleAnimation()
+            var sb = new Storyboard();
+
+            // scaleX
+            DoubleAnimation doubleAnimationX = new DoubleAnimation()
             {
                 EnableDependentAnimation = true,
-                To = PieSlice.Radius, 
+                To = 1.1,
                 Duration = TimeSpan.FromMilliseconds(5000),
-                //EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut }
+                EasingFunction = new ElasticEase() { EasingMode = EasingMode.EaseInOut,Springiness = 0,Oscillations = 1}
             };
+            Storyboard.SetTarget(doubleAnimationX, PieSlice);
+            Storyboard.SetTargetProperty(doubleAnimationX, "(UIElement.Transform3D).(CompositeTransform3D.ScaleX)");
 
-            Storyboard.SetTarget(doubleAnimation, PieSlice);
-            Storyboard.SetTargetProperty(doubleAnimation, "StrokeThickness");
-            _storyboard.Children.Add(doubleAnimation);
-            _storyboard.Completed -= Sb_Completed;
-            _storyboard.Begin();
+            // scaleY
+            DoubleAnimation doubleAnimationY = new DoubleAnimation()
+            {
+                EnableDependentAnimation = true,
+                To = 1.1,
+                Duration = TimeSpan.FromMilliseconds(5000),
+                EasingFunction = new ElasticEase() { EasingMode = EasingMode.EaseInOut, Springiness = 0, Oscillations = 1 }
+            };
+            Storyboard.SetTarget(doubleAnimationY, PieSlice);
+            Storyboard.SetTargetProperty(doubleAnimationY, "(UIElement.Transform3D).(CompositeTransform3D.ScaleY)");
+
+            // color
+            var blue = BlueBrush.Color;
+            ColorAnimation colorAnimation = new ColorAnimation()
+            {
+                Duration = TimeSpan.FromMilliseconds(500),
+                To = Color.FromArgb(blue.A, blue.R, blue.G, blue.B),
+            };
+            Storyboard.SetTarget(colorAnimation, PieSlice);
+            Storyboard.SetTargetProperty(colorAnimation, "(Shape.Fill).(SolidColorBrush.Color)");
+
+            sb.Children.Add(doubleAnimationX);
+            sb.Children.Add(doubleAnimationY);
+            sb.Children.Add(colorAnimation);
+
+            sb.Begin();
         }
         #endregion
 
