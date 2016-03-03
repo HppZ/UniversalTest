@@ -128,6 +128,9 @@
     </Compile>
     <Compile Include="Control\Panel\CustomPanel.cs" />
     <Compile Include="Control\Pie\PieSlice.cs" />
+    <Compile Include="Control\Progress\InfiniteProgress.xaml.cs">
+      <DependentUpon>InfiniteProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Progress\ProgressButton.cs" />
     <Compile Include="Control\ScrollBar\BallScrollBar.xaml.cs">
       <DependentUpon>BallScrollBar.xaml</DependentUpon>
@@ -272,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Menu\Child\CascadeMenuSubItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Progress\InfiniteProgress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

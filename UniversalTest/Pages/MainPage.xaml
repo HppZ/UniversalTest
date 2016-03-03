@@ -13,21 +13,7 @@
     xmlns:button="using:UniversalTest.Control.Button"
     mc:Ignorable="d">
     <Grid x:Name="GridElement" Background="Transparent">
-        <button:ShadowButton Width="506"  Height="300"></button:ShadowButton>
+        <progress:InfiniteProgress></progress:InfiniteProgress>
     </Grid>
-
-    <Page.Triggers>
-        <EventTrigger>
-            <BeginStoryboard>
-                <Storyboard>
-                    <!--<DoubleAnimation Storyboard.TargetName="ProgressButton1"
-                                     Storyboard.TargetProperty="Value"
-                                     EnableDependentAnimation="True"
-                                     From="0" To="100" Duration="0:0:5"
-                                     AutoReverse="True"
-                                     RepeatBehavior="Forever" />-->
-                </Storyboard>
-            </BeginStoryboard>
-        </EventTrigger>
-    </Page.Triggers>
+    
 </Page>
