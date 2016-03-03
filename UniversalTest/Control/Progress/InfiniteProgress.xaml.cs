@@ -20,34 +20,88 @@ namespace UniversalTest.Control.Progress
 {
     public sealed partial class InfiniteProgress : UserControl
     {
+        #region field
+        private Storyboard _storyboard;
+        private bool _isStoped;
+        #endregion
+
+        #region ctor
         public InfiniteProgress()
         {
             this.InitializeComponent();
+
+            _storyboard = new Storyboard();
             Loaded += InfiniteProgress_Loaded;
-
         }
+        #endregion
 
-        private void InfiniteProgress_Loaded(object sender, RoutedEventArgs e)
+        #region property
+        public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
+            "StrokeThickness", typeof (double), typeof (InfiniteProgress), new PropertyMetadata(20));
+
+        public double StrokeThickness
+        {
+            get { return (double) GetValue(StrokeThicknessProperty); }
+            set { SetValue(StrokeThicknessProperty, value); }
+        }
+        #endregion
+
+        #region public
+        /// <summary>
+        /// 开始循环动画
+        /// </summary>
+        public void Begin()
         {
             DoubleAnimation doubleAnimation = new DoubleAnimation()
             {
                 EnableDependentAnimation = true,
                 From = 0,
                 To = 359.9,
-                Duration = TimeSpan.FromMilliseconds(3000),
+                Duration = TimeSpan.FromMilliseconds(2000),
                 EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseInOut }
             };
 
-            Storyboard sb = new Storyboard();
-            sb.Completed += Sb_Completed;
+            _storyboard.Completed += Sb_Completed;
             Storyboard.SetTarget(doubleAnimation, PieSlice);
             Storyboard.SetTargetProperty(doubleAnimation, "SweepAngle");
-            sb.Children.Add(doubleAnimation);
-            sb.Begin();
+            _storyboard.Children.Add(doubleAnimation);
+
+            _isStoped = false;
+            _storyboard.Begin();
         }
 
+        /// <summary>
+        /// 结束，在此次循环动画结束后播放末尾动画，然后结束
+        /// </summary>
+        public void Stop()
+        {
+            _isStoped = true;
+        }
+
+        #endregion
+
+        #region private
+        private void InfiniteProgress_Loaded(object sender, RoutedEventArgs e)
+        {
+            var vw = this.ActualWidth / 2;
+            var vh = this.ActualHeight / 2;
+            RotationYCompositeTransform3D.CenterX = vw;
+            RotationYCompositeTransform3D.CenterY = vh;
+            PieSlice.TopCenter = new Point(vw, 0);
+            PieSlice.Radius = vw;
+
+
+            Begin();
+        }
+       
         private void Sb_Completed(object sender, object e)
         {
+            if (_isStoped) // 停止了
+            {
+                BeginEndAnimation();
+                return;
+            }
+
             var sb = sender as Storyboard;
             var doubleAnimation = (sb.Children[0] as DoubleAnimation);
 
@@ -55,19 +109,27 @@ namespace UniversalTest.Control.Progress
             if (flag) // blue for now
             {
                 RotationYCompositeTransform3D.RotationY = 180;
-                //PieSlice.Stroke = WhiteBrush;
                 doubleAnimation.From = 359.9;
                 doubleAnimation.To = 0;
             }
             else
             {
                 RotationYCompositeTransform3D.RotationY = 0;
-                //PieSlice.Stroke = BlueBrush;
                 doubleAnimation.From = 0;
                 doubleAnimation.To = 359.9;
             }
 
             sb?.Begin();
         }
+
+        /// <summary>
+        /// 末尾的动画
+        /// </summary>
+        private void BeginEndAnimation()
+        {
+            
+        }
+        #endregion
+
     }
 }
