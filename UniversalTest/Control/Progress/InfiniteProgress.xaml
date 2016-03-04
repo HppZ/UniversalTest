@@ -16,16 +16,23 @@
         <SolidColorBrush x:Name="BlueBrush" Color="#3683F9"></SolidColorBrush>
         <Storyboard x:Name="ScaleStoryboard">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Transform3D).(media3D:CompositeTransform3D.ScaleX)" Storyboard.TargetName="PieSlice">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.32" Value="1.2"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.44" Value="0.73"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.76" Value="1.04"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.32" Value="1.26"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.44" Value="0.65"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.76" Value="1.08"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.96" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Transform3D).(media3D:CompositeTransform3D.ScaleY)" Storyboard.TargetName="PieSlice">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.32" Value="1.2"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.44" Value="0.73"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.76" Value="1.04"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.32" Value="1.26"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.44" Value="0.65"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.76" Value="1.08"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.96" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0.42" EnableDependentAnimation="True" Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="border">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.28" Value="16"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0.42" EnableDependentAnimation="True" Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="border1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="28"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -34,7 +41,7 @@
     <UserControl.RenderTransform>
         <CompositeTransform x:Name="ThisCompositeTransform"></CompositeTransform>
     </UserControl.RenderTransform>
-    
+
     <Grid Background="Transparent">
         <Grid.Transform3D>
             <media3D:PerspectiveTransform3D />
@@ -52,5 +59,19 @@
                 <media3D:CompositeTransform3D x:Name="RotationYCompositeTransform3D" CenterY="200" CenterX="200"/>
             </animatedPieSlice:PieSlice.Transform3D>
         </animatedPieSlice:PieSlice>
+
+        <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-16 5 0 0">
+            <Border x:Name="border" CornerRadius="4" Background="White" Width="0" Height="6" Canvas.Left="15" Canvas.Top="9.834" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <Border.RenderTransform>
+                    <CompositeTransform Rotation="-135" TranslateY="0" TranslateX="-10"></CompositeTransform>
+                </Border.RenderTransform>
+            </Border>
+            <Border x:Name="border1" CornerRadius="4" Background="White" Width="0" Height="6" Canvas.Left="1" Canvas.Top="5.75" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+                <Border.RenderTransform>
+                    <CompositeTransform Rotation="-45"></CompositeTransform>
+                </Border.RenderTransform>
+            </Border>
+        </Canvas>
+
     </Grid>
 </UserControl>

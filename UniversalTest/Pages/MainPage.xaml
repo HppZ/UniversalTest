@@ -12,7 +12,7 @@
     xmlns:comboBox="using:UniversalTest.Control.ComboBox"
     xmlns:button="using:UniversalTest.Control.Button"
     mc:Ignorable="d">
-    <Grid x:Name="GridElement" Background="Transparent">
+    <Grid x:Name="GridElement" Background="Black">
         <progress:InfiniteProgress x:Name="InfiniteProgressEle" Width="70" Height="70"></progress:InfiniteProgress>
     </Grid>
     

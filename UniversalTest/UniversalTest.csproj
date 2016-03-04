@@ -129,6 +129,9 @@
     <Compile Include="Control\Panel\CustomPanel.cs" />
     <Compile Include="Control\Pie\PiePath.cs" />
     <Compile Include="Control\Pie\PieSlice.cs" />
+    <Compile Include="Control\Progress\CheckScale.xaml.cs">
+      <DependentUpon>CheckScale.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Progress\InfiniteProgress.xaml.cs">
       <DependentUpon>InfiniteProgress.xaml</DependentUpon>
     </Compile>
@@ -279,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Menu\Child\CascadeMenuSubItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Progress\CheckScale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

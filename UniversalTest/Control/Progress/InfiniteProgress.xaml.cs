@@ -95,14 +95,13 @@ namespace UniversalTest.Control.Progress
             PieSlice.TopCenter = new Point(vw, p);
             PieSlice.Radius = vw - p;
 
-            //PieSlice.SweepAngle = 359.99;
-            //PieSlice.SetClosedAndFilled();
             Begin();
         }
 
         private void Sb_Completed(object sender, object e)
         {
-            if (_isStoped) // 停止了
+            var flag = Math.Abs(RotationYCompositeTransform3D.RotationY) < 0.1;
+            if (_isStoped && flag) // 停止了
             {
                 BeginEndAnimation();
                 return;
@@ -110,8 +109,7 @@ namespace UniversalTest.Control.Progress
 
             var sb = sender as Storyboard;
             var doubleAnimation = (sb.Children[0] as DoubleAnimation);
-
-            var flag = Math.Abs(RotationYCompositeTransform3D.RotationY) < 0.1;
+            
             if (flag) // blue for now
             {
                 RotationYCompositeTransform3D.RotationY = 180;
@@ -146,8 +144,6 @@ namespace UniversalTest.Control.Progress
             };
             Storyboard.SetTarget(colorAnimation, PieSlice);
             Storyboard.SetTargetProperty(colorAnimation, "(Shape.Fill).(SolidColorBrush.Color)");
-
-            
             sb.Children.Add(colorAnimation);
 
             sb.Begin();
