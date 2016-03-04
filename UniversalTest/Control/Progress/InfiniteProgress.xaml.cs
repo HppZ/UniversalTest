@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace UniversalTest.Control.Progress
+namespace Sight.Windows10.Views.Album.Componets.PieControl
 {
     public sealed partial class InfiniteProgress : UserControl
     {
@@ -32,9 +22,12 @@ namespace UniversalTest.Control.Progress
             this.InitializeComponent();
 
             _storyboard = new Storyboard();
+            _storyboard.Completed += Sb_Completed;
             Loaded += InfiniteProgress_Loaded;
         }
         #endregion
+
+        public Action FinishedAction { get; set; }
 
         #region property
         public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
@@ -53,7 +46,9 @@ namespace UniversalTest.Control.Progress
         /// </summary>
         public void Begin()
         {
+            _storyboard.Stop();
             _storyboard.Children.Clear();
+            Init();
 
             DoubleAnimation doubleAnimation = new DoubleAnimation()
             {
@@ -65,7 +60,6 @@ namespace UniversalTest.Control.Progress
                 FillBehavior = FillBehavior.HoldEnd
             };
 
-            _storyboard.Completed += Sb_Completed;
             Storyboard.SetTarget(doubleAnimation, PieSlice);
             Storyboard.SetTargetProperty(doubleAnimation, "SweepAngle");
             _storyboard.Children.Add(doubleAnimation);
@@ -82,10 +76,28 @@ namespace UniversalTest.Control.Progress
             _isStoped = true;
         }
 
+        public void Cancel()
+        {
+            
+        }
+
         #endregion
 
         #region private
         private void InfiniteProgress_Loaded(object sender, RoutedEventArgs e)
+        {
+            Init2();
+        }
+
+        private void ScaleStoryboard_OnCompleted(object sender, object e)
+        {
+            FinishedAction?.Invoke();
+        }
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        private void Init()
         {
             var vw = this.ActualWidth / 2;
             var vh = this.ActualHeight / 2;
@@ -94,8 +106,24 @@ namespace UniversalTest.Control.Progress
             var p = PieSlice.StrokeThickness / 2;
             PieSlice.TopCenter = new Point(vw, p);
             PieSlice.Radius = vw - p;
+            PieSlice.SweepAngle = 0.0;
+            PieSlice.SetClosedAndFilled(false);
+            border.Width = 0;
+            border1.Width = 0;
+        }
 
-            Begin();
+        private void Init2()
+        {
+            // color
+            var blue = BlueBrush.Color;
+            ColorAnimation colorAnimation = new ColorAnimation()
+            {
+                Duration = TimeSpan.FromMilliseconds(500),
+                To = Color.FromArgb(blue.A, blue.R, blue.G, blue.B),
+            };
+            Storyboard.SetTarget(colorAnimation, PieSlice);
+            Storyboard.SetTargetProperty(colorAnimation, "(Shape.Fill).(SolidColorBrush.Color)");
+            ScaleStoryboard.Children.Add(colorAnimation);
         }
 
         private void Sb_Completed(object sender, object e)
@@ -132,23 +160,12 @@ namespace UniversalTest.Control.Progress
         private void BeginEndAnimation()
         {
             PieSlice.SweepAngle = 359.999;
-            PieSlice.SetClosedAndFilled();
+            PieSlice.SetClosedAndFilled(true);
  
-            var sb = ScaleStoryboard;
-            // color
-            var blue = BlueBrush.Color;
-            ColorAnimation colorAnimation = new ColorAnimation()
-            {
-                Duration = TimeSpan.FromMilliseconds(500),
-                To = Color.FromArgb(blue.A, blue.R, blue.G, blue.B),
-            };
-            Storyboard.SetTarget(colorAnimation, PieSlice);
-            Storyboard.SetTargetProperty(colorAnimation, "(Shape.Fill).(SolidColorBrush.Color)");
-            sb.Children.Add(colorAnimation);
-
-            sb.Begin();
+            ScaleStoryboard.Begin();
         }
         #endregion
 
+        
     }
 }

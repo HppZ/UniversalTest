@@ -33,12 +33,18 @@ namespace UniversalTest
         public MainPage()
         {
             this.InitializeComponent();
-            Tapped += MainPage_Tapped;
         }
 
-        private void MainPage_Tapped(object sender, TappedRoutedEventArgs e)
+      
+        private void Begin(object sender, TappedRoutedEventArgs e)
+        {
+            InfiniteProgressEle.Begin();
+        }
+
+        private void Stop(object sender, TappedRoutedEventArgs e)
         {
             InfiniteProgressEle.Stop();
+
         }
 
         // 打算做个导航, 仅仅是打算

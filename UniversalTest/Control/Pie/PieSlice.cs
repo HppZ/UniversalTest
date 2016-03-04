@@ -92,10 +92,10 @@ namespace AnimatedPieSlice
             arcSegment.Size = new Size(this.Radius, this.Radius);
         }
 
-        public void SetClosedAndFilled()
+        public void SetClosedAndFilled(bool flag)
         {
-            pathFigure.IsClosed = true;
-            pathFigure.IsFilled = true;
+            pathFigure.IsClosed = flag;
+            pathFigure.IsFilled = flag;
         }
 
     }
