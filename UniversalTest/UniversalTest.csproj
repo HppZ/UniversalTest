@@ -178,6 +178,9 @@
     <Compile Include="Pages\BlankPage11.xaml.cs">
       <DependentUpon>BlankPage11.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BlankPage12.xaml.cs">
+      <DependentUpon>BlankPage12.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BlankPage2.xaml.cs">
       <DependentUpon>BlankPage2.xaml</DependentUpon>
     </Compile>
@@ -241,6 +244,8 @@
     <Content Include="Assets\icon_share%402x.png" />
     <Content Include="Assets\PageAssets\img103.png" />
     <Content Include="Assets\PageAssets\PhotoGridView_selected.png" />
+    <Content Include="Assets\PageAssets\Test.jpg" />
+    <Content Include="Assets\PageAssets\Test1.jpg" />
     <Content Include="Assets\vedio.mp4" />
     <Content Include="Assets\live.jpg" />
     <Content Include="Properties\Default.rd.xml" />
@@ -338,6 +343,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BlankPage11.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage12.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
