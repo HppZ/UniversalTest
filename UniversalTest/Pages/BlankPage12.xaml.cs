@@ -5,6 +5,12 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+<<<<<<< HEAD
+=======
+using Windows.Graphics.Imaging;
+using Windows.Storage;
+using Windows.Storage.Streams;
+>>>>>>> da8983848bedd598527d0f112cfe884721518f35
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +31,54 @@ namespace UniversalTest.Pages
         public BlankPage12()
         {
             this.InitializeComponent();
+            Loaded += BlankPage12_Loaded;
+        }
+
+        private async void BlankPage12_Loaded(object sender, RoutedEventArgs e)
+        {
+            var file = await KnownFolders.PicturesLibrary.GetFileAsync("333.jpg");
+            EditFile(file);
+        }
+
+
+        private async void EditFile(StorageFile file)
+        {
+            IRandomAccessStream ras = null;
+            string name = "照片";
+            try
+            {
+                ras = await file.OpenAsync(FileAccessMode.ReadWrite);
+                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(ras);
+
+                try
+                {
+                    BitmapEncoder encoder = await BitmapEncoder.CreateForInPlacePropertyEncodingAsync(decoder);
+                    var propertySet = new BitmapPropertySet
+                    {
+                        {"System.ApplicationName", new BitmapTypedValue(name, PropertyType.String)}
+                    };
+                    await encoder.BitmapProperties.SetPropertiesAsync(propertySet);
+                    await encoder.FlushAsync();
+                }
+                catch (Exception e)
+                {
+                    BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(ras, decoder);
+                    var propertySet = new BitmapPropertySet
+                    {
+                        {"System.ApplicationName", new BitmapTypedValue(name, PropertyType.String)}
+                    };
+                    await encoder.BitmapProperties.SetPropertiesAsync(propertySet);
+                    await encoder.FlushAsync();
+                }
+
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                ras?.Dispose();
+            }
         }
     }
 }
