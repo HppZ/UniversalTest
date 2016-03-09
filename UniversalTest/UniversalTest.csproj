@@ -109,6 +109,9 @@
     <Compile Include="Control\ComboBox\ComboBoxx.xaml.cs">
       <DependentUpon>ComboBoxx.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\gif\GifView.xaml.cs">
+      <DependentUpon>GifView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\ListView\PullToFresh.cs" />
     <Compile Include="Control\Menu\CascadeMenu.xaml.cs">
       <DependentUpon>CascadeMenu.xaml</DependentUpon>
@@ -181,6 +184,9 @@
     <Compile Include="Pages\BlankPage12.xaml.cs">
       <DependentUpon>BlankPage12.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BlankPage13.xaml.cs">
+      <DependentUpon>BlankPage13.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BlankPage2.xaml.cs">
       <DependentUpon>BlankPage2.xaml</DependentUpon>
     </Compile>
@@ -228,6 +234,7 @@
     <None Include="UniversalTest_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\break.gif" />
     <Content Include="Assets\giftest.gif" />
     <Content Include="Assets\Arrowhead-Right.png" />
     <Content Include="Assets\ControlAssets\arrow.png" />
@@ -269,6 +276,10 @@
     <Page Include="Control\ComboBox\ComboBoxx.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\gif\GifView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Control\Menu\CascadeMenu.xaml">
       <SubType>Designer</SubType>
@@ -347,6 +358,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BlankPage12.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage13.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
