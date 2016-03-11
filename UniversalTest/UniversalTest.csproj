@@ -112,7 +112,7 @@
     <Compile Include="Control\Dialog\WebviewWindow.xaml.cs">
       <DependentUpon>WebviewWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\Gif\GifView.xaml.cs">
+    <Compile Include="Control\GifView\GifView.xaml.cs">
       <DependentUpon>GifView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\ListView\PullToFresh.cs" />
@@ -283,7 +283,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\Gif\GifView.xaml">
+    <Page Include="Control\GifView\GifView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
