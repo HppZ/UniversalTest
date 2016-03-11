@@ -5,12 +5,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-<<<<<<< HEAD
-=======
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Streams;
->>>>>>> da8983848bedd598527d0f112cfe884721518f35
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
