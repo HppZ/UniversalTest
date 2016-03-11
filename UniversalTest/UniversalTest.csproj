@@ -279,15 +279,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
-    <Page Include="Control\gif\GifView.xaml">
-=======
     <Page Include="Control\Dialog\WebviewWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Control\Gif\GifView.xaml">
->>>>>>> 428630f35f564ec2ea2d5594b279181153325cb3
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
