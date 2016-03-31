@@ -160,6 +160,18 @@
     <Compile Include="Control\ScrollViewer\Second\ThreeImageViewer.xaml.cs">
       <DependentUpon>ThreeImageViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Search\SearchPanel.xaml.cs">
+      <DependentUpon>SearchPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Search\SearchPreResult.xaml.cs">
+      <DependentUpon>SearchPreResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Search\SearchResult.xaml.cs">
+      <DependentUpon>SearchResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Search\SearchTextBox.xaml.cs">
+      <DependentUpon>SearchTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Slider\BallSlider.xaml.cs">
       <DependentUpon>BallSlider.xaml</DependentUpon>
     </Compile>
@@ -338,6 +350,22 @@
     <Page Include="Control\ScrollViewer\Second\ThreeImageViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\Search\SearchPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Search\SearchPreResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Search\SearchResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Search\SearchTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Slider\BallSlider.xaml">
       <SubType>Designer</SubType>
