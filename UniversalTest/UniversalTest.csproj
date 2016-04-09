@@ -115,6 +115,9 @@
     <Compile Include="Control\GifView\GifView.xaml.cs">
       <DependentUpon>GifView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\ListView\MyUserControl1.xaml.cs">
+      <DependentUpon>MyUserControl1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\ListView\PullToFresh.cs" />
     <Compile Include="Control\Menu\CascadeMenu.xaml.cs">
       <DependentUpon>CascadeMenu.xaml</DependentUpon>
@@ -201,6 +204,9 @@
     </Compile>
     <Compile Include="Pages\BlankPage13.xaml.cs">
       <DependentUpon>BlankPage13.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BlankPage14.xaml.cs">
+      <DependentUpon>BlankPage14.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BlankPage2.xaml.cs">
       <DependentUpon>BlankPage2.xaml</DependentUpon>
@@ -299,6 +305,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Control\ListView\MyUserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\Menu\CascadeMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -396,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BlankPage13.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage14.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
