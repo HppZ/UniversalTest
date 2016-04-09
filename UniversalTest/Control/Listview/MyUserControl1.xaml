@@ -38,6 +38,7 @@
                 <media3D:PerspectiveTransform3D Depth="600"  x:Name="PerspectiveTransform" />
             </Grid.Transform3D>
            
+            
             <!--<Ellipse Width="180" Height="180" Stroke="Blue" StrokeThickness="1">
                 <Ellipse.Transform3D>
                     <media3D:CompositeTransform3D RotationX="-90"></media3D:CompositeTransform3D>
@@ -79,6 +80,8 @@
                     </DataTemplate>
                 </local:ItemsControl2.ItemTemplate>
             </local:ItemsControl2>
+            <Grid x:Name="manuGrid" Background="Transparent"></Grid>
+
         </Grid>
     </Grid>
 </UserControl>

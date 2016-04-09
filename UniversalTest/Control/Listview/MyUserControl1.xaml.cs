@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Media3D;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
@@ -27,7 +28,23 @@ namespace UniversalTest.Control.ListView
         {
             this.InitializeComponent();
             Loaded += MyUserControl1_Loaded;
+            manuGrid.ManipulationMode = ManipulationModes.All;
+            manuGrid.ManipulationDelta += MyUserControl1_ManipulationDelta;
             CompositeTransform3D1.RegisterPropertyChangedCallback(CompositeTransform3D.RotationYProperty, OnChanged);
+        }
+
+        private void MyUserControl1_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            return;
+            // if (e.IsInertial)
+            {
+                //      Debug.WriteLine("惯性了");
+                var a = CompositeTransform3D1.RotationY + e.Delta.Translation.X;
+                CompositeTransform3D1.RotationY = a % 360;
+            }
+            Debug.WriteLine(CompositeTransform3D1.RotationY);
+            //(Storyboard1.Children[0] as DoubleAnimation).To =;
+            //Storyboard1.Begin();
         }
 
         private void OnChanged(DependencyObject sender, DependencyProperty dp)
@@ -45,7 +62,7 @@ namespace UniversalTest.Control.ListView
 
                 if (angle == 0)
                 {
-                   var l = c1.Children[0] as Line;
+                    var l = c1.Children[0] as Line;
                     l.Stroke = new SolidColorBrush(Colors.Red);
                 }
 
@@ -69,12 +86,12 @@ namespace UniversalTest.Control.ListView
                 else
                 {
                     Debug.WriteLine("A");
-                    var x =  rotation;
+                    var x = rotation;
 
                     if (x >= 270)
                     {
-                        x = x-270;
-                        if ((angle >= 0 && angle <=  x) || (angle >= 180 + x && angle <= 360))
+                        x = x - 270;
+                        if ((angle >= 0 && angle <= x) || (angle >= 180 + x && angle <= 360))
                         {
                             c1.Opacity = 1;
                         }
@@ -94,7 +111,7 @@ namespace UniversalTest.Control.ListView
                             c1.Opacity = 0;
                         }
                     }
-                    
+
                 }
             }
 
@@ -108,7 +125,7 @@ namespace UniversalTest.Control.ListView
 
             CompositeTransform3D1.CenterX = 300;
             CompositeTransform3D1.CenterY = 300;
-              Storyboard1.Begin();
+            Storyboard1.Begin();
         }
     }
 
