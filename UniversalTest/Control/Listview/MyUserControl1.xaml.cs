@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Media3D;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -30,21 +32,30 @@ namespace UniversalTest.Control.ListView
 
         private void OnChanged(DependencyObject sender, DependencyProperty dp)
         {
+            Storyboard1.Pause();
             var rotation = CompositeTransform3D1.RotationY;
             var t = ItemsControl1.ItemsPanelRoot as Grid;
+            Debug.WriteLine("rotation " + rotation);
+
 
             foreach (var c in t.Children)
             {
                 var c1 = (c as ContentControl).ContentTemplateRoot as Grid;
                 var angle = (c1.RenderTransform as RotateTransform).Angle;
 
+                if (angle == 0)
+                {
+                   var l = c1.Children[0] as Line;
+                    l.Stroke = new SolidColorBrush(Colors.Red);
+                }
+
                 if (rotation > 90 && rotation < 270)
                 {
                     Debug.WriteLine("B");
 
                     var x = rotation - 90;
-                    var a = 0 - x;
-                    var b = 180 - x;
+                    var a = x;
+                    var b = 180 + x;
 
                     if (angle >= a && angle <= b)
                     {
@@ -58,17 +69,36 @@ namespace UniversalTest.Control.ListView
                 else
                 {
                     Debug.WriteLine("A");
-                    var x = rotation;
-                    if ((angle >= 0 && angle <= 90 + x) || (angle >= 270 + x && angle <= 360))
+                    var x =  rotation;
+
+                    if (x >= 270)
                     {
-                        c1.Opacity = 1;
+                        x = x-270;
+                        if ((angle >= 0 && angle <=  x) || (angle >= 180 + x && angle <= 360))
+                        {
+                            c1.Opacity = 1;
+                        }
+                        else
+                        {
+                            c1.Opacity = 0;
+                        }
                     }
                     else
                     {
-                        c1.Opacity = 0;
+                        if ((angle >= 0 && angle <= 90 + x) || (angle >= 270 + x && angle <= 360))
+                        {
+                            c1.Opacity = 1;
+                        }
+                        else
+                        {
+                            c1.Opacity = 0;
+                        }
                     }
+                    
                 }
             }
+
+            Storyboard1.Resume();
         }
 
 
@@ -78,7 +108,7 @@ namespace UniversalTest.Control.ListView
 
             CompositeTransform3D1.CenterX = 300;
             CompositeTransform3D1.CenterY = 300;
-             Storyboard1.Begin();
+              Storyboard1.Begin();
         }
     }
 
