@@ -35,7 +35,7 @@ namespace UniversalTest.Control.ListView
 
         private void MyUserControl1_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            return;
+            
             // if (e.IsInertial)
             {
                 //      Debug.WriteLine("惯性了");
@@ -49,7 +49,7 @@ namespace UniversalTest.Control.ListView
 
         private void OnChanged(DependencyObject sender, DependencyProperty dp)
         {
-            Storyboard1.Pause();
+           // Storyboard1.Pause();
             var rotation = CompositeTransform3D1.RotationY;
             var t = ItemsControl1.ItemsPanelRoot as Grid;
             Debug.WriteLine("rotation " + rotation);
@@ -115,7 +115,7 @@ namespace UniversalTest.Control.ListView
                 }
             }
 
-            Storyboard1.Resume();
+         //   Storyboard1.Resume();
         }
 
 
@@ -125,7 +125,7 @@ namespace UniversalTest.Control.ListView
 
             CompositeTransform3D1.CenterX = 300;
             CompositeTransform3D1.CenterY = 300;
-            Storyboard1.Begin();
+           // Storyboard1.Begin();
         }
     }
 
