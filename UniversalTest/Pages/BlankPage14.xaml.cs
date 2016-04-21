@@ -30,19 +30,4 @@ namespace UniversalTest.Pages
             this.InitializeComponent();
         }
     }
-
-
-    public class AngleSource
-    {
-        public IEnumerable<double> Items
-        {
-            get
-            {
-                return Enumerable.Range(0, 12).Select(d => d * 30.0);
-            }
-        }
-    }
-
-
-
 }

@@ -7,5 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:listView="using:UniversalTest.Control.ListView"
     mc:Ignorable="d">
-    <listView:MyUserControl1  ></listView:MyUserControl1>
+
+        
+        <ScrollViewer Background="Red">
+            <StackPanel Orientation="Vertical" Background="Green"  >
+            </StackPanel>
+        </ScrollViewer>
+
 </Page>
