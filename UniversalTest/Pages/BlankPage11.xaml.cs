@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -32,6 +33,17 @@ namespace UniversalTest.Pages
 
         private async void BlankPage11_Loaded(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                await DoWork();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private async Task DoWork()
+        {
             var f = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/giftest.gif"));
             f = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/vedio.mp4"));
             f = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/live.jpg"));
@@ -59,5 +71,6 @@ namespace UniversalTest.Pages
             MediaElement1.SetSource(m, "video/mp4");
             MediaElement1.Play();
         }
+
     }
 }

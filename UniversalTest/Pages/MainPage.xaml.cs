@@ -25,43 +25,57 @@ namespace UniversalTest
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        /// <summary>
-        /// 目录
-        /// </summary>
-        Random random = new Random();
-        byte[] b = new byte[3];
         public MainPage()
         {
             this.InitializeComponent();
+            Loaded += MainPage_Loaded;
         }
 
-      
-        private void Begin(object sender, TappedRoutedEventArgs e)
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            InfiniteProgressEle.Begin();
+            List<PageInfo> pageInfos = new List<PageInfo>
+            {
+                new PageInfo("BlankPage1", "圆球滚动条"),
+                new PageInfo("BlankPage2", "listview重排序控件"),
+                new PageInfo("BlankPage3", "右键层级菜单"),
+                new PageInfo("BlankPage4", "slider 做 圆球滚动条 和 1 一样"),
+                new PageInfo("BlankPage5", "slider 与 scrollviewer 双向绑定 "),
+                new PageInfo("BlankPage6", "GridView绑定Uri"),
+                new PageInfo("BlankPage7", "图片切换控件"),
+                new PageInfo("BlankPage8", "空"),
+                new PageInfo("BlankPage9", "CustomPanel"),
+                new PageInfo("BlankPage10", "元素相交 mouseover && tapped"),
+                new PageInfo("BlankPage11", "gif / mediaelement"),
+                new PageInfo("BlankPage12", "保存应用名到文件"),
+                new PageInfo("BlankPage13", "gif"),
+                new PageInfo("BlankPage14", "InfiniteProgress"),
+                // new PageInfo("BlankPage15", ""),
+            };
+
+            listviewElement.ItemsSource = pageInfos;
         }
 
-        private void Stop(object sender, TappedRoutedEventArgs e)
+        private void Item_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            InfiniteProgressEle.Stop();
+            var pageinfo = (sender as FrameworkElement).DataContext as PageInfo;
+            if (pageinfo != null)
+            {
+                frameElement.Navigate(Type.GetType("UniversalTest.Pages." + pageinfo.PageName));
+            }
+        }
+    }
 
+    class PageInfo
+    {
+        public PageInfo(string name, string des)
+        {
+            PageName = name;
+            Description = des;
         }
 
-        // 打算做个导航, 仅仅是打算
-
-        // BlankPage1 ----------- 圆球滚动条 触屏模式下自动切换到圆球便于手指拖动
-        // BlankPage2 ----------- listview重排序控件
-        // BlankPage3 ----------- 右键层级菜单
-        // BlankPage4 ----------- slider 做 圆球滚动条 和 1 一样
-        // BlankPage5 ----------- slider 与 scrollviewer  双向绑定 
-        // BlankPage6 ----------- GridView绑定Uri
-        // BlankPage7 ----------- 图片切换控件 自动从系统图库取图，点击页面直接上/下一张 直到崩溃 :)
-
-        // BlankPage10 ----------- 元素相交 mouseover  && tapped
-        // BlankPage11 ----------- gif / mediaelement
-        // BlankPage12 ----------- 保存应用名到文件
-        // BlankPage13 ----------- gif
-
+        public string PageName { get; set; }
+        public string Description { get; set; }
 
     }
+
 }

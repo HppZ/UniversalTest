@@ -13,10 +13,30 @@
     xmlns:button="using:UniversalTest.Control.Button"
     xmlns:pieControl="using:Sight.Windows10.Views.Album.Componets.PieControl"
     mc:Ignorable="d">
-    <Grid x:Name="GridElement" Background="Black">
-        <pieControl:InfiniteProgress x:Name="InfiniteProgressEle" Width="70" Height="70"></pieControl:InfiniteProgress>
-        <Grid Width="30" Height="30" VerticalAlignment="Top" Background="red" HorizontalAlignment="Left" Tapped="Begin"></Grid>
-        <Grid Width="30" Height="30" VerticalAlignment="Top" Margin="50 0 0 0" Background="Green" HorizontalAlignment="Left" Tapped="Stop"></Grid>
+    <Grid x:Name="GridElement" Background="White">
+      <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+        <ListView x:Name="listviewElement">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid   Background="Transparent" Tapped="Item_Tapped" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Description}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Frame x:Name="frameElement" Grid.Column="1" Margin="10 0 0 0">
+            
+        </Frame>
+        
     </Grid>
     
 </Page>

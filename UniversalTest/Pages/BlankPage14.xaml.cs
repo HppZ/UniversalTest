@@ -29,5 +29,17 @@ namespace UniversalTest.Pages
         {
             this.InitializeComponent();
         }
+
+        private void Begin(object sender, TappedRoutedEventArgs e)
+        {
+            InfiniteProgressEle.Begin();
+        }
+
+        private void Stop(object sender, TappedRoutedEventArgs e)
+        {
+            InfiniteProgressEle.Stop();
+
+        }
+
     }
 }

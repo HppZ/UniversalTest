@@ -33,8 +33,14 @@ namespace UniversalTest.Pages
 
         private async void BlankPage12_Loaded(object sender, RoutedEventArgs e)
         {
-            var file = await KnownFolders.PicturesLibrary.GetFileAsync("333.jpg");
-            EditFile(file);
+            try
+            {
+                var file = await KnownFolders.PicturesLibrary.GetFileAsync("333.jpg");
+                EditFile(file);
+            }
+            catch (Exception)
+            {
+            }
         }
 
 
