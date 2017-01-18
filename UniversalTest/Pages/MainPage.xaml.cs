@@ -49,7 +49,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage12", "保存应用名到文件"),
                 new PageInfo("BlankPage13", "gif"),
                 new PageInfo("BlankPage14", "InfiniteProgress"),
-                // new PageInfo("BlankPage15", ""),
+                new PageInfo("BlankPage15", "转盘"),
             };
 
             listviewElement.ItemsSource = pageInfos;

@@ -12,7 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using UniversalTest.Control.Temp;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -21,18 +20,12 @@ namespace UniversalTest.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class BlankPage5 : Page
+    public sealed partial class BlankPage15 : Page
     {
-        public BlankPage5()
+        public BlankPage15()
         {
             this.InitializeComponent();
+            
         }
-
-        private void MyUserControl1_OnValueChanged(object arg1, double arg2)
-        {
-            var bi = MyControl1.GetBindingExpression(MyUserControl1.ValueProperty);
-            Slider111.Value = arg2;
-        }
-
     }
 }

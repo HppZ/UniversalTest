@@ -5,7 +5,7 @@
     xmlns:local="using:UniversalTest.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:win10="using:Win10"
+    xmlns:temp="using:UniversalTest.Control.Temp"
     mc:Ignorable="d">
 
     <Grid x:Name="grid"  Background="White" >
@@ -66,8 +66,8 @@
             
             <!--因为scrollviewer的offset只有get，所以twoway无效-->
             
-            <win10:MyUserControl1 x:Name="MyControl1" ValueChanged="MyUserControl1_OnValueChanged" Grid.Column="2"  
-                                  Value="{Binding ElementName=Slider111,Path=Value,Mode=TwoWay}"></win10:MyUserControl1>
+            <temp:MyUserControl1 x:Name="MyControl1" ValueChanged="MyUserControl1_OnValueChanged" Grid.Column="2"  
+                                  Value="{Binding ElementName=Slider111,Path=Value,Mode=TwoWay}"></temp:MyUserControl1>
         </Grid>
 
     </Grid>
