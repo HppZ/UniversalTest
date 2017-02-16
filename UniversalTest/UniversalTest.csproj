@@ -211,6 +211,9 @@
     <Compile Include="Pages\BlankPage15.xaml.cs">
       <DependentUpon>BlankPage15.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BlankPage16.xaml.cs">
+      <DependentUpon>BlankPage16.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BlankPage2.xaml.cs">
       <DependentUpon>BlankPage2.xaml</DependentUpon>
     </Compile>
@@ -244,6 +247,7 @@
     <Compile Include="Pages\BlankPage9.xaml.cs">
       <DependentUpon>BlankPage9.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\IncrementalLoadingObservableCollection.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -417,6 +421,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BlankPage15.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage16.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

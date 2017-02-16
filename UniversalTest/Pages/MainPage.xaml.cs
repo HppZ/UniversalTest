@@ -50,6 +50,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage13", "gif"),
                 new PageInfo("BlankPage14", "InfiniteProgress"),
                 new PageInfo("BlankPage15", "转盘"),
+                new PageInfo("BlankPage16", "测试虚拟化"),
             };
 
             listviewElement.ItemsSource = pageInfos;

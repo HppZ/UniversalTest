@@ -45,6 +45,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+        </Style>
     </Application.Resources>
 </Application>
