@@ -21,25 +21,48 @@ using Windows.UI.Xaml.Navigation;
 namespace UniversalTest.Pages
 {
 
-
-
     public sealed partial class BlankPage17 : Page
     {
-        public ObservableCollection<string> SortItems { get; set; } = new ObservableCollection<string>(new List<string>()
-        {
-            "item1",
-            "item2"
-        });
 
         public BlankPage17()
         {
             this.InitializeComponent();
+            Loaded += BlankPage17_Loaded;
+
+
         }
 
+        private void BlankPage17_Loaded(object sender, RoutedEventArgs e)
+        {
+            var r = new List<A>();
+            for (int index = 0; index < 100; index++)
+            {
+                var a = new A()
+                {
+                    Key = index.ToString(),
+                };
+                for (int i = 0; i < 30; i++)
+                {
+                    a.Add(new B()
+                    {
+                        Name = i + " data"
+                    });
+                }
+                r.Add(a);
+            }
+            CollectionViewSource.Source = r;
+
+        }
     }
 
+    class A : List<B>
+    {
+        public string Key { get; set; }
+    }
 
-
-
+    class B
+    {
+        public string Name { get; set; }
+    }
 
 }
