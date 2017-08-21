@@ -51,7 +51,8 @@ namespace UniversalTest
                 new PageInfo("BlankPage14", "InfiniteProgress"),
                 new PageInfo("BlankPage15", "转盘"),
                 new PageInfo("BlankPage16", "测试虚拟化"),
-                new PageInfo("BlankPage17", "空"),
+                new PageInfo("BlankPage17", "分组"),
+                new PageInfo("BlankPage18", "dragslider"),
             };
 
             listviewElement.ItemsSource = pageInfos;
