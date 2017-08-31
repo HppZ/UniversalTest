@@ -221,6 +221,9 @@
     <Compile Include="Pages\BlankPage18.xaml.cs">
       <DependentUpon>BlankPage18.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BlankPage19.xaml.cs">
+      <DependentUpon>BlankPage19.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BlankPage2.xaml.cs">
       <DependentUpon>BlankPage2.xaml</DependentUpon>
     </Compile>
@@ -443,6 +446,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\BlankPage19.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\BlankPage2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -516,6 +523,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="SQLite.UWP.2015, Version=3.20.0">
+      <Name>SQLite for Universal Windows Platform</Name>
+    </SDKReference>
     <SDKReference Include="WindowsDesktop, Version=10.0.14393.0">
       <Name>Windows Desktop Extensions for the UWP</Name>
     </SDKReference>

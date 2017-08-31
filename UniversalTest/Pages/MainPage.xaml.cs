@@ -53,6 +53,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage16", "测试虚拟化"),
                 new PageInfo("BlankPage17", "分组"),
                 new PageInfo("BlankPage18", "dragslider"),
+                new PageInfo("BlankPage19", "sqlite multi-thread test"),
             };
 
             listviewElement.ItemsSource = pageInfos;
