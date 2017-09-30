@@ -55,7 +55,7 @@ namespace UniversalTest.Pages
                 try
                 {
                     var c = GetConnection();
-                    for (int i = 0; i < 100000; i++)
+                    for (int i = 0; i < 500; i++)
                     {
                         c.Insert(new TestTable()
                         {
@@ -80,7 +80,7 @@ namespace UniversalTest.Pages
                 try
                 {
                     var c = GetConnection();
-                    for (int i = 0; i < 100000; i++)
+                    for (int i = 0; i < 1000; i++)
                     {
                         var t = c.Query<TestTable>("select * from TestTable");
                         //Debug.WriteLine("read " + i + " count: " + t.Count);
