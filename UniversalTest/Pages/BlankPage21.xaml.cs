@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -33,15 +34,19 @@ namespace UniversalTest.Pages
         private void BlankPage21_Loaded(object sender, RoutedEventArgs e)
         {
 
-            ProcessDiagnosticInfo;
+            //ProcessDiagnosticInfo;
 
-            ProcessCpuUsage;
-            ProcessDiskUsage;
-            ProcessMemoryUsage;
+            //ProcessCpuUsage;
+            //ProcessDiskUsage;
+            //ProcessMemoryUsage;
 
 
-            MemoryManager +  AppMemoryReport + ProcessMemoryReport;
+            //MemoryManager + AppMemoryReport + ProcessMemoryReport;
 
+            var t = ProcessDiagnosticInfo.GetForCurrentProcess();
+            var m = t.MemoryUsage.GetReport();
+            var c = t.CpuUsage.GetReport();
+            var d = t.DiskUsage.GetReport();
 
 
         }
