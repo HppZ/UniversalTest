@@ -28,7 +28,7 @@ namespace UniversalTest.Pages
     /// </summary>
     public sealed partial class BlankPage19 : Page
     {
-
+        SQLiteConnectionPool _connectionPool = new SQLiteConnectionPool(new SQLitePlatformWinRT());
         public BlankPage19()
         {
             this.InitializeComponent();
@@ -37,13 +37,18 @@ namespace UniversalTest.Pages
 
         private void BlankPage19_Loaded(object sender, RoutedEventArgs e)
         {
-            var c = GetConnection();
-            c.CreateTable<TestTable>();
+            using (var c = GetConnection())
+            {
+                c.CreateTable<TestTable>();
+            }
         }
 
         private SQLiteConnection GetConnection()
         {
-            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), ApplicationData.Current.LocalFolder.Path + "/test.db");
+            var connectionstring = ApplicationData.Current.LocalFolder.Path + "\\test.db";
+            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), connectionstring);
+
+            // var connection = _connectionPool.GetConnection(new SQLiteConnectionString(connectionstring, true));
             return connection;
         }
 
@@ -54,16 +59,19 @@ namespace UniversalTest.Pages
             {
                 try
                 {
-                    var c = GetConnection();
-                    for (int i = 0; i < 500; i++)
+                    using (var c = GetConnection())
                     {
-                        c.Insert(new TestTable()
+                        for (int i = 0; i < 500; i++)
                         {
-                            T = i.ToString()
-                        });
-                        //Debug.WriteLine("write " + i);
+                            var t = new TestTable()
+                            {
+                                T = i.ToString()
+                            };
+                            c.Insert(t);
+                            Debug.WriteLine("write " + i + " ## ");
+                        }
+                        Debug.WriteLine("------------------------------write finished");
                     }
-                    Debug.WriteLine("------------------------------write finished");
                 }
                 catch (Exception exception)
                 {
@@ -79,14 +87,15 @@ namespace UniversalTest.Pages
             {
                 try
                 {
-                    var c = GetConnection();
-                    for (int i = 0; i < 1000; i++)
+                    using (var c = GetConnection())
                     {
-                        var t = c.Query<TestTable>("select * from TestTable");
-                        //Debug.WriteLine("read " + i + " count: " + t.Count);
+                        for (int i = 0; i < 1000; i++)
+                        {
+                            var t = c.Query<TestTable>("select * from TestTable");
+                            Debug.WriteLine("read " + i + " count: " + t.Count + " ## ");
+                        }
+                        Debug.WriteLine("------------------------read finished");
                     }
-                    Debug.WriteLine("------------------------read finished");
-
                 }
                 catch (Exception exception)
                 {

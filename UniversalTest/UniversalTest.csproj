@@ -11,7 +11,7 @@
     <AssemblyName>UniversalTest</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -21,6 +21,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86</AppxBundlePlatforms>
+    <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -236,6 +237,12 @@
     <Compile Include="Control\ExpandableList\SideBarItem.xaml.cs">
       <DependentUpon>SideBarItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BlankPage20.xaml.cs">
+      <DependentUpon>BlankPage20.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BlankPage21.xaml.cs">
+      <DependentUpon>BlankPage21.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BlankPage3.xaml.cs">
       <DependentUpon>BlankPage3.xaml</DependentUpon>
     </Compile>
@@ -287,6 +294,126 @@
     <Content Include="Assets\icon_like%402x.png" />
     <Content Include="Assets\icon_search%402x.png" />
     <Content Include="Assets\icon_share%402x.png" />
+    <Content Include="Assets\inner\inner_0.png" />
+    <Content Include="Assets\inner\inner_1.png" />
+    <Content Include="Assets\inner\inner_10.png" />
+    <Content Include="Assets\inner\inner_100.png" />
+    <Content Include="Assets\inner\inner_101.png" />
+    <Content Include="Assets\inner\inner_102.png" />
+    <Content Include="Assets\inner\inner_103.png" />
+    <Content Include="Assets\inner\inner_104.png" />
+    <Content Include="Assets\inner\inner_105.png" />
+    <Content Include="Assets\inner\inner_106.png" />
+    <Content Include="Assets\inner\inner_107.png" />
+    <Content Include="Assets\inner\inner_108.png" />
+    <Content Include="Assets\inner\inner_109.png" />
+    <Content Include="Assets\inner\inner_11.png" />
+    <Content Include="Assets\inner\inner_110.png" />
+    <Content Include="Assets\inner\inner_111.png" />
+    <Content Include="Assets\inner\inner_112.png" />
+    <Content Include="Assets\inner\inner_113.png" />
+    <Content Include="Assets\inner\inner_114.png" />
+    <Content Include="Assets\inner\inner_115.png" />
+    <Content Include="Assets\inner\inner_116.png" />
+    <Content Include="Assets\inner\inner_117.png" />
+    <Content Include="Assets\inner\inner_118.png" />
+    <Content Include="Assets\inner\inner_119.png" />
+    <Content Include="Assets\inner\inner_12.png" />
+    <Content Include="Assets\inner\inner_13.png" />
+    <Content Include="Assets\inner\inner_14.png" />
+    <Content Include="Assets\inner\inner_15.png" />
+    <Content Include="Assets\inner\inner_16.png" />
+    <Content Include="Assets\inner\inner_17.png" />
+    <Content Include="Assets\inner\inner_18.png" />
+    <Content Include="Assets\inner\inner_19.png" />
+    <Content Include="Assets\inner\inner_2.png" />
+    <Content Include="Assets\inner\inner_20.png" />
+    <Content Include="Assets\inner\inner_21.png" />
+    <Content Include="Assets\inner\inner_22.png" />
+    <Content Include="Assets\inner\inner_23.png" />
+    <Content Include="Assets\inner\inner_24.png" />
+    <Content Include="Assets\inner\inner_25.png" />
+    <Content Include="Assets\inner\inner_26.png" />
+    <Content Include="Assets\inner\inner_27.png" />
+    <Content Include="Assets\inner\inner_28.png" />
+    <Content Include="Assets\inner\inner_29.png" />
+    <Content Include="Assets\inner\inner_3.png" />
+    <Content Include="Assets\inner\inner_30.png" />
+    <Content Include="Assets\inner\inner_31.png" />
+    <Content Include="Assets\inner\inner_32.png" />
+    <Content Include="Assets\inner\inner_33.png" />
+    <Content Include="Assets\inner\inner_34.png" />
+    <Content Include="Assets\inner\inner_35.png" />
+    <Content Include="Assets\inner\inner_36.png" />
+    <Content Include="Assets\inner\inner_37.png" />
+    <Content Include="Assets\inner\inner_38.png" />
+    <Content Include="Assets\inner\inner_39.png" />
+    <Content Include="Assets\inner\inner_4.png" />
+    <Content Include="Assets\inner\inner_40.png" />
+    <Content Include="Assets\inner\inner_41.png" />
+    <Content Include="Assets\inner\inner_42.png" />
+    <Content Include="Assets\inner\inner_43.png" />
+    <Content Include="Assets\inner\inner_44.png" />
+    <Content Include="Assets\inner\inner_45.png" />
+    <Content Include="Assets\inner\inner_46.png" />
+    <Content Include="Assets\inner\inner_47.png" />
+    <Content Include="Assets\inner\inner_48.png" />
+    <Content Include="Assets\inner\inner_49.png" />
+    <Content Include="Assets\inner\inner_5.png" />
+    <Content Include="Assets\inner\inner_50.png" />
+    <Content Include="Assets\inner\inner_51.png" />
+    <Content Include="Assets\inner\inner_52.png" />
+    <Content Include="Assets\inner\inner_53.png" />
+    <Content Include="Assets\inner\inner_54.png" />
+    <Content Include="Assets\inner\inner_55.png" />
+    <Content Include="Assets\inner\inner_56.png" />
+    <Content Include="Assets\inner\inner_57.png" />
+    <Content Include="Assets\inner\inner_58.png" />
+    <Content Include="Assets\inner\inner_59.png" />
+    <Content Include="Assets\inner\inner_6.png" />
+    <Content Include="Assets\inner\inner_60.png" />
+    <Content Include="Assets\inner\inner_61.png" />
+    <Content Include="Assets\inner\inner_62.png" />
+    <Content Include="Assets\inner\inner_63.png" />
+    <Content Include="Assets\inner\inner_64.png" />
+    <Content Include="Assets\inner\inner_65.png" />
+    <Content Include="Assets\inner\inner_66.png" />
+    <Content Include="Assets\inner\inner_67.png" />
+    <Content Include="Assets\inner\inner_68.png" />
+    <Content Include="Assets\inner\inner_69.png" />
+    <Content Include="Assets\inner\inner_7.png" />
+    <Content Include="Assets\inner\inner_70.png" />
+    <Content Include="Assets\inner\inner_71.png" />
+    <Content Include="Assets\inner\inner_72.png" />
+    <Content Include="Assets\inner\inner_73.png" />
+    <Content Include="Assets\inner\inner_74.png" />
+    <Content Include="Assets\inner\inner_75.png" />
+    <Content Include="Assets\inner\inner_76.png" />
+    <Content Include="Assets\inner\inner_77.png" />
+    <Content Include="Assets\inner\inner_78.png" />
+    <Content Include="Assets\inner\inner_79.png" />
+    <Content Include="Assets\inner\inner_8.png" />
+    <Content Include="Assets\inner\inner_80.png" />
+    <Content Include="Assets\inner\inner_81.png" />
+    <Content Include="Assets\inner\inner_82.png" />
+    <Content Include="Assets\inner\inner_83.png" />
+    <Content Include="Assets\inner\inner_84.png" />
+    <Content Include="Assets\inner\inner_85.png" />
+    <Content Include="Assets\inner\inner_86.png" />
+    <Content Include="Assets\inner\inner_87.png" />
+    <Content Include="Assets\inner\inner_88.png" />
+    <Content Include="Assets\inner\inner_89.png" />
+    <Content Include="Assets\inner\inner_9.png" />
+    <Content Include="Assets\inner\inner_90.png" />
+    <Content Include="Assets\inner\inner_91.png" />
+    <Content Include="Assets\inner\inner_92.png" />
+    <Content Include="Assets\inner\inner_93.png" />
+    <Content Include="Assets\inner\inner_94.png" />
+    <Content Include="Assets\inner\inner_95.png" />
+    <Content Include="Assets\inner\inner_96.png" />
+    <Content Include="Assets\inner\inner_97.png" />
+    <Content Include="Assets\inner\inner_98.png" />
+    <Content Include="Assets\inner\inner_99.png" />
     <Content Include="Assets\PageAssets\img103.png" />
     <Content Include="Assets\PageAssets\PhotoGridView_selected.png" />
     <Content Include="Assets\PageAssets\Test.jpg" />
@@ -466,6 +593,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\BlankPage20.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage21.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\BlankPage3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -526,9 +661,29 @@
     <SDKReference Include="SQLite.UWP.2015, Version=3.20.0">
       <Name>SQLite for Universal Windows Platform</Name>
     </SDKReference>
-    <SDKReference Include="WindowsDesktop, Version=10.0.14393.0">
+    <SDKReference Include="WindowsDesktop, Version=10.0.16299.0">
       <Name>Windows Desktop Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ApplicationInsights.PersistenceChannel">
+      <Version>1.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ApplicationInsights.WindowsApps">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="SQLite.Net-PCL">
+      <Version>3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Win2D.uwp">
+      <Version>1.18.0</Version>
+    </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
