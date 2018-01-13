@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -104,6 +105,19 @@ namespace UniversalTest
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                ProtocolActivatedEventArgs eventArgs = args as ProtocolActivatedEventArgs;
+                Debug.WriteLine(eventArgs.Uri.ToString());
+                Debug.WriteLine(eventArgs.Uri);
+                // TODO: Handle URI activation
+                // The received URI is eventArgs.Uri.AbsoluteUri
+            }
         }
     }
 }
