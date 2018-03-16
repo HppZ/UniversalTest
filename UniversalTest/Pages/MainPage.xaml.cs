@@ -56,8 +56,9 @@ namespace UniversalTest
                 new PageInfo("BlankPage19", "sqlite multi-thread test"),
                 new PageInfo("BlankPage20", "animation & images"),
                 new PageInfo("BlankPage21", "cpu / memory / disk info"),
+                new PageInfo("BlankPage22", "textblock inlines"),
             };
-
+            pageInfos.Reverse();
             listviewElement.ItemsSource = pageInfos;
         }
 
