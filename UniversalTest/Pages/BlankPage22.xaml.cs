@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
-=======
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -40,7 +38,6 @@ namespace UniversalTest.Pages
         public BlankPage22()
         {
             this.InitializeComponent();
-            Loaded += BlankPage22_Loaded;
         }
 
         private async void BlankPage22_Loaded(object sender, RoutedEventArgs e)
@@ -86,7 +83,6 @@ namespace UniversalTest.Pages
             };
              
             await Task.WhenAll(list);
-            Block1.Text = _value.ToString();
         }
     }
 }
