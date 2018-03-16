@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-<<<<<<< HEAD
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -33,9 +32,6 @@
             </Paragraph>
         </RichTextBlock>
         <RichTextBlockOverflow Grid.Row="1" x:Name="BlockOverflow1"></RichTextBlockOverflow>
-=======
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-<TextBlock x:Name="Block1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"></TextBlock>
->>>>>>> 9705be669b2ea7e1d9863030f697260b4ba67751
+ 
     </Grid>
 </Page>
