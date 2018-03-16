@@ -21,6 +21,9 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="testhaopeng" />
+        </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name=".jpg">
             <uap:SupportedFileTypes>
