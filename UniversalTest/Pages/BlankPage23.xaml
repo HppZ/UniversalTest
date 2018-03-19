@@ -7,31 +7,38 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid  Width="500">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <RichTextBlock Width="300" TextWrapping="NoWrap" OverflowContentTarget="{Binding ElementName=BlockOverflow1}">
-            <Paragraph >
-                <InlineUIContainer>
-                    <Grid BorderBrush="Green" BorderThickness="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid Background="Green">
-                            <TextBlock Text="豆" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                        </Grid>
-                        <Grid Grid.Column="1">
-                            <TextBlock x:Name="xamlRatingTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Green" Text="7.8"></TextBlock>
-                        </Grid>
-                    </Grid>
-                </InlineUIContainer>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid BorderBrush="Green" BorderThickness="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Background="Green">
+                <TextBlock Text="豆" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBlock x:Name="xamlRatingTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Green" Text="7.8"></TextBlock>
+            </Grid>
+        </Grid>
+
+        <RichTextBlock TextWrapping="Wrap"   Grid.Column="1" Grid.Row="0"  
+                       OverflowContentTarget="{Binding ElementName=BlockOverflow1}" 
+                       TextTrimming="WordEllipsis"
+                       >
+            <Paragraph>
                 <Run  >ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</Run>
             </Paragraph>
         </RichTextBlock>
-        <RichTextBlockOverflow Grid.Row="1" x:Name="BlockOverflow1"></RichTextBlockOverflow>
+        <RichTextBlockOverflow Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="BlockOverflow1" MaxLines="3"></RichTextBlockOverflow>
 
     </Grid>
 
