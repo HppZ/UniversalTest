@@ -56,8 +56,8 @@ namespace UniversalTest
                 new PageInfo("BlankPage19", "sqlite multi-thread test"),
                 new PageInfo("BlankPage20", "animation & images"),
                 new PageInfo("BlankPage21", "cpu / memory / disk info"),
-
                 new PageInfo("BlankPage22", "primitive type & thread safety"),
+                new PageInfo("BlankPage23", "richtextblock"),
             };
             pageInfos.Reverse();
 
