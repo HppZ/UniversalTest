@@ -58,6 +58,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage21", "cpu / memory / disk info"),
                 new PageInfo("BlankPage22", "primitive type & thread safety"),
                 new PageInfo("BlankPage23", "richtextblock"),
+                new PageInfo("BlankPage24", "binding webview navigationargs's url "),
             };
             pageInfos.Reverse();
 
