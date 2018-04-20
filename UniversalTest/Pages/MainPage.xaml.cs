@@ -61,6 +61,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage24", "binding webview navigationargs's url "),
                 new PageInfo("BlankPage25", "c# .NET Test"),
                 new PageInfo("BlankPage26", "property changed event & ui thread?"),
+                new PageInfo("BlankPage27", "resource dic"),
             };
             pageInfos.Reverse();
 
