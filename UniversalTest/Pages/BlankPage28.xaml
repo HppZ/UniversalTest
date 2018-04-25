@@ -44,6 +44,11 @@
                    ImageOpened="Image_OnImageOpened"
                    ImageFailed="Image_OnImageFailed"></Image>
 
+            <TextBlock >image6</TextBlock>
+            <Image x:Name="Image6" Visibility="Visible"  Tag="6"
+                   ImageOpened="Image_OnImageOpened"
+                   ImageFailed="Image_OnImageFailed"></Image>
+
         </StackPanel>
     </ScrollViewer>
 </Page>

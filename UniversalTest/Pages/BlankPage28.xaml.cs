@@ -31,7 +31,7 @@ namespace UniversalTest.Pages
             try
             {
                 Uri.TryCreate("", UriKind.RelativeOrAbsolute, out var uri1);
-                new BitmapImage(uri1);// 异常
+                new BitmapImage(uri1);// 异常 System.NullReferenceException
             }
             catch (Exception e)
             {
@@ -41,7 +41,7 @@ namespace UniversalTest.Pages
             try
             {
                 Uri.TryCreate("   ", UriKind.RelativeOrAbsolute, out var uri2);
-                new BitmapImage(uri2);// 异常
+                new BitmapImage(uri2);// 异常 System.ArgumentException: The given System.Uri cannot be converted into a Windows.Foundation.Uri
 
             }
             catch (Exception e)
@@ -53,7 +53,7 @@ namespace UniversalTest.Pages
             try
             {
                 Uri.TryCreate(null, UriKind.RelativeOrAbsolute, out var uri3);
-                new BitmapImage(uri3);// 异常
+                new BitmapImage(uri3);// 异常 System.ArgumentException: The parameter is incorrect
 
             }
             catch (Exception e)
@@ -74,7 +74,8 @@ namespace UniversalTest.Pages
 
             try
             {
-                Image2.Source = new BitmapImage(new Uri(""));
+                var u = new Uri("");
+                Image2.Source = new BitmapImage(u);
             }
             catch (Exception e)
             {
@@ -95,7 +96,8 @@ namespace UniversalTest.Pages
 
             try
             {
-                Image5.Source = new BitmapImage(new Uri("  "));
+                var u = new Uri("  ");
+                Image5.Source = new BitmapImage(u);
             }
             catch (Exception e)
             {
@@ -113,13 +115,22 @@ namespace UniversalTest.Pages
                 Debug.Assert(false);
             }
 
+
+            try
+            {
+                Image6.Source = new BitmapImage();
+            }
+            catch (Exception e)
+            {
+                Debug.Assert(false);
+            }
         }
 
         private void Image_OnImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
             if (sender is FrameworkElement element)
             {
-                Debug.WriteLine("failed " + element.Tag);
+                Debug.WriteLine("universal test failed " + element.Tag);
                 element.Visibility = Visibility.Collapsed;
             }
         }
@@ -129,7 +140,7 @@ namespace UniversalTest.Pages
 
             if (sender is FrameworkElement element)
             {
-                Debug.WriteLine("opened " + element.Tag);
+                Debug.WriteLine("universal test opened " + element.Tag);
                 element.Visibility = Visibility.Visible;
             }
         }
