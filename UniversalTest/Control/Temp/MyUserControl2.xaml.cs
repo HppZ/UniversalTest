@@ -28,10 +28,8 @@ namespace UniversalTest.Control.Temp
 
         private void MyUserControl1_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            var b =this.Resources["Color1"] as SolidColorBrush;
-            b.Color = Colors.Green;
-        }
 
+        }
 
         /*
          *无论使用merge dic与否，都没有share

@@ -25,6 +25,15 @@ namespace UniversalTest.Pages
         public BlankPage27()
         {
             this.InitializeComponent();
+            var data = new List<string>();
+            for (int i = 0; i < 10; i++)
+            {
+                data.Add(i.ToString());
+            }
+
+            ItemsControl1.ItemsSource = data;
         }
+
+
     }
 }

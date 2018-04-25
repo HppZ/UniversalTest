@@ -5,11 +5,23 @@
     xmlns:local="using:UniversalTest.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:temp="using:UniversalTest.Control.Temp"
+    xmlns:c="using:UniversalTest.Control"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <temp:MyUserControl2 Width="100" Height="100"></temp:MyUserControl2>
-        <temp:MyUserControl2 Width="100" Height="100" Margin="300 0 0 0"></temp:MyUserControl2>
+        <ItemsControl x:Name="ItemsControl1">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="50" Height="50">
+                        <TextBlock Text="{Binding}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <c:VirtualizingPanel></c:VirtualizingPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </Grid>
 </Page>
