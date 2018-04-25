@@ -29,7 +29,16 @@ namespace UniversalTest.Pages
 
         private void Image_OnImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
-            throw new NotImplementedException();
+
+            if (sender is FrameworkElement element)
+                element.Visibility = Visibility.Collapsed;
+        }
+
+        private void Image_OnImageOpened(object sender, RoutedEventArgs e)
+        {
+
+            if (sender is FrameworkElement element)
+                element.Visibility = Visibility.Visible;
         }
     }
 }

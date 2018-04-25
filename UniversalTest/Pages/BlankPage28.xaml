@@ -8,6 +8,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Image Source="http://pic3.qiyipic.com/image/20170714/21/f5/a_100012628_m_600_m2_57_76.jpg" Visibility="Collapsed" ImageFailed="Image_OnImageFailed"></Image>
+        <Image Source="http://pic7.qiyipic.com/image/20180418/2a/38/v_115667590_m_601_1080_60.jpg" Visibility="Collapsed" 
+               ImageOpened="Image_OnImageOpened"
+               ImageFailed="Image_OnImageFailed"></Image>
     </Grid>
 </Page>
