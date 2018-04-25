@@ -63,6 +63,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage26", "property changed event & ui thread?"),
                 new PageInfo("BlankPage27", "VirtualizingPanel"),
                 new PageInfo("BlankPage28", "image collapse failed event occur?"),
+                new PageInfo("BlankPage29", "image x;bind string null empty whitespace"),
             };
             pageInfos.Reverse();
 

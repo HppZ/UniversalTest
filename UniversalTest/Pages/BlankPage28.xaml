@@ -7,9 +7,43 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Image Source="http://pic7.qiyipic.com/image/20180418/2a/38/v_115667590_m_601_1080_60.jpg" Visibility="Collapsed" 
-               ImageOpened="Image_OnImageOpened"
+    <ScrollViewer VerticalScrollMode="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBlock >image0</TextBlock>
+            <Image Source="http://pic7.qiyipic.com/image/20180418/2a/38/v_115667590_m_601_1080_60.jpg" Visibility="Collapsed" 
+               ImageOpened="Image_OnImageOpened"  Tag="0"
                ImageFailed="Image_OnImageFailed"></Image>
-    </Grid>
+
+            <TextBlock >image1</TextBlock>
+            <Image x:Name="Image1" Visibility="Collapsed"  Tag="1"
+                   ImageOpened="Image_OnImageOpened"
+                   ImageFailed="Image_OnImageFailed"></Image>
+
+
+            <TextBlock >image2</TextBlock>
+            <Image x:Name="Image2" Visibility="Collapsed"  Tag="2"
+                   ImageOpened="Image_OnImageOpened"
+                   ImageFailed="Image_OnImageFailed"></Image>
+
+
+
+            <TextBlock >image3</TextBlock>
+            <Image x:Name="Image3" Visibility="Collapsed"  Tag="3"
+                   ImageOpened="Image_OnImageOpened"
+                   ImageFailed="Image_OnImageFailed"></Image>
+
+
+
+            <TextBlock >image4</TextBlock>
+            <Image x:Name="Image4" Visibility="Collapsed"  Tag="4"
+                   ImageOpened="Image_OnImageOpened"
+                   ImageFailed="Image_OnImageFailed"></Image>
+
+            <TextBlock >image5</TextBlock>
+            <Image x:Name="Image5" Visibility="Collapsed"  Tag="5"
+                   ImageOpened="Image_OnImageOpened"
+                   ImageFailed="Image_OnImageFailed"></Image>
+
+        </StackPanel>
+    </ScrollViewer>
 </Page>
