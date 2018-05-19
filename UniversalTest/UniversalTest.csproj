@@ -188,6 +188,9 @@
       <DependentUpon>MyUserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Panel\VirtualizingPanel.cs" />
+    <Compile Include="Control\Temp\MyUserControl2.xaml.cs">
+      <DependentUpon>MyUserControl2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper\DebugHelper.cs" />
     <Compile Include="Helper\StoryboardHelper.cs" />
     <Compile Include="Model\GroupSource.cs" />
@@ -260,6 +263,12 @@
     </Compile>
     <Compile Include="Pages\BlankPage27.xaml.cs">
       <DependentUpon>BlankPage27.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BlankPage28.xaml.cs">
+      <DependentUpon>BlankPage28.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BlankPage29.xaml.cs">
+      <DependentUpon>BlankPage29.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BlankPage3.xaml.cs">
       <DependentUpon>BlankPage3.xaml</DependentUpon>
@@ -547,9 +556,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Control\Temp\Dictionary1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\Temp\MyUserControl1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\Temp\MyUserControl2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BlankPage1.xaml">
       <SubType>Designer</SubType>
@@ -640,6 +657,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BlankPage27.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage28.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlankPage29.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

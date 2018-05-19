@@ -62,6 +62,8 @@ namespace UniversalTest.Pages
 
                 var file = await _iconFolder.CreateFileAsync(name + "_" + iconid + ".svg", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(file, svg);
+
+                ErrorElement.Text = "done!";
             }
             catch (Exception exception)
             {
