@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="UniversalTest.Pages.BlankPage27"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UniversalTest.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid Margin="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Click="GetIcon_Click">Get icon</Button>
+                <TextBox x:Name="IconIdElement" Width="200"></TextBox>
+                <TextBlock x:Name="ErrorElement" Foreground="Red"></TextBlock>
+            </StackPanel>
+            
+            <Image x:Name="IconElement" Grid.Row="1"></Image>
+
+        </Grid>
+    </Grid>
+</Page>
