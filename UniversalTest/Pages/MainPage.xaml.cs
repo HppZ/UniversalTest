@@ -64,6 +64,11 @@ namespace UniversalTest
                 new PageInfo("BlankPage27", "download svg from icon8"),
                 new PageInfo("BlankPage28", "image collapse failed event occur?"),
                 new PageInfo("BlankPage29", "image x;bind string null empty whitespace"),
+
+
+
+
+                new PageInfo("Test", "Test"),
             };
             pageInfos.Reverse();
 

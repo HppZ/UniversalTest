@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using UniversalTest.Controller;
 using UniversalTest.Helper;
 using UniversalTest.Pages;
+using ThreadPool = Windows.System.Threading.ThreadPool;
 
 namespace UniversalTest.Model
 {
