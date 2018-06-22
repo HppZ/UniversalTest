@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="UniversalTest.Pages.BlankPage30"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UniversalTest.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid x:Name="TestElement" Width="100" Height="100" HorizontalAlignment="Left" Background="Red"></Grid>
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 400">
+            <Button Width="100" Height="100" Click="startOnClick">start</Button>
+            <Button Width="100" Height="100" Click="resetOnClick">reset</Button>
+            <Button Width="100" Height="100" Click="seekOnClick">seek</Button>
+            <Button Width="100" Height="100" Click="seekAlignedOnClick">end seekAlignedToLastTick</Button>
+            <Button Width="100" Height="100" Click="stopOnClick">stop</Button>
+            <Button Width="100" Height="100" Click="seekAlignedToLastTickOnClick">1.5 seekAlignedToLastTick</Button>
+            <Button Width="100" Height="100" Click="skiptofillOnClick">skiptofill</Button>
+        </StackPanel>
+    </Grid>
+</Page>
