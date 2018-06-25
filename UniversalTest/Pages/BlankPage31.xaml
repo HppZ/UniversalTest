@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="UniversalTest.Pages.BlankPage31"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UniversalTest.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="Transparent" AllowDrop="True" DragOver="BlankPage31_DragOver" Drop="BlankPage31_Drop">
+        <TextBlock x:Name="TipElement" VerticalAlignment="Top" Foreground="Red"></TextBlock>
+        <Grid VerticalAlignment="Center">
+            <TextBox x:Name="SetFileNameTextBox" PlaceholderText="设置文件名"></TextBox>
+            <Button HorizontalAlignment="Right" Click="ButtonBase_OnClick">OK</Button>
+        </Grid>
+    </Grid>
+</Page>

@@ -30,9 +30,6 @@ namespace UniversalTest
         /// </summary>
         public App()
         {
-            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
-                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
-                Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -119,5 +116,7 @@ namespace UniversalTest
                 // The received URI is eventArgs.Uri.AbsoluteUri
             }
         }
+
+
     }
 }
