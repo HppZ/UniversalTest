@@ -111,7 +111,7 @@ namespace UniversalTest.Pages
                              {
                                  scale = Math.Round(scale);
                              }
-                             var scaleFolder = await parentFolder.CreateFolderAsync($"Scale-{scale}", CreationCollisionOption.OpenIfExists);
+                             var scaleFolder = await parentFolder.CreateFolderAsync($"Scale-{scale*100}", CreationCollisionOption.OpenIfExists);
                              var newFIle = await file.StorageFile.CopyAsync(scaleFolder);
                              await newFIle.RenameAsync(filename + newFIle.FileType, NameCollisionOption.ReplaceExisting);
                          }
