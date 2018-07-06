@@ -104,10 +104,13 @@ namespace UniversalTest.Pages
                          try
                          {
                              var width = file.Width;
-                             var scale = Math.Round(width / smalllestWidth * 100);
-                             if (scale > 100 && scale < 200)
-                                 scale = 150;
-
+                             var scale = width / smalllestWidth;
+                             if (scale > 1 && scale < 2 && (Math.Abs(scale - 1.5) < Math.Abs(scale - 1) && Math.Abs(scale - 1.5) < Math.Abs(scale - 2)))
+                                 scale = 1.5;
+                             else
+                             {
+                                 scale = Math.Round(scale);
+                             }
                              var scaleFolder = await parentFolder.CreateFolderAsync($"Scale-{scale}", CreationCollisionOption.OpenIfExists);
                              var newFIle = await file.StorageFile.CopyAsync(scaleFolder);
                              await newFIle.RenameAsync(filename + newFIle.FileType, NameCollisionOption.ReplaceExisting);
