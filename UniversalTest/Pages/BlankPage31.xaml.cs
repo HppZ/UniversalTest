@@ -90,26 +90,34 @@ namespace UniversalTest.Pages
                 return;
 
             var filename = SetFileNameTextBox.Text;
+            await Task.Run(async () =>
+             {
+                 if (_files != null && _files.Any())
+                 {
+                     var files = _files.OrderBy(x => x.Width);
+                     var smalllest = files.First();
+                     var smalllestWidth = smalllest.Width;
 
-            Task.Run(async () =>
-            {
-                if (_files != null && _files.Any())
-                {
-                    var files = _files.OrderBy(x => x.Width);
-                    var smalllest = files.First();
-                    var smalllestWidth = smalllest.Width;
+                     var parentFolder = await smalllest.StorageFile.GetParentAsync();
+                     foreach (var file in _files)
+                     {
+                         try
+                         {
+                             var width = file.Width;
+                             var scale = Math.Round(width / smalllestWidth * 100);
+                             if (scale > 100 && scale < 200)
+                                 scale = 150;
 
-                    var parentFolder = await smalllest.StorageFile.GetParentAsync();
-                    foreach (var file in _files)
-                    {
-                        var width = file.Width;
-                        var scale = width / smalllestWidth * 100;
-                        var scaleFolder = await parentFolder.CreateFolderAsync($"Scale-{scale}", CreationCollisionOption.OpenIfExists);
-                        var newFIle = await file.StorageFile.CopyAsync(scaleFolder);
-                        await newFIle.RenameAsync(filename + newFIle.FileType, NameCollisionOption.ReplaceExisting);
-                    }
-                }
-            });
+                             var scaleFolder = await parentFolder.CreateFolderAsync($"Scale-{scale}", CreationCollisionOption.OpenIfExists);
+                             var newFIle = await file.StorageFile.CopyAsync(scaleFolder);
+                             await newFIle.RenameAsync(filename + newFIle.FileType, NameCollisionOption.ReplaceExisting);
+                         }
+                         catch (Exception exception)
+                         {
+                         }
+                     }
+                 }
+             });
 
         }
     }
