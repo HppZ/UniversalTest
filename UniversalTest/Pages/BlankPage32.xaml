@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="UniversalTest.Pages.BlankPage32"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UniversalTest.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid x:Name="Root" Background="Transparent">
+            <Button VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click">1111111</Button>
+        </Grid>
+        <Grid x:Name="Root2">
+            <Button VerticalAlignment="Center" HorizontalAlignment="Center" Margin="200 0 0 0"  Click="Button_Click2">222222</Button>
+        </Grid>
+    </Grid>
+</Page>

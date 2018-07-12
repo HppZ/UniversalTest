@@ -66,8 +66,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage29", "image x;bind string null empty whitespace"),
                 new PageInfo("BlankPage30", "storyboard test"),
                 new PageInfo("BlankPage31", "rename images"),
-
-
+                new PageInfo("BlankPage32", "add handler"),
 
 
                 new PageInfo("Test", "Test"),
