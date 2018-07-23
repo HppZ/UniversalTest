@@ -6,7 +6,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Themes/Resource/BallSlider2.xaml"/>
         <ResourceDictionary Source="ms-appx:///Themes/Resource/ProgressButton.xaml"/>
-        <ResourceDictionary Source="ms-appx:///Themes/Resource/DragSlider.xaml"/>
         <ResourceDictionary Source="ms-appx:///Themes/Resource/PullToFresh.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 

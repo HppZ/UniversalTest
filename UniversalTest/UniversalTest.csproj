@@ -180,7 +180,7 @@
       <DependentUpon>BallSlider.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Slider\BallSlider2.cs" />
-    <Compile Include="Control\Slider\DragSlider.cs" />
+    <Compile Include="Control\Slider\YLPSlider.cs" />
     <Compile Include="Control\Temp\BallScrollBar.xaml.cs">
       <DependentUpon>BallScrollBar.xaml</DependentUpon>
     </Compile>
@@ -281,6 +281,9 @@
     </Compile>
     <Compile Include="Pages\BlankPage32.xaml.cs">
       <DependentUpon>BlankPage32.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BlankPage33.xaml.cs">
+      <DependentUpon>BlankPage33.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BlankPage4.xaml.cs">
       <DependentUpon>BlankPage4.xaml</DependentUpon>
@@ -696,6 +699,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\BlankPage33.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\BlankPage4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -737,11 +744,6 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Themes\Resource\DragSlider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
     <Page Include="Themes\Resource\ProgressButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -753,8 +755,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="SQLite.UWP.2015, Version=3.20.0">
-      <Name>SQLite for Universal Windows Platform</Name>
+    <SDKReference Include="SQLite.UWP.2015, Version=3.24.0">
+      <Name>SQLite for Universal Windows Platform %28SQLite.UWP.2015, Version=3.24.0%29</Name>
     </SDKReference>
     <SDKReference Include="WindowsDesktop, Version=10.0.17134.0">
       <Name>Windows Desktop Extensions for the UWP</Name>

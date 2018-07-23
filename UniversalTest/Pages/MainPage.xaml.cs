@@ -42,7 +42,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage5", "slider 与 scrollviewer 双向绑定 "),
                 new PageInfo("BlankPage6", "GridView绑定Uri"),
                 new PageInfo("BlankPage7", "图片切换控件"),
-                new PageInfo("BlankPage8", "空"),
+                new PageInfo("BlankPage8", "image source"),
                 new PageInfo("BlankPage9", "CustomPanel"),
                 new PageInfo("BlankPage10", "元素相交 mouseover && tapped"),
                 new PageInfo("BlankPage11", "gif / mediaelement"),
@@ -52,7 +52,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage15", "转盘"),
                 new PageInfo("BlankPage16", "测试虚拟化"),
                 new PageInfo("BlankPage17", "分组"),
-                new PageInfo("BlankPage18", "dragslider"),
+                new PageInfo("BlankPage18", "slider for progress"),
                 new PageInfo("BlankPage19", "sqlite multi-thread test"),
                 new PageInfo("BlankPage20", "animation & images"),
                 new PageInfo("BlankPage21", "cpu / memory / disk info"),
@@ -67,6 +67,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage30", "storyboard test"),
                 new PageInfo("BlankPage31", "rename images"),
                 new PageInfo("BlankPage32", "add handler"),
+                new PageInfo("BlankPage33", "empty"),
 
 
                 new PageInfo("Test", "Test"),
