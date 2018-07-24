@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="UniversalTest.Pages.BlankPage33"
+    x:Class="UniversalTest.Pages.BlankPage34"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UniversalTest.Pages"
@@ -9,12 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ScrollViewer x:Name="ScrollViewerElement">
-            <StackPanel>
-                <StackPanel Background="AntiqueWhite" Height="500"></StackPanel>
-                <StackPanel Background="Gold" Height="500"></StackPanel>
-                <StackPanel Background="DarkGoldenrod" Height="500"></StackPanel>
-            </StackPanel>
-        </ScrollViewer>
+
     </Grid>
 </Page>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,16 +20,11 @@ namespace UniversalTest.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class BlankPage33 : Page
+    public sealed partial class BlankPage34 : Page
     {
-        public BlankPage33()
+        public BlankPage34()
         {
             this.InitializeComponent();
-        }
-
-        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
