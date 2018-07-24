@@ -23,23 +23,25 @@ namespace UniversalTest.Control.Slider
         private const string VerticalThumbPart = "VerticalThumb";
 
         private Thumb _hThumb;
+        private SliderState _currentState = SliderState.None;
 
         public event EventHandler<StateChangedArgs> StateChangedEvent;
 
-        public static readonly DependencyProperty ThumbStateProperty = DependencyProperty.Register(
-            "ThumbState", typeof(SliderThumbState), typeof(YLPSlider), new PropertyMetadata(default(SliderThumbState)));
-        public SliderThumbState ThumbState
+        public static readonly DependencyProperty StateProperty = DependencyProperty.Register(
+            "State", typeof(SliderState), typeof(YLPSlider), new PropertyMetadata(default(SliderState)));
+        public SliderState State
         {
-            get { return (SliderThumbState)GetValue(ThumbStateProperty); }
+            get { return (SliderState)GetValue(StateProperty); }
             set
             {
                 throw new InvalidOperationException();
-                SetValue(ThumbStateProperty, value);
+                SetValue(StateProperty, value);
             }
         }
 
         public YLPSlider()
         {
+            this.ManipulationMode = ManipulationModes.TranslateX;
         }
 
         protected override void OnApplyTemplate()
@@ -49,6 +51,7 @@ namespace UniversalTest.Control.Slider
             if (_hThumb == null)
             {
                 _hThumb = GetTemplateChild(HorizontalThumbPart) as Thumb;
+                _hThumb.ManipulationMode = ManipulationModes.None;
 
                 _hThumb.DragStarted += HThumbDragStarted;
                 _hThumb.DragDelta += HThumbDragDelta;
@@ -56,46 +59,88 @@ namespace UniversalTest.Control.Slider
             }
         }
 
+        #region manipulation
+        protected override void OnManipulationStarting(ManipulationStartingRoutedEventArgs e)
+        {
+            //base.OnManipulationStarting(e);
+            Debug.WriteLine("OnManipulationStarting");
+        }
+
+        protected override void OnManipulationStarted(ManipulationStartedRoutedEventArgs e)
+        {
+            //base.OnManipulationStarted(e);
+            Debug.WriteLine("OnManipulationStarted");
+            RaiseStateChangedEvent(SliderState.Pressed);
+        }
+
+        protected override void OnManipulationInertiaStarting(ManipulationInertiaStartingRoutedEventArgs e)
+        {
+            //base.OnManipulationInertiaStarting(e);
+            Debug.WriteLine("OnManipulationInertiaStarting");
+        }
+
+        protected override void OnManipulationDelta(ManipulationDeltaRoutedEventArgs e)
+        {
+            //base.OnManipulationDelta(e);
+            Debug.WriteLine("OnManipulationDelta");
+            RaiseStateChangedEvent(SliderState.Moving);
+        }
+
+        protected override void OnManipulationCompleted(ManipulationCompletedRoutedEventArgs e)
+        {
+            //base.OnManipulationCompleted(e);
+            Debug.WriteLine("OnManipulationCompleted");
+            RaiseStateChangedEvent(SliderState.Released);
+        }
+        #endregion
+
+        #region thumb
         private void HThumbDragStarted(object sender, DragStartedEventArgs e)
         {
             Debug.WriteLine("HThumbDragStarted");
-            RaiseStateChangedEvent(SliderThumbState.ThumbPressed);
+            RaiseStateChangedEvent(SliderState.Pressed);
         }
 
         private void HThumbDragDelta(object sender, DragDeltaEventArgs e)
         {
             Debug.WriteLine("HThumbDragDelta");
-            RaiseStateChangedEvent(SliderThumbState.ThumbMoving);
+            RaiseStateChangedEvent(SliderState.Moving);
         }
 
         private void HThumbDragCompleted(object sender, DragCompletedEventArgs e)
         {
             Debug.WriteLine("HThumbDragCompleted");
-            RaiseStateChangedEvent(SliderThumbState.ThumbReleased);
+            RaiseStateChangedEvent(SliderState.Released);
         }
+        #endregion
 
-        private void RaiseStateChangedEvent(SliderThumbState reason)
+        private void RaiseStateChangedEvent(SliderState state)
         {
-            StateChangedEvent?.Invoke(this, new StateChangedArgs(reason));
+            if (_currentState != state)
+            {
+                _currentState = state;
+                StateChangedEvent?.Invoke(this, new StateChangedArgs(_currentState));
+            }
         }
     }
 
 
-    public enum SliderThumbState
+    public enum SliderState
     {
-        ThumbPressed,
-        ThumbMoving,
-        ThumbReleased,
+        None,
+        Pressed,
+        Moving,
+        Released,
     }
 
     public class StateChangedArgs : EventArgs
     {
-        public StateChangedArgs(SliderThumbState state)
+        public StateChangedArgs(SliderState state)
         {
             State = state;
         }
 
-        public SliderThumbState State { get; }
+        public SliderState State { get; }
     }
 
 }
