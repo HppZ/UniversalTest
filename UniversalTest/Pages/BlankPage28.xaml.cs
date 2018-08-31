@@ -30,7 +30,7 @@ namespace UniversalTest.Pages
 
             try
             {
-                Uri.TryCreate("", UriKind.RelativeOrAbsolute, out var uri1);
+                var flag = Uri.TryCreate("", UriKind.RelativeOrAbsolute, out var uri1);
                 new BitmapImage(uri1);// 异常 System.NullReferenceException
             }
             catch (Exception e)
@@ -40,32 +40,31 @@ namespace UniversalTest.Pages
 
             try
             {
-                Uri.TryCreate("   ", UriKind.RelativeOrAbsolute, out var uri2);
+                var flag = Uri.TryCreate("   ", UriKind.RelativeOrAbsolute, out var uri2);
                 new BitmapImage(uri2);// 异常 System.ArgumentException: The given System.Uri cannot be converted into a Windows.Foundation.Uri
-
             }
             catch (Exception e)
             {
                 Debug.Assert(false);
-
             }
 
             try
             {
-                Uri.TryCreate(null, UriKind.RelativeOrAbsolute, out var uri3);
+                var flag = Uri.TryCreate(null, UriKind.RelativeOrAbsolute, out var uri3);
                 new BitmapImage(uri3);// 异常 System.ArgumentException: The parameter is incorrect
-
             }
             catch (Exception e)
             {
                 Debug.Assert(false);
             }
+
+
+
 
             // ----------------------------
             try
             {
                 Image1.Source = null;
-
             }
             catch (Exception e)
             {
@@ -79,18 +78,15 @@ namespace UniversalTest.Pages
             }
             catch (Exception e)
             {
-                // 异常
                 Debug.Assert(false);
             }
 
             try
             {
                 Image3.Source = new BitmapImage(null);
-
             }
             catch (Exception e)
             {
-                // 异常
                 Debug.Assert(false);
             }
 
@@ -101,14 +97,12 @@ namespace UniversalTest.Pages
             }
             catch (Exception e)
             {
-                // 异常
                 Debug.Assert(false);
             }
 
             try
             {
                 Image5.Source = new BitmapImage(new Uri("http://pic7.qiyipic.com/image/20180418/2a/38/v_115667590_m_601_1080_608.jpg"));
-
             }
             catch (Exception e)
             {

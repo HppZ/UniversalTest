@@ -62,7 +62,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage25", "c# .NET Test"),
                 new PageInfo("BlankPage26", "property changed event & ui thread?"),
                 new PageInfo("BlankPage27", "download svg from icon8"),
-                new PageInfo("BlankPage28", "image collapse failed event occur?"),
+                new PageInfo("BlankPage28", "image source uri / collapse failed event occur?"),
                 new PageInfo("BlankPage29", "image x;bind string null empty whitespace"),
                 new PageInfo("BlankPage30", "storyboard seek api test"),
                 new PageInfo("BlankPage31", "rename images"),
