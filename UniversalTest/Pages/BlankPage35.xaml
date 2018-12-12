@@ -9,7 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ListView x:Name="xamlListView">
+        <Button VerticalAlignment="Top" Click="ButtonBase_OnClick">hasmore</Button>
+        <ListView x:Name="xamlListView" Margin="0 100 0 0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="100">

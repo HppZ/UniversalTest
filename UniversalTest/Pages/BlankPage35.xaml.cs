@@ -31,11 +31,16 @@ namespace UniversalTest.Pages
             xamlListView.ItemsSource = new IncrementalLoadingObservableCollection<string>(this);
         }
 
-        public bool HasMoreItems { get; } = true;
+        public bool HasMoreItems { get; set; } = true;
         public async Task<IEnumerable<string>> GetItems(CancellationToken token, uint count)
         {
             await Task.Delay(1);
             return Enumerable.Range(0, (int)count).Select(x => x.ToString());
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.HasMoreItems = !this.HasMoreItems;
         }
     }
 }
