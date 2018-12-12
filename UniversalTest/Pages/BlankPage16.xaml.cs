@@ -24,12 +24,12 @@ namespace UniversalTest.Pages
     /// </summary>
     public sealed partial class BlankPage16 : Page
     {
-        public IncrementalLoadingObservableCollection<string> SearchResultObservableCards;
+        public ObservableCollection<string> SearchResultObservableCards;
         private int start = 1;
         public BlankPage16()
         {
             this.InitializeComponent();
-            SearchResultObservableCards = new IncrementalLoadingObservableCollection<string>();
+            SearchResultObservableCards = new ObservableCollection<string>();
             listViewSearch.ItemsSource = SearchResultObservableCards;
         }
 

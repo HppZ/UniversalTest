@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,52 +11,37 @@ using Windows.UI.Xaml.Data;
 
 namespace iQiyiVideo.Common
 {
+    public interface IIncrementalSource<T>
+    {
+        bool HasMoreItems { get; }
+        Task<IEnumerable<T>> GetItems(CancellationToken token, uint count);
+    }
+
     public class IncrementalLoadingObservableCollection<T> : ObservableCollection<T>, ISupportIncrementalLoading
     {
-        private bool _busy = false;
+        private readonly IIncrementalSource<T> _incrementalSource;
 
-        public Func<bool> HasMoreItemsFunc;
-        public Func<CancellationToken, uint, Task<IList<T>>> LoadMoreItemsAsyncFunc;
-
-        public bool HasMoreItems
+        public IncrementalLoadingObservableCollection(IIncrementalSource<T> source)
         {
-            get
-            {
-                if (HasMoreItemsFunc == null)
-                {
-                    return false;
-                }
-
-                return HasMoreItemsFunc.Invoke();
-            }
+            _incrementalSource = source;
         }
+
+        public bool HasMoreItems => _incrementalSource.HasMoreItems;
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
-            if (_busy)
-            {
-                throw new InvalidOperationException("重复加载");
-            }
-
-            _busy = true;
+            Debug.WriteLine($"LoadMoreItemsAsync {count}");
             return AsyncInfo.Run((c) => LoadMoreItemsAsync(c, count));
         }
 
         private async Task<LoadMoreItemsResult> LoadMoreItemsAsync(CancellationToken c, uint count)
         {
-            try
+            var items = await _incrementalSource.GetItems(c, count);
+            foreach (T item in items)
             {
-                var items = await LoadMoreItemsAsyncFunc(c, count);
-                foreach (T item in items)
-                {
-                    this.Add(item);
-                }
-                return new LoadMoreItemsResult { Count = (uint)items.Count };
+                this.Add(item);
             }
-            finally
-            {
-                _busy = false;
-            }
+            return new LoadMoreItemsResult { Count = (uint)items.Count() };
         }
 
     }

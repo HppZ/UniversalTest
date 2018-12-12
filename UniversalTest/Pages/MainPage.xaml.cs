@@ -69,6 +69,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage32", "add handler"),
                 new PageInfo("BlankPage33", "scrollviewer TryStartDirectManipulation"),
                 new PageInfo("BlankPage34", "touchpad"),
+                new PageInfo("BlankPage35", "IncrementalLoadingObservableCollection"),
 
 
                 new PageInfo("Test", "Test something"),
