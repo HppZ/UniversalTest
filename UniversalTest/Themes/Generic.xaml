@@ -1,7 +1,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:listview="using:UniversalTest.Control.Listview">
+    xmlns:listview="using:UniversalTest.Control.Listview"
+    xmlns:pages="using:UniversalTest.Pages">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Themes/Resource/BallSlider2.xaml"/>
@@ -9,5 +10,7 @@
         <ResourceDictionary Source="ms-appx:///Themes/Resource/PullToFresh.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-  
+
+   
+
 </ResourceDictionary>

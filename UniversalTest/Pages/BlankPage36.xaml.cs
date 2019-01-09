@@ -19,9 +19,9 @@ using Windows.UI.Xaml.Navigation;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace UniversalTest.Pages
-{
+{ 
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// style 放进 generic 就不会重复 onapplytemplate 了。
     /// </summary>
     public sealed partial class BlankPage36 : Page
     {
@@ -61,7 +61,7 @@ namespace UniversalTest.Pages
             Source.Remove(data);
 
             var item = xamlListView.ContainerFromItem(next) as ListViewItem;
-            var viewitem = (item.ContentTemplateRoot as Grid).Children[0] as ViewItem;
+            var viewitem = (item.ContentTemplateRoot as StackPanel).Children[1] as ViewItem;
 
             if (_lastItem != viewitem)
             {

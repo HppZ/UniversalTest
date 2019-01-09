@@ -28,10 +28,10 @@
         <ListView x:Name="xamlListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="300" Background="Transparent" Tapped="UIElement_OnTapped">
-                        <local:ViewItem></local:ViewItem>
+                    <StackPanel Orientation="Horizontal" Height="300" Background="Transparent" Tapped="UIElement_OnTapped">
                         <TextBlock Text="{Binding txt}"></TextBlock>
-                    </Grid>
+                        <local:ViewItem></local:ViewItem>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
