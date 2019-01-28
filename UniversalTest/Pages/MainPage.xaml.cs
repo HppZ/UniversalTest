@@ -71,6 +71,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage34", "touchpad"),
                 new PageInfo("BlankPage35", "IncrementalLoadingObservableCollection"),
                 new PageInfo("BlankPage36", "listviewitem & onapplytemplate & cache fields wrong"),
+                new PageInfo("BlankPage37", "drag content in scrollviewer"),
 
 
                 new PageInfo("Test", "Test something"),
