@@ -35,17 +35,20 @@ namespace UniversalTest.Pages
             var rect1= xamlEle.TransformToVisual(Window.Current.Content).TransformBounds(rect);
             var rect2 = xamlEle.TransformToVisual(xamlRoot).TransformBounds(rect);
             var rect3 = xamlEle.TransformToVisual(xamlRoot2).TransformBounds(rect);
+            var rect4 = xamlEle.TransformToVisual(xamlMiddle).TransformBounds(rect);
 
 
             Debug.WriteLine($"{rect1.X} {rect1.Y} {rect1.Width} {rect1.Height}");
             Debug.WriteLine($"{rect2.X} {rect2.Y} {rect2.Width} {rect2.Height}");
             Debug.WriteLine($"{rect3.X} {rect3.Y} {rect3.Width} {rect3.Height}");
+            Debug.WriteLine($"{rect4.X} {rect4.Y} {rect4.Width} {rect4.Height}");
 
             // output: 
 
             //739 480 280 140
             //295 280 280 140
-            //-100 -200 200 400
+            //- 100 - 200 200 400
+            //- 100 - 200 200 400
 
         }
 
