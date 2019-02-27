@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,24 +20,16 @@ namespace UniversalTest.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Test : Page
+    public sealed partial class BlankPage39 : Page
     {
-        public Test()
+        public BlankPage39()
         {
             this.InitializeComponent();
         }
 
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("OnNavigatedTo");
-            base.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            Debug.WriteLine("OnNavigatedFrom");
-            base.OnNavigatedFrom(e);
+            xamlFrame.Navigate(typeof(Test));
         }
     }
 }

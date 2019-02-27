@@ -73,6 +73,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage36", "listviewitem & onapplytemplate & cache fields wrong"),
                 new PageInfo("BlankPage37", "drag content in scrollviewer"),
                 new PageInfo("BlankPage38", "transform to visual & middle layer"),
+                new PageInfo("BlankPage39", "frame navigation"),
 
 
                 new PageInfo("Test", "Test something"),
