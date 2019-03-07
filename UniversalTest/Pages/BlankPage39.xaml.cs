@@ -31,5 +31,10 @@ namespace UniversalTest.Pages
         {
             xamlFrame.Navigate(typeof(Test));
         }
+
+        private void ButtonBase_OnClick2(object sender, RoutedEventArgs e)
+        {
+            xamlFrame.Navigate(typeof(BlankPage1));
+        }
     }
 }

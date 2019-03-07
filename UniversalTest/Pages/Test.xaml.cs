@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.UserDataTasks.DataProvider;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,20 +26,38 @@ namespace UniversalTest.Pages
     {
         public Test()
         {
+            Debug.WriteLine("new page ");
+
             this.InitializeComponent();
+
+            // 设置此项后，navigate到同一个page 不会 new page
+            NavigationCacheMode = NavigationCacheMode.Required;
+
+            Loaded += Test_Loaded;
+            Unloaded += Test_Unloaded;
         }
 
+        private void Test_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Test_Unloaded ");
+        }
+
+        private void Test_Loaded(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Test_Loaded ");
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Debug.WriteLine("OnNavigatedTo");
+            Debug.WriteLine("OnNavigatedTo " + e.NavigationMode);
             base.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            Debug.WriteLine("OnNavigatedFrom");
+            Debug.WriteLine("OnNavigatedFrom " + e.NavigationMode);
             base.OnNavigatedFrom(e);
         }
+
     }
 }
