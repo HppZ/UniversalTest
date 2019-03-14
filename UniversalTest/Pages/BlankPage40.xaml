@@ -9,14 +9,14 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <GridView x:Name="xamlGridView" SelectionMode="Multiple">
-            <GridView.ItemTemplate>
+        <local:GridViewT x:Name="xamlGridView" SelectionMode="Multiple">
+            <local:GridViewT.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Width="100" Height="70">
                         <TextBlock Text="{Binding}" Foreground="Red" VerticalAlignment="Center"></TextBlock>
                     </Grid>
                 </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+            </local:GridViewT.ItemTemplate>
+        </local:GridViewT>
     </Grid>
 </Page>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -31,11 +32,34 @@ namespace UniversalTest.Pages
 
         private void UIElement_OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            Debug.WriteLine("GridViewT 1");
         }
 
 
 
 
     }
+
+
+
+    class GridViewT : GridView
+    {
+        public GridViewT()
+        {
+            Loaded += GridViewT_Loaded;
+        }
+
+        private void GridViewT_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.AddHandler(PointerPressedEvent, new PointerEventHandler(UIElement_OnPointerPressed), true);
+        }
+
+        private void UIElement_OnPointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            Debug.WriteLine("GridViewT 2");
+        }
+
+
+    }
+
 }
