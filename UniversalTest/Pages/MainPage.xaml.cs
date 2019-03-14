@@ -74,6 +74,7 @@ namespace UniversalTest
                 new PageInfo("BlankPage37", "drag content in scrollviewer"),
                 new PageInfo("BlankPage38", "transform to visual & middle layer"),
                 new PageInfo("BlankPage39", "frame navigation"),
+                new PageInfo("BlankPage40", "gridview selection & pointer pressed event"),
 
 
                 new PageInfo("Test", "Test something"),
