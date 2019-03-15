@@ -56,6 +56,7 @@ namespace UniversalTest.Pages
 
         private void UIElement_OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            this.CapturePointer(e.Pointer); // this line matters
             Debug.WriteLine("GridViewT 2");
         }
 
