@@ -35,13 +35,13 @@ namespace UniversalTest.Pages
         private void BlankPage17_Loaded(object sender, RoutedEventArgs e)
         {
             var r = new List<A>();
-            for (int index = 0; index < 100; index++)
+            for (int index = 0; index < 10; index++)
             {
                 var a = new A()
                 {
                     Key = index.ToString(),
                 };
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     a.Add(new B()
                     {
