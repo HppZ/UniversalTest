@@ -10,46 +10,23 @@
 
     <Page.Resources>
         <CollectionViewSource x:Name="CollectionViewSource" IsSourceGrouped="True"></CollectionViewSource>
-        <Style x:Key="GroupItemStyle1" TargetType="GroupItem">
-            <Setter Property="IsTabStop" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="GroupItem">
-                        <Grid BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="red">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <ContentControl x:Name="HeaderContent" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Content="{TemplateBinding Content}" IsTabStop="False" Margin="{TemplateBinding Padding}" TabIndex="0"/>
-                            <ItemsControl Background="Aqua" x:Name="ItemsControl" IsTabStop="False" ItemsSource="{Binding GroupItems}" Grid.Row="1" TabIndex="1" TabNavigation="Once">
-                                <ItemsControl.ItemContainerTransitions>
-                                    <TransitionCollection>
-                                        <AddDeleteThemeTransition/>
-                                        <ContentThemeTransition/>
-                                        <ReorderThemeTransition/>
-                                        <EntranceThemeTransition IsStaggeringEnabled="False"/>
-                                    </TransitionCollection>
-                                </ItemsControl.ItemContainerTransitions>
-                            </ItemsControl>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
         <GridView ItemsSource="{Binding Source={StaticResource CollectionViewSource}}">
 
             <GridView.GroupStyle>
-                <GroupStyle ContainerStyle="{StaticResource GroupItemStyle1}">
+                <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-
                             <TextBlock Text="{Binding Key}"/>
-
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate>
+                            <Grid Background="Red"></Grid>
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
                 </GroupStyle>
             </GridView.GroupStyle>
 
@@ -60,7 +37,9 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
-
+<GridView.ItemsPanel><ItemsPanelTemplate>
+    <WrapGrid></WrapGrid>
+</ItemsPanelTemplate></GridView.ItemsPanel>
 
         </GridView>
     </Grid>
