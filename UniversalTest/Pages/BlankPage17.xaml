@@ -10,11 +10,38 @@
 
     <Page.Resources>
         <CollectionViewSource x:Name="CollectionViewSource" IsSourceGrouped="True"></CollectionViewSource>
+
+        <Style x:Key="Style1" TargetType="GridViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewItem">
+                        <Grid>
+                            <ContentPresenter Width="{Binding ElementName=This,Path=ItemWidth1}"></ContentPresenter>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Style2" TargetType="GridViewItem">
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewItem">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center" HorizontalContentAlignment="Center" Width="{Binding ElementName=This,Path=ItemWidth2}"></ContentPresenter>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <local:containerStyleSelector x:Key="ContainerStyleSelector" Style1="{StaticResource Style1}" Style2="{StaticResource  Style2}"></local:containerStyleSelector>
+
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
-        <GridView ItemsSource="{Binding Source={StaticResource CollectionViewSource}}">
-
+        <GridView ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" ItemContainerStyleSelector="{StaticResource ContainerStyleSelector}">
             <GridView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -22,11 +49,6 @@
                             <TextBlock Text="{Binding Key}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
-                    <GroupStyle.Panel>
-                        <ItemsPanelTemplate>
-                            <Grid Background="Red"></Grid>
-                        </ItemsPanelTemplate>
-                    </GroupStyle.Panel>
                 </GroupStyle>
             </GridView.GroupStyle>
 
@@ -37,10 +59,12 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
-<GridView.ItemsPanel><ItemsPanelTemplate>
-    <WrapGrid></WrapGrid>
-</ItemsPanelTemplate></GridView.ItemsPanel>
 
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal" SizeChanged="FrameworkElement_OnSizeChanged"></ItemsWrapGrid>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
         </GridView>
     </Grid>
 </Page>
