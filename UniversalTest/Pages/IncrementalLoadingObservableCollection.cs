@@ -26,7 +26,7 @@ namespace iQiyiVideo.Common
             _incrementalSource = source;
         }
 
-        public bool HasMoreItems => _incrementalSource.HasMoreItems;
+        public bool HasMoreItems => this.Count <= 100;
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
