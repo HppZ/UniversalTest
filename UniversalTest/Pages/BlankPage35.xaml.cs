@@ -23,85 +23,28 @@ namespace UniversalTest.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class BlankPage35 : Page, IIncrementalSource<ItemModel>
+    public sealed partial class BlankPage35 : Page, IIncrementalSource<string>
     {
-        private BindingObject _bindingObj;
         public BlankPage35()
         {
             this.InitializeComponent();
-            _bindingObj = new BindingObject()
-            {
-                ItemMargin = new Thickness(0, 0, 20, 0)
-            };
 
-            ListViewElement.ItemsSource = new List<IncrementalLoadingObservableCollection<ItemModel>>()
+            ListViewElement.ItemsSource = new List<IncrementalLoadingObservableCollection<string>>()
             {
-                new IncrementalLoadingObservableCollection<ItemModel>(this),
+                new IncrementalLoadingObservableCollection<string>(this),
             };
         }
 
         public bool HasMoreItems { get; set; } = true;
-        public async Task<IEnumerable<ItemModel>> GetItems(CancellationToken token, uint count)
+
+        public async Task<IEnumerable<string>> GetItems(CancellationToken token, uint count)
         {
-            var list = new List<ItemModel>();
+            var list = new List<string>();
             for (int i = 0; i < count; i++)
             {
-                list.Add(new ItemModel()
-                {
-                    Text = i.ToString(),
-                    BindingObject = _bindingObj
-                });
+                list.Add(i.ToString());
             }
             return await Task.FromResult(list);
         }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.HasMoreItems = !this.HasMoreItems;
-        }
     }
-
-    public class BindingObject : DependencyObject
-    {
-        public static readonly DependencyProperty ItemMarginProperty = DependencyProperty.Register(
-            "ItemMargin", typeof(Thickness), typeof(BindingObject), new PropertyMetadata(default(Thickness)));
-
-        public Thickness ItemMargin
-        {
-            get { return (Thickness)GetValue(ItemMarginProperty); }
-            set { SetValue(ItemMarginProperty, value); }
-        }
-    }
-
-    public class ItemModel
-    {
-        public string Text { get; set; }
-        public BindingObject BindingObject { get; set; }
-    }
-
-    class ListView1 : ListView
-    {
-        protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
-        {
-            var uiElment = element as FrameworkElement;
-            var model = (item as ItemModel);
-            uiElment.DataContext = model;
-
-            BindingOperations.SetBinding(
-                uiElment,
-                MarginProperty,
-                new Binding { Path = new PropertyPath("BindingObject.ItemMargin") });
-
-            base.PrepareContainerForItemOverride(element, item);
-        }
-
-        protected override void ClearContainerForItemOverride(DependencyObject element, object item)
-        {
-            var uiElment = element as FrameworkElement;
-            uiElment.ClearValue(MarginProperty);
-
-            base.ClearContainerForItemOverride(element, item);
-        }
-    }
-
 }

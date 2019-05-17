@@ -36,7 +36,7 @@ namespace iQiyiVideo.Common
 
         private async Task<LoadMoreItemsResult> LoadMoreItemsAsync(CancellationToken c, uint count)
         {
-            var items = await _incrementalSource.GetItems(c, count);
+            var items = (await _incrementalSource.GetItems(c, count)).ToList();
             foreach (T item in items)
             {
                 this.Add(item);
