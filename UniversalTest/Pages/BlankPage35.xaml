@@ -27,11 +27,11 @@
                                 </Grid>
                             </DataTemplate>
                         </local:ListView1.ItemTemplate>
-                        <ListView.ItemsPanel>
+                        <local:ListView1.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Vertical"></ItemsWrapGrid>
                             </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
+                        </local:ListView1.ItemsPanel>
                     </local:ListView1>
                 </DataTemplate>
             </ListView.ItemTemplate>
